@@ -4,7 +4,7 @@ import h from "./Header.module.css"
 export const Header = () => {
     return (
         <div className={h.wrapper}>
-            HEADER
+            <div>HOME WORK 14</div>
         </div>
     );
 };

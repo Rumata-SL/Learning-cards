@@ -1,6 +1,6 @@
 .wrapper{
     grid-area: n;
-    background-color: #c8fbec;
+    background-color: #039267;
     padding: 2px;
     box-sizing: border-box;
 }
@@ -13,11 +13,11 @@
 a {
     text-decoration: none;
     font-size: 1.5em;
-    color: rgba(22, 208, 208, 0.75);
+    color: #000;
 }
 .active {
-    color: #07846b;
+    color: #06f5f2;
 }
 .link:hover {
-    color: red;
+    color: #06f5f2;
 }

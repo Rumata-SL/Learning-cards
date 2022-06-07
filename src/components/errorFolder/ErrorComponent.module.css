@@ -1,0 +1,16 @@
+.wrapper{
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.title{
+    font-size: 8em;
+    font-weight: bold;
+    color: red;
+}
+.text{
+    color: #0685a5;
+    font-size: 7em;
+}

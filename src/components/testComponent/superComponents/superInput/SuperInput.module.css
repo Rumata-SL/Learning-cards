@@ -1,0 +1,18 @@
+.superInput {
+margin:5px;
+    width: 200px;
+    height: 30px;
+    border-radius: 3px;
+    background-color: rgba(48, 243, 196, 0.45);
+    text-align: center;
+    border: 1px solid #fff;
+}
+
+.errorInput {
+    border: 3px solid lime;
+    background: red;
+}
+
+.error {
+    color: red;
+}

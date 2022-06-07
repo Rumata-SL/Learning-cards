@@ -3,7 +3,7 @@ import React from "react";
 export const Recovery = () => {
     return (
         <div>
-            password recovery
+            <h4>PASSWORD RECOVERY</h4>
         </div>
     );
 };

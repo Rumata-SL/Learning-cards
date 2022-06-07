@@ -1,22 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import {Header} from "./components/header/Header";
-import {Navigate} from "./components/nav/Navigate";
-import {Route, Routes} from "react-router-dom";
-import {Profile} from "./components/profile/Profile";
-import {Registration} from "./components/registration/Registration";
+import React from 'react';
+import {Nav} from "./components/nav/Nav";
 import {Login} from "./components/login/Login";
-import {ErrorComponent} from "./components/errorFolder/ErrorComponent";
-import {Recovery} from "./components/recovery/Recovery";
+import { Route, Routes} from "react-router-dom";
+import {Header} from "./components/header/Header";
+import {Profile} from "./components/profile/Profile";
 import {Test} from "./components/testComponent/Test";
+import {Recovery} from "./components/recovery/Recovery";
 import {NewPassword} from "./components/newPassword/NewPassword";
+import {Registration} from "./components/registration/Registration";
+import {ErrorComponent} from "./components/errorFolder/ErrorComponent";
 
 function App() {
   return (
     <div className="app">
         <Header/>
-        <Navigate/>
+        <Nav/>
         <div className="app-wrapper">
             <Routes>
                 <Route path={"/profile"} element={<Profile/>}></Route>
