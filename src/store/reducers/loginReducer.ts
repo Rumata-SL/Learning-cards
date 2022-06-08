@@ -5,7 +5,7 @@ type InitialStateType= {
 
 type ActionType = ReturnType<typeof loginAC>
 
-export const loginReducer = (state:InitialStateType, action:ActionType)=>{
+export const loginReducer = (state=true, action:ActionType)=>{
         switch (action.type){
             default:
                 return state

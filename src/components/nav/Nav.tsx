@@ -3,10 +3,12 @@ import n from "./Nav.module.css"
 import {PATH} from "../../enum/path";
 import {NavLink} from "react-router-dom";
 
-
+type IsActive = {
+    isActive: boolean
+}
 
 export const Nav = () => {
-    const setActive = ({isActive}: any) => isActive ? n.active : n.link
+    const setActive = (isActive: IsActive) => isActive ? n.active : n.link
     return (
         <div className={n.wrapper}>
             <div className={n.container}>

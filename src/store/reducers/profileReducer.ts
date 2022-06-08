@@ -4,7 +4,8 @@ type InitialStateType= {
 
 type ActionType = ReturnType<typeof profileAC>
 
-export const profileReducer = (state:InitialStateType, action:ActionType)=>{
+
+export const profileReducer = (state=true, action:ActionType)=>{
     switch (action.type){
         default:
             return state

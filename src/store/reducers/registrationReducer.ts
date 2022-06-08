@@ -5,7 +5,7 @@ type InitialStateType= {
 
 type ActionType = ReturnType<typeof registrationAC>
 
-export const registrationReducer = (state:InitialStateType, action:ActionType)=>{
+export const registrationReducer = (state=true, action:ActionType)=>{
     switch (action.type){
         default:
             return state
