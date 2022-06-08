@@ -8,7 +8,7 @@ type IsActive = {
 }
 
 export const Nav = () => {
-    const setActive = (isActive: IsActive) => isActive ? n.active : n.link
+    const setActive = ({isActive}: IsActive) => isActive ? n.active : n.link
     return (
         <div className={n.wrapper}>
             <div className={n.container}>
