@@ -1,5 +1,6 @@
 type InitialStateType= {
     login:string
+    password:string
 }
 
 type ActionType = ReturnType<typeof registrationAC>

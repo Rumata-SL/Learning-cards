@@ -1,5 +1,5 @@
 type InitialStateType= {
-    login:string
+    profile:Array<string>
 }
 
 type ActionType = ReturnType<typeof profileAC>
