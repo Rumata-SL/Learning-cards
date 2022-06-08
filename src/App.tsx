@@ -22,8 +22,8 @@ function App() {
                 <Route path={"/registration"} element={<Registration/>}></Route>
                 <Route path={"/login"} element={<Login/>}></Route>
                 <Route path={"/recovery"} element={<Recovery/>}></Route>
-                <Route path={"/test"} element={<Test/>}></Route>
                 <Route path={"/new_password"} element={<NewPassword/>}></Route>
+                <Route path={"/test"} element={<Test/>}></Route>
                 <Route path={"/error"} element={<ErrorComponent/>}></Route>
             </Routes>
         </div>
