@@ -4,7 +4,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: deepskyblue;
+    background-color: rgba(182, 237, 243, 0.25);
     /*text-align: center;*/
     font-size: 2em;
     font-weight: bold;

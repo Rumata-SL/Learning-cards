@@ -1,6 +1,6 @@
 .wrapper{
     grid-area: n;
-    background-color: #039267;
+    background-color: rgba(53, 177, 139, 0.76);
     padding: 2px;
     box-sizing: border-box;
 }

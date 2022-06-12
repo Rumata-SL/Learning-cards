@@ -15,6 +15,6 @@
 
 .app-wrapper {
     grid-area: c;
-    background-color: cornflowerblue;
+    background-color: rgba(32, 240, 237, 0.59);
     text-align: center;
 }
