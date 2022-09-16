@@ -10,11 +10,11 @@
     grid-gap: 5px;
     grid-template-areas:
     "h h"
-    "n c";
+    "c c";
 }
 
 .app-wrapper {
     grid-area: c;
-    background-color: rgba(32, 240, 237, 0.59);
+    /*background-color: rgb(255, 255, 255);*/
     text-align: center;
 }

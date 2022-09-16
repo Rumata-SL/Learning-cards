@@ -1,7 +1,7 @@
 import './App.css';
 import React from 'react';
 import {PATH} from "./enum/path";
-import {Nav} from "./components/nav/Nav";
+// import {Nav} from "./components/nav/Nav";
 import {Login} from "./components/login/Login";
 import {Header} from "./components/header/Header";
 import {Profile} from "./components/profile/Profile";
@@ -16,7 +16,7 @@ function App() {
   return (
     <div className="app">
         <Header/>
-        <Nav/>
+        {/*<Nav/>*/}
         <div className="app-wrapper">
             <Routes>
                 <Route path={'/'} element={<Navigate to={PATH.PROFILE}/>}/>
