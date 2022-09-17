@@ -18,3 +18,14 @@
     border-radius: 5px;
     /*border: 1px solid #000;*/
 }
+
+
+.red{
+    background-color: red;
+}
+
+.red:hover{
+    background-color: white;
+    border: 2px solid red;
+    color: red;
+}
