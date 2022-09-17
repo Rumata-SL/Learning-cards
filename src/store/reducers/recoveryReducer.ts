@@ -4,6 +4,8 @@ type InitialStateType= {
 
 type ActionType = ReturnType<typeof recoveryAC>
 
+const initialState = ""
+
 export const recoveryReducer = (state=true, action:ActionType)=>{
     switch (action.type){
         default:

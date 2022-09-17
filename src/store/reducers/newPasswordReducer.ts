@@ -4,6 +4,8 @@ type InitialStateType= {
 
 type ActionType = ReturnType<typeof newPasswordAC>
 
+const initialState = ""
+
 export const newPasswordReducer = (state=true, action:ActionType)=>{
     switch (action.type){
         default:
