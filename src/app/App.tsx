@@ -1,21 +1,21 @@
 import './App.css';
 import React from 'react';
-import {PATH} from "./enum/path";
+import {PATH} from "../common/enum/path";
 // import {Nav} from "./components/nav/Nav";
-import {Login} from "./components/login/Login";
-import {Header} from "./components/header/Header";
-import {Profile} from "./components/profile/Profile";
-import {Test} from "./components/testComponent/Test";
-import {Recovery} from "./components/recovery/Recovery";
+import {Login} from "../feautures/login/Login";
+import {Navbar} from "../feautures/nav/Navbar";
+import {Profile} from "../feautures/profile/Profile";
+import {Test} from "../components/testComponent/Test";
+import {Recovery} from "../feautures/recovery/Recovery";
 import {Navigate, Route, Routes} from "react-router-dom";
-import {NewPassword} from "./components/newPassword/NewPassword";
-import {Registration} from "./components/registration/Registration";
-import {ErrorComponent} from "./components/errorFolder/ErrorComponent";
+import {NewPassword} from "../feautures/newPassword/NewPassword";
+import {Registration} from "../feautures/registration/Registration";
+import {ErrorComponent} from "../feautures/errorFolder/ErrorComponent";
 
 function App() {
   return (
     <div className="app">
-        <Header/>
+        <Navbar/>
         {/*<Nav/>*/}
         <div className="app-wrapper">
             <Routes>
