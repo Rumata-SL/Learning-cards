@@ -4,6 +4,8 @@ export const Registration = () => {
     return (
         <div>
             <h4>REGISTRATION</h4>
+            <h4>REGISTRATION</h4>
         </div>
     );
 };
+
