@@ -1,24 +1,37 @@
-type InitialStateType= {
-    login:string
-    password:string
-}
+import {ThunkType} from "../../bll/store";
 
-type ActionType = ReturnType<typeof registrationAC>
+
+type InitialStateType = {
+    isRegistered: boolean
+}
 
 const initialState = {
-    login:"",
-    password:'',
+    isRegistered: false
 }
 
-export const registrationReducer = (state=true, action:ActionType)=>{
-    switch (action.type){
+export const registrationReducer = (state: InitialStateType = initialState, action: RegisteredActionType) => {
+    switch (action.type) {
+        case "register/IS-COMPLETED":
+            return {...state, isRegistered: action.isRegistered}
         default:
             return state
     }
 }
 
-const registrationAC = ()=>{
-    return{
-        type:"REGISTRATION"
-    }as const
+const registrationAC = (isRegistered: boolean) => ({
+    type: "register/IS-COMPLETED",
+    isRegistered
+} as const)
+
+export const registerTC = (): ThunkType => async dispatch => {
+    try {
+
+    } catch (e) {
+
+    } finally {
+
+    }
 }
+
+
+export type RegisteredActionType = ReturnType<typeof registrationAC>

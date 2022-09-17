@@ -1,0 +1,37 @@
+.wrapper{
+    position: fixed;
+    top:120px;
+    text-align: center;
+    width: 100%;
+}
+
+.formContainer{
+    margin: 0 auto;
+    max-width: 413px;
+    height: 528px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 20px;
+    background-color: #fff;
+
+}
+.title {
+    font-family: 'Montserrat', serif;
+    text-align: center;
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 30px;
+}
+.input {
+    margin-bottom: 15px;
+}
+
+a.link{
+    color: #2c70be;
+}
+.btn{
+    color:#fff;
+}
+
+
