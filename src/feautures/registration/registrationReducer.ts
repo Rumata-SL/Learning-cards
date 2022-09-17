@@ -1,4 +1,6 @@
 import {ThunkType} from "../../bll/store";
+import {registerAPI, RegisterParamsType} from "../../api/registerAPI";
+import {AxiosError} from "axios";
 
 
 type InitialStateType = {
@@ -23,15 +25,15 @@ const registrationAC = (isRegistered: boolean) => ({
     isRegistered
 } as const)
 
-export const registerTC = (): ThunkType => async dispatch => {
+export const registerTC = (registeredData:RegisterParamsType): ThunkType => async dispatch => {
     try {
-
+        const {status} = await registerAPI.register(registeredData)
     } catch (e) {
+        const err = e as Error | AxiosError<{ error: string }>
 
     } finally {
 
     }
 }
-
 
 export type RegisteredActionType = ReturnType<typeof registrationAC>

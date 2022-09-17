@@ -6,6 +6,7 @@
 }
 
 .formContainer{
+    position: relative;
     margin: 0 auto;
     max-width: 413px;
     height: 528px;
@@ -27,11 +28,28 @@
     margin-bottom: 15px;
 }
 
-a.link{
-    color: #2c70be;
+a.link:active,
+a.link:hover,
+a.link {
+    /*text-decoration: none;*/
+    text-decoration-line: underline;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 600;
+    font-family: 'Montserrat', serif;
+    color: #366EFF;
+}
+.text{
+    font-family: 'Montserrat', serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 24px;
+    color: #000;
+    opacity: 0.5;
 }
 .btn{
-    color:#fff;
+    color:red;
 }
 
 
