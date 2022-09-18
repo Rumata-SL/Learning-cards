@@ -1,4 +1,4 @@
-import React, {useCallback, useState} from "react";
+import React, {FC, useCallback, useState} from "react";
 import style from "./Registration.module.css"
 import {
     Button,
@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import {useFormik} from "formik";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
-import {Link} from "react-router-dom";
+import {Link, Navigate} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "../../bll/store";
 import {registerTC} from "./registrationReducer";
 import SuperButton
@@ -22,7 +22,7 @@ type FormikErrorType = {
     confirmPassword?: string
 }
 
-export const Registration = () => {
+export const Registration:FC = () => {
 
     const dispatch = useAppDispatch()
 
@@ -44,27 +44,27 @@ export const Registration = () => {
             confirmPassword: "",
         },
         validate: (values) => {
-            const error: FormikErrorType = {};
+            const errors: FormikErrorType = {};
             if (!values.email) {
-                error.email = 'Required';
+                errors.email = 'Required';
             } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-                error.email = 'Invalid email address';
+                errors.email = 'Invalid email address';
             }
             if (!values.password) {
-                error.password = 'Required';
+                errors.password = 'Required';
             } else if (values.password.length <= 7) {
-                error.password = 'Password must be more than 7 characters...'
+                errors.password = 'Password must be more than 7 characters...'
             }
             if (!values.confirmPassword) {
-                error.confirmPassword = 'Required';
+                errors.confirmPassword = 'Required';
             } else if (values.confirmPassword !== values.password) {
-                error.confirmPassword = 'The password and confirmation password do not match'
+                errors.confirmPassword = 'The password and confirmation password do not match'
             }
-            return error;
+            return errors;
 
         },
         onSubmit: (values) => {
-                dispatch(registerTC())
+                dispatch(registerTC(values))
         },
     })
 
@@ -87,32 +87,37 @@ export const Registration = () => {
         e.preventDefault()
     }
 
+    if (isRegistered) {
+        return <Navigate to={'/login'}/>
+    }
     return (
         <div className={style.wrapper}>
             <form className={style.formContainer} onSubmit={formik.handleSubmit}>
                 <div className={style.title}>Sign UP</div>
                 <FormControl variant="standard">
-                    <InputLabel color="secondary">Email</InputLabel>
+                    <InputLabel color="primary">Email</InputLabel>
                     <Input
                         id="email"
                         type="email"
                         placeholder={"Email"}
                         className={style.input}
-                        color={"secondary"}
+                        color={"primary"}
                         {...formik.getFieldProps("email")}
                     />
+                    {/*{(formik.errors.email && formik.touched.email) ? <div style={{color: "red"}}>{formik.errors.email}</div>:<div style={{opacity:0}}>sdrfbsdfbd</div>}*/}
                 </FormControl>
                 {/*{formik.errors.email && formik.touched.email &&
-                    <div className={error.error}>{formik.errors.email}</div>}*/}
+                    <div style={{position:"fixed",top:265,left:670,color:"red" }}>
+                        <span style={{textAlign:"center"}}>{formik.errors.email}</span></div>}*/}
 
                 <FormControl variant="standard">
-                    <InputLabel color={"secondary"}>Password</InputLabel>
+                    <InputLabel color={"primary"}>Password</InputLabel>
                     <Input
                         id="password"
                         type={valuePass.showPass ? "text" : "password"}
                         placeholder={"Password"}
                         className={style.input}
-                        color={"secondary"}
+                        color={"primary"}
                         {...formik.getFieldProps("password")}
                         autoComplete="on"
                         endAdornment={
@@ -129,18 +134,18 @@ export const Registration = () => {
                         }
                     />
                 </FormControl>
-                {/*{formik.errors.password && formik.touched.password &&
-                    <div className={error.error}>{formik.errors.password}</div>}*/}
+                {formik.errors.password && formik.touched.password &&
+                    <div style={{color:"red"}}>{formik.errors.password}</div>}
 
                 <FormControl variant="standard">
-                    <InputLabel color={"secondary"}>Confirm
+                    <InputLabel color={"primary"}>Confirm
                         password</InputLabel>
                     <Input
                         id="confirmPassword"
                         type={valuePassConfirm.showPassConfirm ? "text" : "password"}
                         placeholder={"Confirm password"}
                         className={style.input}
-                        color={"secondary"}
+                        color={"primary"}
                         {...formik.getFieldProps("confirmPassword")}
                         autoComplete="on"
                         endAdornment={
@@ -157,16 +162,17 @@ export const Registration = () => {
                         }
                     />
                 </FormControl>
-                {/*{formik.errors.confirmPassword && formik.touched.confirmPassword &&
-                    <div className={error.error}>{formik.errors.confirmPassword}</div>}*/}
-                <Button color={"primary"} variant={"contained"} type="submit">Sign Up</Button>
-                {/*<SuperButton className={style.btn} title={"Sign Up"} type="submit"/>*/}
-                Already have an account?
+                {formik.errors.confirmPassword && formik.touched.confirmPassword &&
+                    <div style={{position:"fixed",top:455,color:"red"}}>{formik.errors.confirmPassword}</div>}
+                {/*<Button color={"primary"} variant={"contained"} type="submit">Sign Up</Button>*/}
+                <SuperButton
+                    style={{fontFamily: 'Montserrat', fontStyle: "normal", fontWeight: 500, fontSize:"16px", lineHeight:"20px", letterSpacing:"0.01em"}}
+                    type="submit">Sign Up</SuperButton>
+                <span className={style.text}>Already have an account?</span>
 
                 <Link className={style.link} to={"/login"} >Sign In</Link>
 
             </form>
-
         </div>
     );
 };
