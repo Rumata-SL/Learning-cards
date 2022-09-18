@@ -1,20 +1,34 @@
-type InitialStateType= {
-    login:string
+import {DispatchActionType, ThunkType} from '../../bll/store';
+
+type InitialStateType = {
+    isRequested: boolean
 }
 
-type ActionType = ReturnType<typeof recoveryAC>
+export type RecoveryActionType = ReturnType<typeof setIsRequestedAC>
 
-const initialState = ""
+const initialState: InitialStateType = {
+    isRequested: false
+}
 
-export const recoveryReducer = (state=true, action:ActionType)=>{
-    switch (action.type){
+export const recoveryReducer = (state: InitialStateType = initialState, action: RecoveryActionType): InitialStateType => {
+    switch (action.type) {
+        case 'recovery/SET-IS-REQUESTED': {
+            return {...state, isRequested: action.status}
+        }
+
         default:
             return state
     }
 }
 
-const recoveryAC = ()=>{
-    return{
-        type:"RECOVERY"
-    }as const
+export const setIsRequestedAC = (status: boolean) => {
+    return {
+        type: 'recovery/SET-IS-REQUESTED',
+        status
+    } as const
+}
+
+
+export const requestRecoveryTC = (): ThunkType => (dispatch) => {
+    dispatch(setIsRequestedAC(true))
 }

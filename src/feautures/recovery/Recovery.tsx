@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom';
 import {useAppDispatch, useAppSelector} from '../../bll/store';
 import {useFormik} from 'formik';
 import {BackToLogin} from './BackToLogin';
+import {requestRecoveryTC} from './recoveryReducer';
 
 
 type FormikErrorType = {
@@ -15,11 +16,9 @@ type FormikErrorType = {
 export const Recovery = () => {
 
 
-    const [isRequested, setIsRequested] = useState(false)
-
+    const isRequested = useAppSelector<boolean>(state => state.recovery.isRequested)
 
     const dispatch = useAppDispatch()
-
 
     const formik = useFormik({
         initialValues: {
@@ -39,12 +38,12 @@ export const Recovery = () => {
 
         },
         onSubmit: (values) => {
-
+            dispatch(requestRecoveryTC())
         },
     })
 
 
-    if(isRequested) {
+    if (isRequested) {
         return <BackToLogin/>
     }
 
@@ -70,8 +69,6 @@ export const Recovery = () => {
                 </FormControl>
                 {/*{formik.errors.email && formik.touched.email &&
                     <div className={error.error}>{formik.errors.email}</div>}*/}
-
-
 
 
                 <Button color={'primary'} variant={'contained'} type="submit">Send Instructions</Button>

@@ -1,14 +1,18 @@
 import React from 'react';
 import style from '../recovery/Recovery.module.css';
 import {Button} from '@mui/material';
-import {Navigate, useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
+import {useAppDispatch} from '../../bll/store';
+import {setIsRequestedAC} from './recoveryReducer';
 
 
 export const BackToLogin = () => {
 
+    const dispatch = useAppDispatch()
     const navigate = useNavigate();
 
     const handleRedirect = () => {
+        dispatch(setIsRequestedAC(false))
         navigate('/login')
     }
 
