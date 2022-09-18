@@ -1,7 +1,7 @@
 import React, {FC, useCallback, useState} from "react";
 import style from "./Registration.module.css"
 import {
-    Button,
+    // Button,
     FormControl,
     IconButton,
     Input,
@@ -15,7 +15,7 @@ import {useAppDispatch, useAppSelector} from "../../bll/store";
 import {registerTC} from "./registrationReducer";
 import SuperButton
     from "../../components/testComponent/superComponents/superButton/SuperButton";
-import {RegisterParamsType} from "../../api/registerAPI";
+// import {RegisterParamsType} from "../../api/registerAPI";
 
 type FormikErrorType = {
     email?: string
