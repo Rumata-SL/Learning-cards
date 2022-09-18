@@ -15,6 +15,7 @@ import {useAppDispatch, useAppSelector} from "../../bll/store";
 import {registerTC} from "./registrationReducer";
 import SuperButton
     from "../../components/testComponent/superComponents/superButton/SuperButton";
+import {RegisterParamsType} from "../../api/registerAPI";
 
 type FormikErrorType = {
     email?: string
