@@ -1,11 +1,12 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import style from '../recovery/Recovery.module.css';
 import {Button, FormControl, Input, InputLabel} from '@mui/material';
 import {Link} from 'react-router-dom';
 import {useAppDispatch, useAppSelector} from '../../bll/store';
 import {useFormik} from 'formik';
 import {BackToLogin} from './BackToLogin';
-import {requestRecoveryTC} from './recoveryReducer';
+import {requestRecoveryTC, setRecoveryErrorAC} from './recoveryReducer';
+import {recoverAPI} from '../../api/recoveryAPI';
 
 
 type FormikErrorType = {
@@ -15,16 +16,19 @@ type FormikErrorType = {
 
 export const Recovery = () => {
 
+    // useEffect(()=>{
+    //     recoverAPI.requestLink('denisegorenko1@gmail.com')
+    // }, [])
 
     const isRequested = useAppSelector<boolean>(state => state.recovery.isRequested)
+    const error = useAppSelector<string | null>(state => state.recovery.error)
+
 
     const dispatch = useAppDispatch()
 
     const formik = useFormik({
         initialValues: {
             email: '',
-            password: '',
-            confirmPassword: '',
         },
         validate: (values) => {
             const error: FormikErrorType = {};
@@ -38,13 +42,17 @@ export const Recovery = () => {
 
         },
         onSubmit: (values) => {
-            dispatch(requestRecoveryTC())
+            dispatch(requestRecoveryTC(values.email))
         },
     })
 
 
     if (isRequested) {
         return <BackToLogin/>
+    }
+
+    const onFocusHandle = () => {
+        dispatch(setRecoveryErrorAC(null))
     }
 
     return (
@@ -56,7 +64,8 @@ export const Recovery = () => {
                     Enter your email address and we will send you further instructions
                 </div>
 
-                <FormControl variant="standard">
+
+                <FormControl className={style.inputBlock} variant="standard">
                     <InputLabel color="secondary">Email</InputLabel>
                     <Input
                         id="email"
@@ -64,8 +73,10 @@ export const Recovery = () => {
                         placeholder={'Email'}
                         className={style.input}
                         color={'secondary'}
+                        onFocus={onFocusHandle}
                         {...formik.getFieldProps('email')}
                     />
+                    {error ? <div className={style.error}>{error}</div> : null}
                 </FormControl>
                 {/*{formik.errors.email && formik.touched.email &&
                     <div className={error.error}>{formik.errors.email}</div>}*/}

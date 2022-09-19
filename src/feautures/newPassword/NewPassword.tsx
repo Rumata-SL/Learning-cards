@@ -1,12 +1,12 @@
-import React, {useCallback, useState} from 'react';
+import React, {useState} from 'react';
 import {useAppDispatch, useAppSelector} from '../../bll/store';
 import {useFormik} from 'formik';
-import {registerTC} from '../registration/registrationReducer';
 import style from './NewPassword.module.css';
 import {Button, FormControl, IconButton, Input, InputAdornment, InputLabel} from '@mui/material';
 import {Visibility, VisibilityOff} from '@mui/icons-material';
-import {Link} from 'react-router-dom';
-import {Simulate} from 'react-dom/test-utils';
+import {createNewPasswordTC} from './newPasswordReducer';
+import {useNavigate, useParams} from 'react-router-dom';
+import {BackToLogin} from '../recovery/BackToLogin';
 
 
 type FormikErrorType = {
@@ -18,9 +18,13 @@ type FormikErrorType = {
 export const NewPassword = () => {
 
     const dispatch = useAppDispatch()
+    const isCreated = useAppSelector<boolean>(state => state.newPassword.isCreated)
 
+    const navigate = useNavigate();
     const [showValuePass, setShowValuePass] = useState(false)
     const [showValuePassConfirm, setShowValuePassConfirm] = useState(false)
+
+    let params = useParams();
 
     const formik = useFormik({
         initialValues: {
@@ -45,7 +49,7 @@ export const NewPassword = () => {
 
         },
         onSubmit: (values) => {
-
+            dispatch(createNewPasswordTC(values.password, params.token ? params.token : ''))
         },
     })
 
@@ -59,6 +63,10 @@ export const NewPassword = () => {
 
     const MouseDownPass = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
+    }
+
+    if (isCreated) {
+        navigate('/login')
     }
 
     return (

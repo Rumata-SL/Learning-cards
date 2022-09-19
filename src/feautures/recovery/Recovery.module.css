@@ -1,11 +1,11 @@
-.wrapper{
+.wrapper {
     position: fixed;
-    top:120px;
+    top: 120px;
     text-align: center;
     width: 100%;
 }
 
-.formContainer{
+.formContainer {
     margin: 0 auto;
     max-width: 413px;
     height: 350px;
@@ -16,6 +16,7 @@
     background-color: #fff;
     border-radius: 10px;
 }
+
 .title {
     font-family: 'Montserrat', serif;
     text-align: center;
@@ -23,6 +24,7 @@
     font-weight: 600;
     line-height: 30px;
 }
+
 .input {
     margin-bottom: 15px;
 }
@@ -46,11 +48,18 @@
     font-size: 16px;
 }
 
-a.link{
+a.link {
     color: #2c70be;
 }
-.btn{
-    color:#fff;
+
+.btn {
+    color: #fff;
 }
 
+.error {
+    color: red;
+}
 
+.inputBlock {
+    height: 80px;
+}
