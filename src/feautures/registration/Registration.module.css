@@ -1,11 +1,10 @@
-.wrapper{
+.wrapper {
     position: fixed;
-    top:120px;
-    text-align: center;
+    top: 120px;
     width: 100%;
 }
 
-.formContainer{
+.formContainer {
     position: relative;
     margin: 0 auto;
     max-width: 413px;
@@ -18,39 +17,52 @@
     border-radius: 10px;
 
 }
-.title {
+.title, a.link, .text{
     font-family: 'Montserrat', serif;
+    font-weight: 600;
+}
+
+.title {
     text-align: center;
     font-size: 26px;
-    font-weight: 600;
     line-height: 30px;
 }
+
 .input {
     margin-bottom: 15px;
 }
 
-a.link:active,
-a.link:hover,
 a.link {
-    /*text-decoration: none;*/
     text-decoration-line: underline;
     font-size: 16px;
     line-height: 24px;
-    font-weight: 600;
-    font-family: 'Montserrat', serif;
     color: #366EFF;
 }
-.text{
-    font-family: 'Montserrat', serif;
-    font-style: normal;
-    font-weight: 600;
+
+.text {
     font-size: 14px;
     line-height: 24px;
     color: #000;
     opacity: 0.5;
 }
-.btn{
-    color:red;
+
+.emailError, .passwordError, .confirmPasswordError{
+    position: absolute;
+    width: 413px;
+    display: flex;
+    justify-content: center;
+    font-size: 14px;
+    font-style: italic;
+    color: red;
+}
+.emailError {
+    top: 145px;
+}
+.passwordError{
+    top: 240px;
+}
+.confirmPasswordError{
+    top: 335px;
 }
 
 
