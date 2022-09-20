@@ -26,20 +26,20 @@ export type AppActionType =
     | ReturnType<typeof setAppInitializedAC>
     | ReturnType<typeof setAppErrorAC>
 
-const setAppStatusAC = (status: LoadingStatusType) => {
+export const setAppStatusAC = (status: LoadingStatusType) => {
     return {
         type: "app/SET-STATUS",
         status
     } as const
 }
 
-const setAppInitializedAC = (value: boolean) => {
+export const setAppInitializedAC = (value: boolean) => {
     return {
         type: "app/SET-IS-INITIALIZED",
         value
     } as const
 }
-const setAppErrorAC = (error: null | string) => {
+export const setAppErrorAC = (error: null | string) => {
     return {
         type: "app/SET-ERROR",
         error
