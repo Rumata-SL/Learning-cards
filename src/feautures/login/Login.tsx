@@ -51,7 +51,7 @@ export const Login = () => {
     }
 
     return (
-        <div className={styles.form}>
+        <div className={styles.wrapper}>
             <form onSubmit={formik.handleSubmit} className={styles.formContainer}>
                 <h2 className={styles.title}>Sign in</h2>
                 <FormControl variant="standard">

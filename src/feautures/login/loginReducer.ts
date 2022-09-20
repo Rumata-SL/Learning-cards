@@ -4,6 +4,7 @@ import {Dispatch} from 'redux';
 import {AppRootActionsType, AppStateType, ThunkType} from '../../bll/store';
 import {authAPI} from '../../api/authAPI';
 import {ThunkDispatch} from 'redux-thunk';
+import {AxiosError} from 'axios';
 
 const initialState: InitialStateType = {
     isLoggedIn: false
@@ -27,9 +28,14 @@ const loginAC = (value: boolean) => {
 }
 
 //thunks
-export const loginTC = (email: string, password: string, rememberMe: boolean=false): ThunkType => (dispatch: ThunkDispatch<AppStateType, unknown, AppRootActionsType>) => {
-    authAPI.login(email,password,rememberMe)
-        .then(res=>{})
+export const loginTC = (email: string, password: string, rememberMe: boolean=false): ThunkType => async dispatch => {
+    try{
+         const res = await authAPI.login(email,password,rememberMe)
+    }catch (e) {
+        const err = e as Error | AxiosError<{ error: string }>
+    }finally {
+
+    }
 }
 
 //types
