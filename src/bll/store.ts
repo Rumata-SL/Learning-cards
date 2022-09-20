@@ -16,7 +16,7 @@ import {
     RecoveryActionType,
     recoveryReducer,
 } from '../feautures/recovery/recoveryReducer'
-import { appReducer } from '../app/appReducer'
+import {AppActionType, appReducer} from "../app/appReducer"
 import thunkMiddleware, {ThunkAction, ThunkDispatch} from "redux-thunk";
 
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
@@ -42,7 +42,8 @@ export type AppRootActionsType =
     | RegisteredActionType
     | RecoveryActionType
     | newPasswordActionType
-    | ProfileActionType // your actionType
+    | ProfileActionType
+    |AppActionType// your actionType
 
 export type ThunkType<ReturnType = void> = ThunkAction<
     ReturnType,

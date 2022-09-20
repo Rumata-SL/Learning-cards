@@ -28,6 +28,7 @@ const registrationAC = (isRegistered: boolean) => ({
 export const registerTC = (registeredData:RegisterParamsType): ThunkType => async dispatch => {
     try {
         const {status} = await registerAPI.register(registeredData)
+        dispatch(registrationAC(true))
     } catch (e) {
         const err = e as Error | AxiosError<{ error: string }>
 
