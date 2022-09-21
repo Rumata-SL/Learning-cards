@@ -26,7 +26,7 @@ export const Profile = () => {
 	useEffect(() => {
 		if (!isLoggedIn) return
 		dispatch(getProfileTC())
-	}, [])
+	}, [isLoggedIn])
 
 	if (!isLoggedIn) {
 		return <Navigate to={'/login'} />
