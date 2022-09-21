@@ -27,6 +27,7 @@ const setProfileAC = (profile: ProfileType) => {
 
 //thunk
 export const getProfileTC = (): ThunkType => async dispatch => {
+
 	const res = await profileAPI.getMe()
 	dispatch(setProfileAC(res.data))
 }
