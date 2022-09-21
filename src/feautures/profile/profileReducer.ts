@@ -1,5 +1,8 @@
+import { AxiosError } from 'axios'
 import { EditMeArgsType, profileAPI, ProfileType } from '../../api/profileAPI'
+import { setAppStatusAC } from '../../app/appReducer'
 import { AppRootActionsType, ThunkType } from '../../bll/store'
+import { utilsError } from '../../utils/utils_error'
 
 //reducer
 const initialState: InitialStateType = {
@@ -27,16 +30,31 @@ const setProfileAC = (profile: ProfileType) => {
 
 //thunk
 export const getProfileTC = (): ThunkType => async dispatch => {
-
-	const res = await profileAPI.getMe()
-	dispatch(setProfileAC(res.data))
+	dispatch(setAppStatusAC('loading'))
+	try {
+		const res = await profileAPI.getMe()
+		dispatch(setProfileAC(res.data))
+	} catch (e) {
+		const err = e as Error | AxiosError<{ error: string }>
+		utilsError(err, dispatch)
+	} finally {
+		dispatch(setAppStatusAC('idle'))
+	}
 }
 
 export const updateProfileTC =
 	(args: EditMeArgsType): ThunkType =>
 	async dispatch => {
-		const res = await profileAPI.editMe(args)
-		dispatch(getProfileTC())
+		dispatch(setAppStatusAC('loading'))
+		try {
+			const res = await profileAPI.editMe(args)
+			dispatch(getProfileTC())
+		} catch (e) {
+			const err = e as Error | AxiosError<{ error: string }>
+			utilsError(err, dispatch)
+		} finally {
+			dispatch(setAppStatusAC('idle'))
+		}
 	}
 
 //type

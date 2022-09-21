@@ -20,11 +20,9 @@ export const Profile = () => {
 	const updateProfile = (args: EditMeArgsType) => {
 		dispatch(updateProfileTC(args))
 	}
-
 	const logout = () => {
 		dispatch(logoutTC())
 	}
-
 	useEffect(() => {
 		if (!isLoggedIn) return
 		dispatch(getProfileTC())
