@@ -28,14 +28,14 @@ const registrationAC = (isRegistered: boolean) => ({
 //thunk
 export const registerTC = (registeredData:RegisterParamsType): ThunkType => async dispatch => {
     try {
-
+        dispatch(setAppStatusAC("loading"));
         const {status} = await registerAPI.register(registeredData)
        dispatch(registrationAC(true))
     } catch (e) {
         const err = e as Error | AxiosError<{ error: string }>
         utilsError(err, dispatch)
     } finally {
-        dispatch(setAppStatusAC('idle'));
+        dispatch(setAppStatusAC("succeeded"));
     }
 }
 
