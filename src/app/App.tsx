@@ -11,6 +11,7 @@ import {Navigate, Route, Routes} from "react-router-dom";
 import {NewPassword} from "../feautures/newPassword/NewPassword";
 import {Registration} from "../feautures/registration/Registration";
 import {ErrorComponent} from "../feautures/errorFolder/ErrorComponent";
+import {Pages} from "./Pages";
 
 function App() {
   return (
@@ -18,16 +19,7 @@ function App() {
         <Navbar/>
         {/*<Nav/>*/}
         <div className="app-wrapper">
-            <Routes>
-                <Route path={'/'} element={<Navigate to={PATH.PROFILE}/>}/>
-                <Route path={PATH.PROFILE} element={<Profile/>}></Route>
-                <Route path={PATH.REGISTRATION} element={<Registration/>}></Route>
-                <Route path={PATH.LOGIN} element={<Login/>}></Route>
-                <Route path={PATH.RECOVERY} element={<Recovery/>}></Route>
-                <Route path={PATH.NEW_PASSWORD} element={<NewPassword/>}></Route>
-                <Route path={PATH.TEST} element={<Test/>}></Route>
-                <Route path={"/*"} element={<ErrorComponent/>}></Route>
-            </Routes>
+            <Pages/>
         </div>
     </div>
   );
