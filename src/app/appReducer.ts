@@ -1,11 +1,12 @@
 import {ThunkType} from "../bll/store";
 import {AxiosError} from "axios";
 import {authAPI} from "../api/authAPI";
+import {utilsError} from "../utils/utils_error";
 
 const initialState: InitialStateType = {
     status: "idle",
     isInitial: false,
-    error: null
+    error: null as null | string
 }
 
 export const appReducer = (state: InitialStateType = initialState, action: AppActionType): InitialStateType => {
@@ -52,11 +53,12 @@ const authMeTC = (): ThunkType => async dispatch => {
         const res = await authAPI.authMe()
     } catch (e) {
         const err = e as Error | AxiosError<{ error: string }>
+        utilsError(err, dispatch)
     } finally {
-
+        dispatch(setAppStatusAC("idle"))
+        dispatch(setAppInitializedAC(true))
     }
 }
-
 
 export type LoadingStatusType = "idle" | "loading" | "succeeded"
 
