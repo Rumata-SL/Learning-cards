@@ -1,12 +1,13 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useAppDispatch, useAppSelector} from '../../bll/store';
 import {useFormik} from 'formik';
 import {Link, Navigate} from 'react-router-dom';
 import {loginTC} from './loginReducer';
-import {Checkbox, FormControl, FormControlLabel, Input, InputLabel} from '@mui/material';
+import {Checkbox, FormControl, FormControlLabel, IconButton, Input, InputAdornment, InputLabel} from '@mui/material';
 import styles from './Login.module.css';
 import style from '../recovery/Recovery.module.css';
 import SuperButton from '../../components/testComponent/superComponents/superButton/SuperButton';
+import {Visibility, VisibilityOff} from '@mui/icons-material';
 
 type FormikErrorType = {
     email?: string,
@@ -15,6 +16,8 @@ type FormikErrorType = {
 }
 
 export const Login = () => {
+
+    const [visibleMode, setVisibleMode] = useState<boolean>(false)
 
     const dispatch = useAppDispatch()
 
@@ -50,6 +53,10 @@ export const Login = () => {
         return <Navigate to={'/profile/'}/>
     }
 
+    const onClickHandler = () => {
+        setVisibleMode(!visibleMode)
+    }
+
     return (
         <div className={styles.wrapper}>
             <form onSubmit={formik.handleSubmit} className={styles.formContainer}>
@@ -69,10 +76,21 @@ export const Login = () => {
                     <InputLabel color="primary">Password</InputLabel>
                     <Input
                         id="password"
-                        type="password"
+                        type={visibleMode ? 'text':'password'}
                         placeholder={'password'}
                         color={'primary'}
                         className={style.input}
+                        endAdornment={
+                            <InputAdornment position="end">
+                                <IconButton
+                                    onClick={onClickHandler}
+                                    color={"primary"}
+                                >
+                                    {visibleMode ? <VisibilityOff/> :
+                                        <Visibility/>}
+                                </IconButton>
+                            </InputAdornment>
+                        }
                         {...formik.getFieldProps('password')}
                     />
                 </FormControl>
