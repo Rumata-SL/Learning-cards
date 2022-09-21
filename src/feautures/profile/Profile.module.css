@@ -16,7 +16,7 @@
 
     background: #FFFFFF;
     box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1), -1px -1px 2px rgba(0, 0, 0, 0.1);
-    border-radius: 2px;
+    border-radius: 10px;
 }
 
 .title {
@@ -98,41 +98,20 @@
 }
 
 .editNameBlock {
-    text-align: left;
-}
-
-.editNameBlock label {
-    font-size: 13px;
-    opacity: 0.5;
-}
-
-.editNameForm {
     display: flex;
+    align-items: center;
     position: relative;
-    padding-right: 12px;
 }
 
-.editNameForm:after {
-    position: absolute;
-    bottom: -3px;
-   content: '';
+.editNameInput {
     width: 100%;
-    height: 1px;
-    background: #000000;
-    opacity: 0.2;
-}
-
-.editNameForm input {
-    width: 100%;
-    border: none;
-    font-family: 'Montserrat', serif;
-    font-weight: 500;
-    font-size: 16px;
-    outline: none;
 }
 
 .saveButton {
-    height: 24px;
+    position: absolute;
+    right: 10px;
+    bottom: 5px;
+    height: 30px;
     padding: 0 10px;
     background: #366EFF;
     border-radius: 2px;
@@ -140,7 +119,7 @@
     cursor: pointer;
 
     font-family: 'Montserrat', serif;
-    font-size: 12px;
+    font-size: 14px;
     color: #FFFFFF;
 
 }

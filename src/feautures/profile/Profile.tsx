@@ -8,20 +8,33 @@ import { useAppDispatch, useAppSelector } from '../../bll/store'
 import { getProfileTC, updateProfileTC } from './profileReducer'
 import CircularProgress from '@mui/material/CircularProgress'
 import { EditMeArgsType, ProfileType } from '../../api/profileAPI'
+import { FormControl, Input, InputLabel, Button } from '@mui/material'
+import { Navigate } from 'react-router-dom'
+import { logoutTC } from '../login/loginReducer'
 
 export const Profile = () => {
 	const dispatch = useAppDispatch()
 	const profile = useAppSelector(state => state.profile.profile)
+	const isLoggedIn = useAppSelector(state => state.login.isLoggedIn)
 
 	const updateProfile = (args: EditMeArgsType) => {
 		dispatch(updateProfileTC(args))
 	}
 
+	const logout = () => {
+		dispatch(logoutTC())
+	}
+
 	useEffect(() => {
+		if (!isLoggedIn) return
 		dispatch(getProfileTC())
 	}, [])
 
-	if (!profile)
+	if (!isLoggedIn) {
+		return <Navigate to={'/login'} />
+	}
+
+	if (!profile) {
 		return (
 			<div
 				style={{
@@ -34,6 +47,7 @@ export const Profile = () => {
 				<CircularProgress />
 			</div>
 		)
+	}
 
 	return (
 		<div className={s.wrapper}>
@@ -53,7 +67,7 @@ export const Profile = () => {
 				<span className={s.email}>{profile.email}</span>
 
 				<div className={s.logoutButtonBlock}>
-					<button className={s.logoutButton}>
+					<button className={s.logoutButton} onClick={logout}>
 						<img src={logoutIcon} alt='logout' />
 						Log out
 					</button>
@@ -90,18 +104,19 @@ const EditableProfileName: React.FC<EditableProfileNamePropsType> = ({
 		<>
 			{editMode ? (
 				<div className={s.editNameBlock}>
-					<label htmlFor='profileName'>Nickname</label>
-					<div className={s.editNameForm}>
-						<input
-							id='profileName'
-							type='text'
+					<FormControl variant='standard' className={s.editNameInput}>
+						<InputLabel color='primary'>Nickname</InputLabel>
+						<Input
+							id='name'
+							placeholder={'Nickname'}
 							value={name}
 							onChange={changeName}
+							color={'primary'}
 						/>
-						<button className={s.saveButton} onClick={activateViewMode}>
-							SAVE
-						</button>
-					</div>
+					</FormControl>
+					<button className={s.saveButton} onClick={activateViewMode}>
+						SAVE
+					</button>
 				</div>
 			) : (
 				<div className={s.nameBlock}>
