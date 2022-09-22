@@ -1,8 +1,9 @@
-import {EditMeArgsType, ProfileType} from "../../../api/profileAPI";
+import {EditMeArgsType} from "../../../api/profileAPI";
 import React, {ChangeEvent, useState} from "react";
 import s from "./EditableProfileName.module.css";
 import {FormControl, Input, InputLabel} from "@mui/material";
 import editIcon from "../../../assets/image/icons/edit.svg";
+import {ProfileType} from "../../../api/authAPI";
 
 type EditableProfileNamePropsType = {
     profile: ProfileType
