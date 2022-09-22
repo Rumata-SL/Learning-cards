@@ -4,7 +4,7 @@
     position: fixed;
     top: 120px;
     text-align: center;
-    width: 100%;   
+    width: 100%;
 }
 
 .container {
@@ -71,58 +71,6 @@
     border-radius: 100%;
 }
 
-.nameBlock {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    column-gap: 10px;
-}
-
-.name {
-    margin: 0;
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 24px;
-    color: #000000;
-}
-
-.onEditModeButton {
-    cursor: pointer;
-    width: 12px;
-    height: 12px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: none;
-    background-color: transparent;
-}
-
-.editNameBlock {
-    display: flex;
-    align-items: center;
-    position: relative;
-}
-
-.editNameInput {
-    width: 100%;
-}
-
-.saveButton {
-    position: absolute;
-    right: 10px;
-    bottom: 5px;
-    height: 30px;
-    padding: 0 10px;
-    background: #366EFF;
-    border-radius: 2px;
-    border: none;
-    cursor: pointer;
-
-    font-family: 'Montserrat', serif;
-    font-size: 14px;
-    color: #FFFFFF;
-
-}
 
 .email {
     display: block;

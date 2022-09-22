@@ -1,16 +1,15 @@
-import React, { ChangeEvent, useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import s from './Profile.module.css'
-import avatar from './assets/avatar.png'
-import changePhoto from './assets/photo.svg'
-import editIcon from './assets/edit.svg'
-import logoutIcon from './assets/logout.svg'
+import avatar from '../../assets/image/avatar.png'
+import changePhoto from '../../assets/image/icons/photo.svg'
+import logoutIcon from '../../assets/image/icons/logout.svg'
 import { useAppDispatch, useAppSelector } from '../../bll/store'
 import { getProfileTC, updateProfileTC } from './profileReducer'
 import CircularProgress from '@mui/material/CircularProgress'
-import { EditMeArgsType, ProfileType } from '../../api/profileAPI'
-import { FormControl, Input, InputLabel, Button } from '@mui/material'
+import { EditMeArgsType } from '../../api/profileAPI'
 import { Navigate } from 'react-router-dom'
 import { logoutTC } from '../login/loginReducer'
+import {EditableProfileName} from "./editableProfileName/EditableProfileName";
 
 export const Profile = () => {
 	const dispatch = useAppDispatch()
@@ -75,55 +74,4 @@ export const Profile = () => {
 	)
 }
 
-type EditableProfileNamePropsType = {
-	profile: ProfileType
-	updateProfile: (args: EditMeArgsType) => void
-}
 
-const EditableProfileName: React.FC<EditableProfileNamePropsType> = ({
-	profile,
-	updateProfile,
-}) => {
-	const [editMode, setEditMode] = useState(false)
-	const [name, setName] = useState(profile.name)
-
-	const activateEditMode = () => {
-		setEditMode(true)
-	}
-	const activateViewMode = () => {
-		updateProfile({ name })
-		setEditMode(false)
-	}
-	const changeName = (e: ChangeEvent<HTMLInputElement>) => {
-		setName(e.currentTarget.value)
-	}
-
-	return (
-		<>
-			{editMode ? (
-				<div className={s.editNameBlock}>
-					<FormControl variant='standard' className={s.editNameInput}>
-						<InputLabel color='primary'>Nickname</InputLabel>
-						<Input
-							id='name'
-							placeholder={'Nickname'}
-							value={name}
-							onChange={changeName}
-							color={'primary'}
-						/>
-					</FormControl>
-					<button className={s.saveButton} onClick={activateViewMode}>
-						SAVE
-					</button>
-				</div>
-			) : (
-				<div className={s.nameBlock}>
-					<h4 className={s.name}>{profile.name}</h4>
-					<button className={s.onEditModeButton} onClick={activateEditMode}>
-						<img src={editIcon} alt='edit' />
-					</button>
-				</div>
-			)}
-		</>
-	)
-}

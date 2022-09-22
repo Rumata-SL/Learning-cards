@@ -3,6 +3,8 @@ import {recoverAPI} from '../../api/recoveryAPI';
 import axios, {AxiosError, AxiosResponse} from 'axios';
 import {Simulate} from 'react-dom/test-utils';
 import error = Simulate.error;
+import {setAppStatusAC} from '../../app/appReducer';
+import {utilsError} from '../../utils/utils_error';
 
 type InitialStateType = {
     isRequested: boolean,
@@ -50,23 +52,20 @@ export const setRecoveryErrorAC = (error: string | null) => {
 
 export const requestRecoveryTC = (email: string): ThunkType => async (dispatch) => {
     try {
+        dispatch(setAppStatusAC('loading'))
+
         const req = await recoverAPI.requestLink(email)
 
         if (req.data.success) {
             dispatch(setIsRequestedAC(true))
-        } else {
-
+            dispatch(setAppStatusAC('succeeded'))
         }
 
     } catch (e) {
+        const err = e as Error | AxiosError<{ error: string }>
+        utilsError(err, dispatch)
 
-        if (axios.isAxiosError(e)) {
-            const serverError = e as AxiosError<any>;
-            if (serverError && serverError.response) {
-                dispatch(setRecoveryErrorAC(serverError.response.data.error))
-            }
-        } else {
-            throw new Error('different error than axios');
-        }
+    } finally {
+        dispatch(setAppStatusAC('idle'))
     }
 }
