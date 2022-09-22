@@ -12,6 +12,7 @@ import {NewPassword} from "../feautures/newPassword/NewPassword";
 import {Registration} from "../feautures/registration/Registration";
 import {ErrorComponent} from "../feautures/errorFolder/ErrorComponent";
 import {Pages} from "./Pages";
+import {ErrorBar} from "../common/errorBar/ErrorBar";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <div className="app-wrapper">
             <Pages/>
         </div>
+        <ErrorBar/>
     </div>
   );
 }
