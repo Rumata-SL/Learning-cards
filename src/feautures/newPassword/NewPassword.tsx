@@ -5,8 +5,9 @@ import style from './NewPassword.module.css';
 import {Button, FormControl, IconButton, Input, InputAdornment, InputLabel} from '@mui/material';
 import {Visibility, VisibilityOff} from '@mui/icons-material';
 import {createNewPasswordTC} from './newPasswordReducer';
-import {useNavigate, useParams} from 'react-router-dom';
+import {Navigate, useNavigate, useParams} from 'react-router-dom';
 import {BackToLogin} from '../recovery/BackToLogin';
+import SuperButton from '../../components/testComponent/superComponents/superButton/SuperButton';
 
 
 type FormikErrorType = {
@@ -19,6 +20,7 @@ export const NewPassword = () => {
 
     const dispatch = useAppDispatch()
     const isCreated = useAppSelector<boolean>(state => state.newPassword.isCreated)
+    const isLoggedIn = useAppSelector<boolean>(state => state.login.isLoggedIn)
 
     const navigate = useNavigate();
     const [showValuePass, setShowValuePass] = useState(false)
@@ -65,8 +67,16 @@ export const NewPassword = () => {
         e.preventDefault()
     }
 
+    // if (isCreated) {
+    //     navigate('/login')
+    // }
+
     if (isCreated) {
-        navigate('/login')
+        return <Navigate to={'/login/'}/>
+    }
+
+    if (isLoggedIn) {
+        return <Navigate to={'/profile/'}/>
     }
 
     return (
@@ -138,8 +148,16 @@ export const NewPassword = () => {
 
                 </FormControl>
 
+                <SuperButton style={{
+                    fontFamily: 'Montserrat',
+                    fontStyle: 'normal',
+                    fontWeight: 500,
+                    fontSize: '16px',
+                    lineHeight: '20px',
+                    letterSpacing: '0.01em'
+                }} type="submit">Create new password</SuperButton>
 
-                <Button color={'primary'} variant={'contained'} type="submit">Create new password</Button>
+
 
             </form>
 

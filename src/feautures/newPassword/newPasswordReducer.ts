@@ -1,5 +1,8 @@
 import {ThunkType} from '../../bll/store';
 import {recoverAPI} from '../../api/recoveryAPI';
+import {setAppStatusAC} from '../../app/appReducer';
+import {AxiosError} from 'axios';
+import {utilsError} from '../../utils/utils_error';
 
 type newPasswordInitialStateType = {
     isCreated: boolean
@@ -34,14 +37,19 @@ const setIsCreatedAC = (status: boolean) => {
 export const createNewPasswordTC = (newPassword: string, token: string): ThunkType => async (dispatch) => {
 
     try {
+        dispatch(setAppStatusAC('loading'))
+
         const res = await recoverAPI.setNewPassword(newPassword, token)
 
         if (res.data.info === 'setNewPassword success —ฅ/ᐠ.̫ .ᐟฅ—') {
             dispatch(setIsCreatedAC(true))
+            dispatch(setAppStatusAC('succeeded'))
         }
-
     } catch (e) {
-
+        const err = e as Error | AxiosError<{ error: string }>
+        utilsError(err, dispatch)
+    } finally {
+        dispatch(setAppStatusAC('idle'))
     }
 
 }

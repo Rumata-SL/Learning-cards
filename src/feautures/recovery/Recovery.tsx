@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import style from '../recovery/Recovery.module.css';
 import {Button, FormControl, Input, InputLabel} from '@mui/material';
-import {Link} from 'react-router-dom';
+import {Link, Navigate} from 'react-router-dom';
 import {useAppDispatch, useAppSelector} from '../../bll/store';
 import {useFormik} from 'formik';
 import {BackToLogin} from './BackToLogin';
 import {requestRecoveryTC, setRecoveryErrorAC} from './recoveryReducer';
 import {recoverAPI} from '../../api/recoveryAPI';
+import SuperButton from '../../components/testComponent/superComponents/superButton/SuperButton';
 
 
 type FormikErrorType = {
@@ -22,6 +23,7 @@ export const Recovery = () => {
 
     const isRequested = useAppSelector<boolean>(state => state.recovery.isRequested)
     const error = useAppSelector<string | null>(state => state.recovery.error)
+    const isLoggedIn = useAppSelector<boolean>(state => state.login.isLoggedIn)
 
 
     const dispatch = useAppDispatch()
@@ -55,6 +57,10 @@ export const Recovery = () => {
         dispatch(setRecoveryErrorAC(null))
     }
 
+    if (isLoggedIn) {
+        return <Navigate to={'/profile/'}/>
+    }
+
     return (
         <div className={style.wrapper}>
             <form className={style.formContainer} onSubmit={formik.handleSubmit}>
@@ -76,14 +82,23 @@ export const Recovery = () => {
                         onFocus={onFocusHandle}
                         {...formik.getFieldProps('email')}
                     />
-                    {error ? <div className={style.error}>{error}</div> : null}
+                    {formik.errors.email && formik.touched.email &&
+                        <div className={style.error}>{formik.errors.email}</div>}
                 </FormControl>
-                {/*{formik.errors.email && formik.touched.email &&
-                    <div className={error.error}>{formik.errors.email}</div>}*/}
 
+                {/*{error ? <div className={style.error}>{error}</div> : null}*/}
 
-                <Button color={'primary'} variant={'contained'} type="submit">Send Instructions</Button>
-                {/*<SuperButton className={style.btn} title={"Sign Up"} type="submit"/>*/}
+                {/*<Button color={'primary'} variant={'contained'} type="submit">Send Instructions</Button>*/}
+
+                <SuperButton style={{
+                    fontFamily: 'Montserrat',
+                    fontStyle: 'normal',
+                    fontWeight: 500,
+                    fontSize: '16px',
+                    lineHeight: '20px',
+                    letterSpacing: '0.01em'
+                }} type="submit">Send Instructions</SuperButton>
+
 
                 <div>
                     <div className={style.loginMessage}>Already have an account?</div>
