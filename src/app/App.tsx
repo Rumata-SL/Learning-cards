@@ -1,30 +1,41 @@
 import './App.css';
-import React from 'react';
-import {PATH} from "../common/enum/path";
-// import {Nav} from "./components/nav/Nav";
-import {Login} from "../feautures/login/Login";
-import {Navbar} from "../feautures/nav/Navbar";
-import {Profile} from "../feautures/profile/Profile";
-import {Test} from "../components/testComponent/Test";
-import {Recovery} from "../feautures/recovery/Recovery";
-import {Navigate, Route, Routes} from "react-router-dom";
-import {NewPassword} from "../feautures/newPassword/NewPassword";
-import {Registration} from "../feautures/registration/Registration";
-import {ErrorComponent} from "../feautures/errorFolder/ErrorComponent";
-import {Pages} from "./Pages";
-import {ErrorBar} from "../common/errorBar/ErrorBar";
+import React, {useEffect} from 'react';
+import {Navbar} from '../feautures/nav/Navbar';
+import {Pages} from './Pages';
+import {ErrorBar} from '../common/errorBar/ErrorBar';
+import {useAppDispatch, useAppSelector} from '../bll/store';
+import {CircularProgress, LinearProgress} from '@mui/material';
+import {getProfileTC} from '../feautures/profile/profileReducer';
+import {authMeTC} from './appReducer';
 
 function App() {
-  return (
-    <div className="app">
-        <Navbar/>
-        {/*<Nav/>*/}
-        <div className="app-wrapper">
-            <Pages/>
+
+    const dispatch = useAppDispatch()
+    const appStatus = useAppSelector(state => state.app.status)
+    const isInitialized = useAppSelector(state => state.app.isInitial)
+    const isLoggedIn = useAppSelector(state => state.login.isLoggedIn)
+
+    useEffect(()=>{
+        if (isLoggedIn) return
+        dispatch(authMeTC())
+    }, [])
+
+    if (!isInitialized) {
+        return <div style={{display: 'flex', height: '100vh', justifyContent: 'center', alignItems: 'center'}}><CircularProgress/></div>
+    }
+
+    return (
+        <div className="app">
+            <Navbar/>
+
+            <div className="linearProgress">{appStatus === 'loading' && <LinearProgress/>}</div>
+
+            <div className="app-wrapper">
+                <Pages/>
+            </div>
+            <ErrorBar/>
         </div>
-        <ErrorBar/>
-    </div>
-  );
+    );
 }
 
 export default App;

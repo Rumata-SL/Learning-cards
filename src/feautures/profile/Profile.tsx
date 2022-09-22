@@ -16,6 +16,7 @@ export const Profile = () => {
 	const profile = useAppSelector(state => state.profile.profile)
 	const isLoggedIn = useAppSelector(state => state.login.isLoggedIn)
 
+
 	const updateProfile = (args: EditMeArgsType) => {
 		dispatch(updateProfileTC(args))
 	}

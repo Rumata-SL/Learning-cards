@@ -20,7 +20,7 @@ export const loginReducer = (state: InitialStateType = initialState,action: Logi
 }
 
 //actions
-const loginAC = (value: boolean) => {
+export const loginAC = (value: boolean) => {
     return {
         type: 'login/SET-IS-LOGGED-IN',
         value,

@@ -5,11 +5,12 @@
     margin: 0 auto;
     /*padding: 5px;*/
     display: grid;
-    grid-template-rows: 70px 1fr;
+    grid-template-rows: 70px 4px 1fr;
     grid-template-columns: 2fr 10fr;
-    grid-gap: 5px;
+    /*grid-gap: 5px;*/
     grid-template-areas:
     "h h"
+    "p p"
     "c c";
 }
 
@@ -17,4 +18,8 @@
     grid-area: c;
     /*background-color: rgb(255, 255, 255);*/
     text-align: center;
+}
+
+.linearProgress {
+    grid-area: p;
 }
