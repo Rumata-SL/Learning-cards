@@ -36,12 +36,13 @@ type LoginResponseType = {
 	"name": string,
 	"verified": boolean,
 	"publicCardPacksCount": number,
-	"created": string,
-	"updated": string,
+	"created": Date,
+	"updated": Date,
 	"__v": number,
 	"token": string,
 	"tokenDeathTime": number,
-	"avatar": string,
+	"avatar"?: string,
+	error?: string,
 	"deviceTokens": [
 		{
 			"_id": string,
