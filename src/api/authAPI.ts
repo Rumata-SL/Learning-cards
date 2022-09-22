@@ -43,24 +43,12 @@ type LoginResponseType = {
 	"tokenDeathTime": number,
 	"avatar"?: string,
 	error?: string,
-	"deviceTokens": [
-		{
-			"_id": string,
-			"device": string,
-			"token": string,
-			"tokenDeathTime": number
-		},
-		{
-			"_id": string,
-			"device": string,
-			"token": string,
-			"tokenDeathTime": number
-		},
-		{
-			"_id": string,
-			"device": string,
-			"token": string,
-			"tokenDeathTime": number
-		}
-	]
+	"deviceTokens": DeviceTokenType[]
+}
+
+type DeviceTokenType = {
+	"_id": string,
+	"device": string,
+	"token": string,
+	"tokenDeathTime": number
 }
