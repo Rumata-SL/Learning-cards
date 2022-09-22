@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import style from '../recovery/Recovery.module.css';
 import {Button} from '@mui/material';
 import {useNavigate} from 'react-router-dom';
@@ -10,6 +10,10 @@ export const BackToLogin = () => {
 
     const dispatch = useAppDispatch()
     const navigate = useNavigate();
+
+    // useEffect(() => {
+    //     return () => dispatch(setIsRequestedAC(false))
+    // }, [])
 
     const handleRedirect = () => {
         dispatch(setIsRequestedAC(false))
