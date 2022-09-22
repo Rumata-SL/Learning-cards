@@ -31,12 +31,14 @@ const loginAC = (value: boolean) => {
 export const loginTC =
     (email: string, password: string, rememberMe: boolean = false): ThunkType =>
         async dispatch => {
+            dispatch(setAppStatusAC('loading'))
             try {
                 const res = await authAPI.login(email, password, rememberMe)
                 dispatch(loginAC(true))
             } catch (e) {
                 const err = e as Error | AxiosError<{ error: string }>
             } finally {
+                dispatch(setAppStatusAC('idle'))
             }
         }
 
