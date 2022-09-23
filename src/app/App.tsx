@@ -5,7 +5,6 @@ import {Pages} from './Pages';
 import {ErrorBar} from '../common/errorBar/ErrorBar';
 import {useAppDispatch, useAppSelector} from '../bll/store';
 import {CircularProgress, LinearProgress} from '@mui/material';
-import {getProfileTC} from '../feautures/profile/profileReducer';
 import {authMeTC} from './appReducer';
 
 function App() {
