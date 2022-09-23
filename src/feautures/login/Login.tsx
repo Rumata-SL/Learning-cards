@@ -49,12 +49,16 @@ export const Login = () => {
         }
     })
 
-    if (isLoggedIn) {
-        return <Navigate to={'/profile/'}/>
-    }
-
     const onClickHandler = () => {
         setVisibleMode(!visibleMode)
+    }
+
+    const onForgotClick = () => {
+        return <Navigate to={'/recovery/'}/>
+    }
+
+    if (isLoggedIn) {
+        return <Navigate to={'/profile/'}/>
     }
 
     return (
@@ -98,7 +102,7 @@ export const Login = () => {
                     <FormControlLabel className={styles.input} control={<Checkbox/>} label="Remember me" />
                 </FormControl>
                 <div className={styles.recover}>
-                    <span>Forgot Password?</span>
+                    <span onClick={onForgotClick}>Forgot Password?</span>
                 </div>
                 <SuperButton
                     style={{fontFamily: 'Montserrat', fontStyle: "normal", fontWeight: 500, fontSize:"16px", lineHeight:"20px", letterSpacing:"0.01em"}}
