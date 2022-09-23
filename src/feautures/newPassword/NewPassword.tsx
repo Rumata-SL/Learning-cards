@@ -1,12 +1,11 @@
-import React, {useState} from 'react';
-import {useAppDispatch, useAppSelector} from '../../bll/store';
 import {useFormik} from 'formik';
+import React, {useState} from 'react';
 import style from './NewPassword.module.css';
-import {Button, FormControl, IconButton, Input, InputAdornment, InputLabel} from '@mui/material';
-import {Visibility, VisibilityOff} from '@mui/icons-material';
 import {createNewPasswordTC} from './newPasswordReducer';
-import {Navigate, useNavigate, useParams} from 'react-router-dom';
-import {BackToLogin} from '../recovery/BackToLogin';
+import {Visibility, VisibilityOff} from '@mui/icons-material';
+import {useAppDispatch, useAppSelector} from '../../bll/store';
+import {Navigate, useParams} from 'react-router-dom';
+import {FormControl, IconButton, Input, InputAdornment, InputLabel} from '@mui/material';
 import SuperButton from '../../components/testComponent/superComponents/superButton/SuperButton';
 
 
@@ -22,7 +21,7 @@ export const NewPassword = () => {
     const isCreated = useAppSelector<boolean>(state => state.newPassword.isCreated)
     const isLoggedIn = useAppSelector<boolean>(state => state.login.isLoggedIn)
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate(); ????
     const [showValuePass, setShowValuePass] = useState(false)
     const [showValuePassConfirm, setShowValuePassConfirm] = useState(false)
 

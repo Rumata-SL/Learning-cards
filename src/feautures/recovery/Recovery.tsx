@@ -1,12 +1,11 @@
-import React, {useEffect, useState} from 'react';
-import style from '../recovery/Recovery.module.css';
-import {Button, FormControl, Input, InputLabel} from '@mui/material';
-import {Link, Navigate} from 'react-router-dom';
-import {useAppDispatch, useAppSelector} from '../../bll/store';
+import React from 'react';
 import {useFormik} from 'formik';
 import {BackToLogin} from './BackToLogin';
+import {Link, Navigate} from 'react-router-dom';
+import style from '../recovery/Recovery.module.css';
+import {FormControl, Input, InputLabel} from '@mui/material';
+import {useAppDispatch, useAppSelector} from '../../bll/store';
 import {requestRecoveryTC, setRecoveryErrorAC} from './recoveryReducer';
-import {recoverAPI} from '../../api/recoveryAPI';
 import SuperButton from '../../components/testComponent/superComponents/superButton/SuperButton';
 
 
@@ -17,14 +16,9 @@ type FormikErrorType = {
 
 export const Recovery = () => {
 
-    // useEffect(()=>{
-    //     recoverAPI.requestLink('denisegorenko1@gmail.com')
-    // }, [])
-
     const isRequested = useAppSelector<boolean>(state => state.recovery.isRequested)
-    const error = useAppSelector<string | null>(state => state.recovery.error)
+    // const error = useAppSelector<string | null>(state => state.recovery.error)
     const isLoggedIn = useAppSelector<boolean>(state => state.login.isLoggedIn)
-
 
     const dispatch = useAppDispatch()
 
@@ -47,7 +41,6 @@ export const Recovery = () => {
             dispatch(requestRecoveryTC(values.email))
         },
     })
-
 
     if (isRequested) {
         return <BackToLogin/>

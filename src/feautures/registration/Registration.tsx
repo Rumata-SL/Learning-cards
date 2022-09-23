@@ -1,5 +1,10 @@
-import React, {FC, useCallback, useState} from "react";
+import {useFormik} from "formik";
 import style from "./Registration.module.css"
+import {Link, Navigate} from "react-router-dom";
+import {registerTC} from "./registrationReducer";
+import React, {FC, useCallback, useState} from "react";
+import {Visibility, VisibilityOff} from "@mui/icons-material";
+import {useAppDispatch, useAppSelector} from "../../bll/store";
 import {
     FormControl,
     IconButton,
@@ -7,11 +12,6 @@ import {
     InputAdornment,
     InputLabel
 } from "@mui/material";
-import {useFormik} from "formik";
-import {Visibility, VisibilityOff} from "@mui/icons-material";
-import {Link, Navigate} from "react-router-dom";
-import {useAppDispatch, useAppSelector} from "../../bll/store";
-import {registerTC} from "./registrationReducer";
 import SuperButton
     from "../../components/testComponent/superComponents/superButton/SuperButton";
 
@@ -26,7 +26,6 @@ export const Registration: FC = () => {
 
     const dispatch = useAppDispatch()
     const isLoggedIn = useAppSelector<boolean>(state => state.login.isLoggedIn)
-    const isRegistered = useAppSelector(state => state.registration.isRegistered)
 
     const [valuePass, setValuePass] = useState({
         password: "",

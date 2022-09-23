@@ -1,10 +1,8 @@
-import {DispatchActionType, ThunkType} from '../../bll/store';
-import {recoverAPI} from '../../api/recoveryAPI';
-import axios, {AxiosError, AxiosResponse} from 'axios';
-import {Simulate} from 'react-dom/test-utils';
-import error = Simulate.error;
-import {setAppStatusAC} from '../../app/appReducer';
-import {utilsError} from '../../utils/utils_error';
+import { ThunkType} from "../../bll/store";
+import {recoverAPI} from "../../api/recoveryAPI";
+import {AxiosError} from "axios";
+import {setAppStatusAC} from "../../app/appReducer";
+import {utilsError} from "../../utils/utils_error";
 
 type InitialStateType = {
     isRequested: boolean,
@@ -22,11 +20,11 @@ const initialState: InitialStateType = {
 
 export const recoveryReducer = (state: InitialStateType = initialState, action: RecoveryActionType): InitialStateType => {
     switch (action.type) {
-        case 'recovery/SET-IS-REQUESTED': {
+        case "recovery/SET-IS-REQUESTED": {
             return {...state, isRequested: action.status}
         }
 
-        case 'recovery/SET-RECOVERY-ERROR': {
+        case "recovery/SET-RECOVERY-ERROR": {
             return {...state, error: action.error}
         }
 
@@ -37,14 +35,14 @@ export const recoveryReducer = (state: InitialStateType = initialState, action: 
 
 export const setIsRequestedAC = (status: boolean) => {
     return {
-        type: 'recovery/SET-IS-REQUESTED',
+        type: "recovery/SET-IS-REQUESTED",
         status
     } as const
 }
 
 export const setRecoveryErrorAC = (error: string | null) => {
     return {
-        type: 'recovery/SET-RECOVERY-ERROR',
+        type: "recovery/SET-RECOVERY-ERROR",
         error
     } as const
 }
@@ -52,20 +50,16 @@ export const setRecoveryErrorAC = (error: string | null) => {
 
 export const requestRecoveryTC = (email: string): ThunkType => async (dispatch) => {
     try {
-        dispatch(setAppStatusAC('loading'))
-
+        dispatch(setAppStatusAC("loading"))
         const req = await recoverAPI.requestLink(email)
-
         if (req.data.success) {
             dispatch(setIsRequestedAC(true))
-            dispatch(setAppStatusAC('succeeded'))
+            dispatch(setAppStatusAC("succeeded"))
         }
-
     } catch (e) {
         const err = e as Error | AxiosError<{ error: string }>
         utilsError(err, dispatch)
-
     } finally {
-        dispatch(setAppStatusAC('idle'))
+        dispatch(setAppStatusAC("idle"))
     }
 }
