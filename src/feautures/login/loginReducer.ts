@@ -1,16 +1,16 @@
-//initial state
 import {ThunkType} from "../../bll/store"
 import {authAPI} from "../../api/authAPI"
 import {AxiosError} from "axios"
 import {setAppStatusAC} from "../../app/appReducer"
 import {utilsError} from "../../utils/utils_error"
 
+//initial state
 const initialState: InitialStateType = {
     isLoggedIn: false,
 }
 
 //reducer
-export const loginReducer = (state: InitialStateType = initialState, action: LoginActionType) => {
+export const loginReducer = (state: InitialStateType = initialState, action: LoginActionType):InitialStateType => {
     switch (action.type) {
         case "login/SET-IS-LOGGED-IN":
             return {...state, isLoggedIn: action.value}
