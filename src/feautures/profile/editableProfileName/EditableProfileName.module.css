@@ -25,6 +25,20 @@
 
 }
 
+.error{
+    margin-top: 5px;
+    font-size: 12px;
+    font-style: italic;
+    color: red;
+}
+
+.saveButton:disabled {
+    cursor: auto;
+    background-color: #eaeaea;
+    color: #666;
+    opacity: 0.5;
+}
+
 .nameBlock {
     display: flex;
     justify-content: center;
