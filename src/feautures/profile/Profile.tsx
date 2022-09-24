@@ -4,18 +4,23 @@ import avatar from '../../assets/image/avatar.png'
 import changePhoto from '../../assets/image/icons/photo.svg'
 import logoutIcon from '../../assets/image/icons/logout.svg'
 import { useAppDispatch, useAppSelector } from '../../bll/store'
-import { getProfileTC, updateProfileTC } from './profileReducer'
-import CircularProgress from '@mui/material/CircularProgress'
+import { updateProfileTC } from './profileReducer'
 import { EditMeArgsType } from '../../api/profileAPI'
 import { Navigate } from 'react-router-dom'
 import { logoutTC } from '../login/loginReducer'
 import {EditableProfileName} from "./editableProfileName/EditableProfileName";
+import {authMeTC} from "../../app/appReducer";
 
 export const Profile = () => {
 	const dispatch = useAppDispatch()
 	const profile = useAppSelector(state => state.profile.profile)
 	const isLoggedIn = useAppSelector(state => state.login.isLoggedIn)
 
+	useEffect(() => {
+		if(!profile) {
+			dispatch(authMeTC())
+		}
+	}, [profile])
 
 	const updateProfile = (args: EditMeArgsType) => {
 		dispatch(updateProfileTC(args))
@@ -23,28 +28,9 @@ export const Profile = () => {
 	const logout = () => {
 		dispatch(logoutTC())
 	}
-	useEffect(() => {
-		if (!isLoggedIn) return
-		dispatch(getProfileTC())
-	}, [isLoggedIn])
 
 	if (!isLoggedIn) {
 		return <Navigate to={'/login'} />
-	}
-
-	if (!profile) {
-		return (
-			<div
-				style={{
-					position: 'fixed',
-					top: '30%',
-					textAlign: 'center',
-					width: '100%',
-				}}
-			>
-				<CircularProgress />
-			</div>
-		)
 	}
 
 	return (

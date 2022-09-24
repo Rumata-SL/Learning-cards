@@ -3,6 +3,7 @@ import {authAPI} from "../../api/authAPI"
 import {AxiosError} from "axios"
 import {setAppStatusAC} from "../../app/appReducer"
 import {utilsError} from "../../utils/utils_error"
+import {setProfileAC} from "../profile/profileReducer";
 
 //initial state
 const initialState: InitialStateType = {
@@ -36,6 +37,7 @@ export const loginTC =
                 const res = await authAPI.login(email, password, rememberMe)
                 if (res) {
                     dispatch(loginAC(true))
+                    dispatch(setProfileAC(res.data))
                 }
             } catch (e) {
                 const err = e as Error | AxiosError<{ error: string }>

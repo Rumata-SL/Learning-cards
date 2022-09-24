@@ -3,6 +3,7 @@ import {AxiosError} from "axios";
 import {authAPI} from "../api/authAPI";
 import {utilsError} from "../utils/utils_error";
 import {loginAC} from '../feautures/login/loginReducer';
+import {setProfileAC} from "../feautures/profile/profileReducer";
 
 const initialState: InitialStateType = {
     status: "idle",
@@ -52,6 +53,7 @@ export const authMeTC = (): ThunkType => async dispatch => {
     try {
         dispatch(setAppStatusAC("loading"))
         const res = await authAPI.authMe()
+        dispatch(setProfileAC(res.data))
         dispatch(loginAC(true))
     } catch (e) {
         const err = e as Error | AxiosError<{ error: string }>
