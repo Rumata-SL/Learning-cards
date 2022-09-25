@@ -63,5 +63,19 @@ a.link {
     color: #000;
     opacity: 0.5;
 }
-
+.emailError, .passwordError{
+    position: absolute;
+    width: 413px;
+    display: flex;
+    justify-content: center;
+    font-size: 14px;
+    font-style: italic;
+    color: red;
+}
+.emailError {
+    top: 145px;
+}
+.passwordError {
+    top: 215px;
+}
 

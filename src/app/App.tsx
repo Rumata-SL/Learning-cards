@@ -1,6 +1,6 @@
 import './App.css';
 import React, {useEffect} from 'react';
-import {Navbar} from '../feautures/nav/Navbar';
+import {Navbar} from '../features/nav/Navbar';
 import {Pages} from './Pages';
 import {ErrorBar} from '../common/errorBar/ErrorBar';
 import {useAppDispatch, useAppSelector} from '../bll/store';

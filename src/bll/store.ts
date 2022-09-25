@@ -1,21 +1,21 @@
 import { applyMiddleware, combineReducers, legacy_createStore } from 'redux'
-import { LoginActionType, loginReducer } from '../feautures/login/loginReducer'
+import { LoginActionType, loginReducer } from '../features/login/loginReducer'
 import {
     ProfileActionType,
     profileReducer,
-} from '../feautures/profile/profileReducer'
+} from '../features/profile/profileReducer'
 import {
     newPasswordActionType,
     newPasswordReducer,
-} from '../feautures/newPassword/newPasswordReducer'
+} from '../features/newPassword/newPasswordReducer'
 import {
     RegisteredActionType,
     registrationReducer,
-} from '../feautures/registration/registrationReducer'
+} from '../features/registration/registrationReducer'
 import {
     RecoveryActionType,
     recoveryReducer,
-} from '../feautures/recovery/recoveryReducer'
+} from '../features/recovery/recoveryReducer'
 import {AppActionType, appReducer} from "../app/appReducer"
 import thunkMiddleware, {ThunkAction, ThunkDispatch} from "redux-thunk";
 

@@ -72,6 +72,9 @@ export const Login = () => {
                         {...formik.getFieldProps('email')}
                     />
                 </FormControl>
+              {formik.errors.email && formik.touched.email &&
+                  <div
+                      className={styles.emailError}>{formik.errors.email}</div>}
                 <FormControl variant="standard">
                     <InputLabel color="primary">Password</InputLabel>
                     <Input
@@ -94,6 +97,9 @@ export const Login = () => {
                         {...formik.getFieldProps('password')}
                     />
                 </FormControl>
+              {formik.errors.password && formik.touched.password &&
+                  <div
+                      className={styles.passwordError}>{formik.errors.password}</div>}
                 <FormControl>
                     <FormControlLabel className={styles.input} control={<Checkbox/>} label="Remember me" />
                 </FormControl>

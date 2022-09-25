@@ -1,13 +1,13 @@
 import React from "react";
 import {Navigate, Route, Routes} from "react-router-dom";
 import {PATH} from "../common/enum/path";
-import {Profile} from "../feautures/profile/Profile";
-import {Registration} from "../feautures/registration/Registration";
-import {Login} from "../feautures/login/Login";
-import {Recovery} from "../feautures/recovery/Recovery";
-import {NewPassword} from "../feautures/newPassword/NewPassword";
+import {Profile} from "../features/profile/Profile";
+import {Registration} from "../features/registration/Registration";
+import {Login} from "../features/login/Login";
+import {Recovery} from "../features/recovery/Recovery";
+import {NewPassword} from "../features/newPassword/NewPassword";
 import {Test} from "../components/testComponent/Test";
-import {ErrorComponent} from "../feautures/errorFolder/ErrorComponent";
+import {ErrorComponent} from "../features/errorFolder/ErrorComponent";
 
 export const Pages = () => {
     return (

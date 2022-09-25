@@ -2,8 +2,8 @@ import {ThunkType} from "../bll/store";
 import {AxiosError} from "axios";
 import {authAPI} from "../api/authAPI";
 import {utilsError} from "../utils/utils_error";
-import {loginAC} from '../feautures/login/loginReducer';
-import {setProfileAC} from "../feautures/profile/profileReducer";
+import {loginAC} from '../features/login/loginReducer';
+import {setProfileAC} from "../features/profile/profileReducer";
 
 const initialState: InitialStateType = {
     status: "idle",
@@ -57,7 +57,7 @@ export const authMeTC = (): ThunkType => async dispatch => {
         dispatch(loginAC(true))
     } catch (e) {
         const err = e as Error | AxiosError<{ error: string }>
-        utilsError(err, dispatch)
+        // utilsError(err, dispatch)
         dispatch(loginAC(false))
     } finally {
         dispatch(setAppStatusAC("idle"))
