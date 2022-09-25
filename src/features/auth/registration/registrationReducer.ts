@@ -1,16 +1,18 @@
-import axios, {AxiosError} from "axios";
-import {ThunkType} from "../../bll/store";
-import {utilsError} from "../../utils/utils_error";
-import {setAppErrorAC, setAppStatusAC} from "../../app/appReducer";
-import {registerAPI, RegisterParamsType} from "../../api/registerAPI";
+import {AxiosError} from "axios";
+import {ThunkType} from "../../../bll/store";
+import {utilsError} from "../../../utils/utils_error";
+import {setAppStatusAC} from "../../../app/appReducer";
+import {registerAPI, RegisterParamsType} from "../../../api/auth/registerAPI";
 
+//initial state
+type InitialStateType = typeof initialState
 
 const initialState = {
     isRegistered: false
 }
 
 //reducer
-export const registrationReducer = (state: InitialStateType = initialState, action: RegisteredActionType) => {
+export const registrationReducer = (state: InitialStateType = initialState, action: RegisteredActionType): InitialStateType => {
     switch (action.type) {
         case "register/IS-COMPLETED":
             return {...state, isRegistered: action.isRegistered}
@@ -25,7 +27,7 @@ const registrationAC = (isRegistered: boolean) => ({
     isRegistered
 } as const)
 
-//thunk
+//TC
 export const registerTC = (registeredData: RegisterParamsType): ThunkType => async dispatch => {
     try {
         dispatch(setAppStatusAC("loading"));
@@ -42,7 +44,4 @@ export const registerTC = (registeredData: RegisterParamsType): ThunkType => asy
 }
 
 //types
-type InitialStateType = {
-    isRegistered: boolean
-}
 export type RegisteredActionType = ReturnType<typeof registrationAC>

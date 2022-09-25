@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react';
-import style from '../recovery/Recovery.module.css';
+import style from './Recovery.module.css';
 import {Button} from '@mui/material';
 import {useNavigate} from 'react-router-dom';
-import {useAppDispatch} from '../../bll/store';
+import {useAppDispatch} from '../../../bll/store';
 import {setIsRequestedAC} from './recoveryReducer';
 
 

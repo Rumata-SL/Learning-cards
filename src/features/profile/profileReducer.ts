@@ -3,19 +3,17 @@ import {EditMeArgsType, profileAPI} from "../../api/profileAPI"
 import {authMeTC, setAppStatusAC} from "../../app/appReducer"
 import {AppRootActionsType, ThunkType} from "../../bll/store"
 import {utilsError} from "../../utils/utils_error"
-import {ProfileType} from "../../api/authAPI";
+import {ProfileType} from "../../api/auth/authAPI";
 
-//reducer
+//initial state
 type InitialStateType = typeof initialState
 
 const initialState = {
     profile: {} as ProfileType,
 }
 
-export const profileReducer = (
-    state = initialState,
-    action: AppRootActionsType
-): InitialStateType => {
+//reducer
+export const profileReducer = (state = initialState, action: AppRootActionsType): InitialStateType => {
     switch (action.type) {
         case "profile/SET_PROFILE":
             return {...state, profile: action.profile}
@@ -24,7 +22,7 @@ export const profileReducer = (
     }
 }
 
-//action
+//AC
 export const setProfileAC = (profile: ProfileType) => {
     return {
         type: "profile/SET_PROFILE",
@@ -32,7 +30,7 @@ export const setProfileAC = (profile: ProfileType) => {
     } as const
 }
 
-//thunk
+//TC
 export const updateProfileTC =
     (args: EditMeArgsType): ThunkType =>
         async dispatch => {
@@ -50,5 +48,5 @@ export const updateProfileTC =
             }
         }
 
-//type
+//types
 export type ProfileActionType = ReturnType<typeof setProfileAC>

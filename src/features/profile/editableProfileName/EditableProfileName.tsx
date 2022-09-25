@@ -3,7 +3,7 @@ import React, {ChangeEvent, KeyboardEvent, useState} from "react";
 import s from "./EditableProfileName.module.css";
 import {FormControl, Input, InputLabel} from "@mui/material";
 import editIcon from "../../../assets/image/icons/edit.svg";
-import {ProfileType} from "../../../api/authAPI";
+import {ProfileType} from "../../../api/auth/authAPI";
 
 type EditableProfileNamePropsType = {
     profile: ProfileType

@@ -1,16 +1,19 @@
 import {ThunkType} from "../bll/store";
 import {AxiosError} from "axios";
-import {authAPI} from "../api/authAPI";
-import {utilsError} from "../utils/utils_error";
-import {loginAC} from '../features/login/loginReducer';
+import {authAPI} from "../api/auth/authAPI";
+import {loginAC} from '../features/auth/login/loginReducer';
 import {setProfileAC} from "../features/profile/profileReducer";
 
-const initialState: InitialStateType = {
-    status: "idle",
+//initial state
+type InitialStateType = typeof initialState
+
+const initialState = {
+    status: "idle" as LoadingStatusType,
     isInitial: false,
     error: null as null | string
 }
 
+//reducer
 export const appReducer = (state: InitialStateType = initialState, action: AppActionType): InitialStateType => {
     switch (action.type) {
         case "app/SET-STATUS":
@@ -24,11 +27,7 @@ export const appReducer = (state: InitialStateType = initialState, action: AppAc
     }
 }
 
-export type AppActionType =
-    ReturnType<typeof setAppStatusAC>
-    | ReturnType<typeof setAppInitializedAC>
-    | ReturnType<typeof setAppErrorAC>
-
+//AC
 export const setAppStatusAC = (status: LoadingStatusType) => {
     return {
         type: "app/SET-STATUS",
@@ -42,6 +41,7 @@ export const setAppInitializedAC = (value: boolean) => {
         value
     } as const
 }
+
 export const setAppErrorAC = (error: null | string) => {
     return {
         type: "app/SET-ERROR",
@@ -49,6 +49,7 @@ export const setAppErrorAC = (error: null | string) => {
     } as const
 }
 
+//TC
 export const authMeTC = (): ThunkType => async dispatch => {
     try {
         dispatch(setAppStatusAC("loading"))
@@ -57,7 +58,6 @@ export const authMeTC = (): ThunkType => async dispatch => {
         dispatch(loginAC(true))
     } catch (e) {
         const err = e as Error | AxiosError<{ error: string }>
-        // utilsError(err, dispatch)
         dispatch(loginAC(false))
     } finally {
         dispatch(setAppStatusAC("idle"))
@@ -65,10 +65,11 @@ export const authMeTC = (): ThunkType => async dispatch => {
     }
 }
 
+//types
+export type AppActionType =
+    ReturnType<typeof setAppStatusAC>
+    | ReturnType<typeof setAppInitializedAC>
+    | ReturnType<typeof setAppErrorAC>
+
 export type LoadingStatusType = "idle" | "loading" | "succeeded"
 
-type InitialStateType = {
-    status: LoadingStatusType
-    isInitial: boolean
-    error: null | string
-}

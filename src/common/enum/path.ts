@@ -4,5 +4,6 @@ export enum PATH {
     PROFILE = '/profile/',
     NEW_PASSWORD = '/new_password/:token',
     RECOVERY = '/recovery/',
-    TEST = '/test/',
+    PACKS_LIST = '/packs_list/',
+    PACK = '/pack/'
 }

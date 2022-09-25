@@ -1,31 +1,28 @@
-import {ThunkType} from '../../bll/store';
-import {recoverAPI} from '../../api/recoveryAPI';
-import {setAppStatusAC} from '../../app/appReducer';
+import {ThunkType} from '../../../bll/store';
+import {recoverAPI} from '../../../api/auth/recoveryAPI';
+import {setAppStatusAC} from '../../../app/appReducer';
 import {AxiosError} from 'axios';
-import {utilsError} from '../../utils/utils_error';
+import {utilsError} from '../../../utils/utils_error';
 
-type newPasswordInitialStateType = {
-    isCreated: boolean
-}
+//initial state
+type InitialStateType = typeof initialState
 
-export type newPasswordActionType = ReturnType<typeof setIsCreatedAC>
-
-const initialState: newPasswordInitialStateType = {
+const initialState = {
     isCreated: false
 }
 
-export const newPasswordReducer = (state: newPasswordInitialStateType = initialState, action: newPasswordActionType): newPasswordInitialStateType => {
+//reducer
+export const newPasswordReducer = (state: InitialStateType = initialState, action: NewPasswordActionType): InitialStateType => {
     switch (action.type) {
-
         case 'newPassword/SET-IS-CREATED': {
             return {...state, isCreated: action.status}
         }
-
         default:
             return state
     }
 }
 
+//AC
 const setIsCreatedAC = (status: boolean) => {
     return {
         type: 'newPassword/SET-IS-CREATED',
@@ -33,9 +30,8 @@ const setIsCreatedAC = (status: boolean) => {
     } as const
 }
 
-
+//TC
 export const createNewPasswordTC = (newPassword: string, token: string): ThunkType => async (dispatch) => {
-
     try {
         dispatch(setAppStatusAC('loading'))
 
@@ -51,5 +47,7 @@ export const createNewPasswordTC = (newPassword: string, token: string): ThunkTy
     } finally {
         dispatch(setAppStatusAC('idle'))
     }
-
 }
+
+//types
+export type NewPasswordActionType = ReturnType<typeof setIsCreatedAC>

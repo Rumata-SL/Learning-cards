@@ -1,25 +1,27 @@
 import { applyMiddleware, combineReducers, legacy_createStore } from 'redux'
-import { LoginActionType, loginReducer } from '../features/login/loginReducer'
+import { LoginActionType, loginReducer } from '../features/auth/login/loginReducer'
 import {
     ProfileActionType,
     profileReducer,
 } from '../features/profile/profileReducer'
 import {
-    newPasswordActionType,
+    NewPasswordActionType,
     newPasswordReducer,
-} from '../features/newPassword/newPasswordReducer'
+} from '../features/auth/newPassword/newPasswordReducer'
 import {
     RegisteredActionType,
     registrationReducer,
-} from '../features/registration/registrationReducer'
+} from '../features/auth/registration/registrationReducer'
 import {
     RecoveryActionType,
     recoveryReducer,
-} from '../features/recovery/recoveryReducer'
+} from '../features/auth/recovery/recoveryReducer'
 import {AppActionType, appReducer} from "../app/appReducer"
 import thunkMiddleware, {ThunkAction, ThunkDispatch} from "redux-thunk";
 
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
+import {PacksListActionType, packsListReducer} from "../features/packsList/packsListReducer";
+import {PackActionType, packReducer} from "../features/packsList/pack/packReducer";
 
 const rootReducer = combineReducers({
     app: appReducer,
@@ -28,6 +30,8 @@ const rootReducer = combineReducers({
     newPassword: newPasswordReducer,
     registration: registrationReducer,
     recovery: recoveryReducer,
+    packsList: packsListReducer,
+    pack: packReducer
 })
 
 export const store = legacy_createStore(
@@ -41,9 +45,11 @@ export type AppRootActionsType =
     | LoginActionType
     | RegisteredActionType
     | RecoveryActionType
-    | newPasswordActionType
+    | NewPasswordActionType
     | ProfileActionType
-    |AppActionType// your actionType
+    | AppActionType
+    | PacksListActionType
+    | PackActionType
 
 export type ThunkType<ReturnType = void> = ThunkAction<
     ReturnType,

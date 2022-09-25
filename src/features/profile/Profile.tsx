@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from '../../bll/store'
 import { updateProfileTC } from './profileReducer'
 import { EditMeArgsType } from '../../api/profileAPI'
 import { Navigate } from 'react-router-dom'
-import { logoutTC } from '../login/loginReducer'
+import { logoutTC } from '../auth/login/loginReducer'
 import {EditableProfileName} from "./editableProfileName/EditableProfileName";
 import {authMeTC} from "../../app/appReducer";
 

@@ -4,7 +4,7 @@ import {Link, Navigate} from "react-router-dom";
 import {registerTC} from "./registrationReducer";
 import React, {FC, useCallback, useState} from "react";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
-import {useAppDispatch, useAppSelector} from "../../bll/store";
+import {useAppDispatch, useAppSelector} from "../../../bll/store";
 import {
     FormControl,
     IconButton,
@@ -13,7 +13,7 @@ import {
     InputLabel
 } from "@mui/material";
 import SuperButton
-    from "../../components/testComponent/superComponents/superButton/SuperButton";
+    from "../../../components/superButton/SuperButton";
 
 
 type FormikErrorType = {

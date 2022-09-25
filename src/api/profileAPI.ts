@@ -1,5 +1,5 @@
 import { instance } from './instance'
-import {ProfileType} from "./authAPI";
+import {ProfileType} from "./auth/authAPI";
 import {AxiosResponse} from "axios";
 
 export const profileAPI = {

@@ -3,10 +3,10 @@ import React, {useState} from 'react';
 import style from './NewPassword.module.css';
 import {createNewPasswordTC} from './newPasswordReducer';
 import {Visibility, VisibilityOff} from '@mui/icons-material';
-import {useAppDispatch, useAppSelector} from '../../bll/store';
+import {useAppDispatch, useAppSelector} from '../../../bll/store';
 import {Navigate, useParams} from 'react-router-dom';
 import {FormControl, IconButton, Input, InputAdornment, InputLabel} from '@mui/material';
-import SuperButton from '../../components/testComponent/superComponents/superButton/SuperButton';
+import SuperButton from '../../../components/superButton/SuperButton';
 
 
 type FormikErrorType = {

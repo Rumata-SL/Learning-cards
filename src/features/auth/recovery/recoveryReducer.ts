@@ -1,38 +1,32 @@
-import { ThunkType} from "../../bll/store";
-import {recoverAPI} from "../../api/recoveryAPI";
+import {ThunkType} from "../../../bll/store";
+import {recoverAPI} from "../../../api/auth/recoveryAPI";
 import {AxiosError} from "axios";
-import {setAppStatusAC} from "../../app/appReducer";
-import {utilsError} from "../../utils/utils_error";
+import {setAppStatusAC} from "../../../app/appReducer";
+import {utilsError} from "../../../utils/utils_error";
 
-type InitialStateType = {
-    isRequested: boolean,
-    error: string | null
-}
+//initial state
+type InitialStateType = typeof initialState
 
-export type RecoveryActionType =
-    ReturnType<typeof setIsRequestedAC>
-    | ReturnType<typeof setRecoveryErrorAC>
-
-const initialState: InitialStateType = {
+const initialState = {
     isRequested: false,
-    error: null
+    error: null as string | null
 }
 
+//reducer
 export const recoveryReducer = (state: InitialStateType = initialState, action: RecoveryActionType): InitialStateType => {
     switch (action.type) {
         case "recovery/SET-IS-REQUESTED": {
             return {...state, isRequested: action.status}
         }
-
         case "recovery/SET-RECOVERY-ERROR": {
             return {...state, error: action.error}
         }
-
         default:
             return state
     }
 }
 
+//AC
 export const setIsRequestedAC = (status: boolean) => {
     return {
         type: "recovery/SET-IS-REQUESTED",
@@ -47,7 +41,7 @@ export const setRecoveryErrorAC = (error: string | null) => {
     } as const
 }
 
-
+//TC
 export const requestRecoveryTC = (email: string): ThunkType => async (dispatch) => {
     try {
         dispatch(setAppStatusAC("loading"))
@@ -63,3 +57,8 @@ export const requestRecoveryTC = (email: string): ThunkType => async (dispatch) 
         dispatch(setAppStatusAC("idle"))
     }
 }
+
+//types
+export type RecoveryActionType =
+    | ReturnType<typeof setIsRequestedAC>
+    | ReturnType<typeof setRecoveryErrorAC>
