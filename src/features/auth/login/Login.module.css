@@ -2,13 +2,6 @@ h2 {
     margin: 0
 }
 
-.wrapper {
-    position: fixed;
-    top: 120px;
-    width: 100%;
-
-}
-
 .formContainer {
     margin: 0 auto;
     max-width: 413px;

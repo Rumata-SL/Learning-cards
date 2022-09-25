@@ -6,7 +6,7 @@ import style from './Recovery.module.css';
 import {FormControl, Input, InputLabel} from '@mui/material';
 import {useAppDispatch, useAppSelector} from '../../../bll/store';
 import {requestRecoveryTC, setRecoveryErrorAC} from './recoveryReducer';
-import SuperButton from '../../../components/superButton/SuperButton';
+import SuperButton from '../../../common/components/superButton/SuperButton';
 
 
 type FormikErrorType = {

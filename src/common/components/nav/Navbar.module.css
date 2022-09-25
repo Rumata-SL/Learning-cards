@@ -1,0 +1,19 @@
+.wrapper{
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.21);
+    color: #fff;
+}
+a {
+    text-decoration: none;
+    font-size: 16px;
+    color: #ffffff;
+}
+.active {
+    color: #03b6b3;
+}
+.link:hover {
+    color: #000;
+}

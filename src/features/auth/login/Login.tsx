@@ -6,7 +6,7 @@ import {Link, Navigate} from 'react-router-dom';
 import style from '../recovery/Recovery.module.css';
 import {useAppDispatch, useAppSelector} from '../../../bll/store';
 import {Visibility, VisibilityOff} from '@mui/icons-material';
-import SuperButton from '../../../components/superButton/SuperButton';
+import SuperButton from '../../../common/components/superButton/SuperButton';
 import {Checkbox, FormControl, FormControlLabel, IconButton, Input, InputAdornment, InputLabel} from '@mui/material';
 
 type FormikErrorType = {

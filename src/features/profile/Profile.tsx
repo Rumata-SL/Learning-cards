@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import s from './Profile.module.css'
 import avatar from '../../assets/image/avatar.png'
 import changePhoto from '../../assets/image/icons/photo.svg'
@@ -8,19 +8,12 @@ import { updateProfileTC } from './profileReducer'
 import { EditMeArgsType } from '../../api/profileAPI'
 import { Navigate } from 'react-router-dom'
 import { logoutTC } from '../auth/login/loginReducer'
-import {EditableProfileName} from "./editableProfileName/EditableProfileName";
-import {authMeTC} from "../../app/appReducer";
+import { EditableProfileName } from './editableProfileName/EditableProfileName'
 
 export const Profile = () => {
 	const dispatch = useAppDispatch()
 	const profile = useAppSelector(state => state.profile.profile)
 	const isLoggedIn = useAppSelector(state => state.login.isLoggedIn)
-
-	/*useEffect(() => {
-		if(!profile) {
-			dispatch(authMeTC())
-		}
-	}, [profile])*/
 
 	const updateProfile = (args: EditMeArgsType) => {
 		dispatch(updateProfileTC(args))
@@ -60,5 +53,3 @@ export const Profile = () => {
 		</div>
 	)
 }
-
-

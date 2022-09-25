@@ -6,7 +6,7 @@ import {Registration} from "../features/auth/registration/Registration";
 import {Login} from "../features/auth/login/Login";
 import {Recovery} from "../features/auth/recovery/Recovery";
 import {NewPassword} from "../features/auth/newPassword/NewPassword";
-import {ErrorComponent} from "../features/errorFolder/ErrorComponent";
+import {ErrorComponent} from "../common/components/errorFolder/ErrorComponent";
 import {PacksList} from "../features/packsList/PacksList";
 import {Pack} from "../features/packsList/pack/Pack";
 

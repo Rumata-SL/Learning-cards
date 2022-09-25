@@ -1,25 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap');
+
 .app {
-  /*text-align: center;*/
-    width:100%;
-    height: 100vh;
-    margin: 0 auto;
-    /*padding: 5px;*/
-    display: grid;
-    grid-template-rows: 70px 4px 1fr;
-    grid-template-columns: 2fr 10fr;
-    /*grid-gap: 5px;*/
-    grid-template-areas:
-    "h h"
-    "p p"
-    "c c";
 }
 
 .app-wrapper {
-    grid-area: c;
-    /*background-color: rgb(255, 255, 255);*/
+    position: relative;
+    max-width: 1010px;
+    padding-top: 120px;
+    margin: 0 auto;
     text-align: center;
 }
 
 .linearProgress {
-    grid-area: p;
+    width: 100%;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    z-index: 100;
 }

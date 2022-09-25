@@ -6,7 +6,7 @@ import {Visibility, VisibilityOff} from '@mui/icons-material';
 import {useAppDispatch, useAppSelector} from '../../../bll/store';
 import {Navigate, useParams} from 'react-router-dom';
 import {FormControl, IconButton, Input, InputAdornment, InputLabel} from '@mui/material';
-import SuperButton from '../../../components/superButton/SuperButton';
+import SuperButton from '../../../common/components/superButton/SuperButton';
 
 
 type FormikErrorType = {

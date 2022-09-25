@@ -13,7 +13,7 @@ import {
     InputLabel
 } from "@mui/material";
 import SuperButton
-    from "../../../components/superButton/SuperButton";
+    from "../../../common/components/superButton/SuperButton";
 
 
 type FormikErrorType = {
