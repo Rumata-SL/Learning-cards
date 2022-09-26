@@ -1,15 +1,46 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+
+import { NavLink } from 'react-router-dom'
 
 import avatar from '../../../assets/image/avatar.png'
+import logoutIcon from '../../../assets/image/icons/logout.svg'
+import userIcon from '../../../assets/image/icons/user.svg'
 import logo from '../../../assets/image/logo.svg'
-import { useAppSelector } from '../../../bll/store'
+import { useAppDispatch, useAppSelector } from '../../../bll/store'
+import { logoutTC } from '../../../features/auth/login/loginReducer'
+import { PATH } from '../../enum/path'
 import SuperButton from '../superButton/SuperButton'
 
 import s from './Header.module.css'
 
 export const Header = () => {
+  const dispatch = useAppDispatch()
   const isLoggedIn = useAppSelector(state => state.login.isLoggedIn)
   const profileName = useAppSelector(state => state.profile.profile.name)
+  const [togglePopup, setTogglePopup] = useState(false)
+  const popupRef = useRef(null)
+
+  const onTogglePopupHandler = () => {
+    setTogglePopup(!togglePopup)
+  }
+
+  const handleOutsideClick = (e: any) => {
+    if (!e.path.includes(popupRef.current)) {
+      setTogglePopup(false)
+    }
+  }
+
+  const logout = () => {
+    dispatch(logoutTC())
+  }
+
+  useEffect(() => {
+    document.body.addEventListener('click', handleOutsideClick)
+
+    return () => {
+      document.body.removeEventListener('click', handleOutsideClick)
+    }
+  }, [])
 
   return (
     <div className={s.header}>
@@ -18,15 +49,44 @@ export const Header = () => {
           <img src={logo} alt="logo" />
         </div>
         {isLoggedIn ? (
-          <div className={s.user}>
-            <span>{profileName}</span>
+          <div ref={popupRef} className={s.user} onClick={onTogglePopupHandler}>
+            <span className={s.name}>{profileName}</span>
             <div className={s.photo}>
               <img src={avatar} alt="avatar" />
             </div>
+            {togglePopup && (
+              <div className={s.popup}>
+                <NavLink to={PATH.PROFILE}>
+                  <div className={s.link}>
+                    <img src={userIcon} alt="user" />
+                    <span>Profile</span>
+                  </div>
+                </NavLink>
+                <div className={s.link} onClick={logout}>
+                  <img src={logoutIcon} alt="logout" />
+                  <span>Log out</span>
+                </div>
+              </div>
+            )}
           </div>
         ) : (
           <div className={s.buttonSignIn}>
-            <SuperButton>Sign in</SuperButton>
+            <NavLink to={PATH.LOGIN}>
+              <SuperButton
+                style={{
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: '113px',
+                  fontFamily: 'Montserrat',
+                  fontSize: '16px',
+                  fontWeight: '500',
+                }}
+              >
+                Sign in
+              </SuperButton>
+            </NavLink>
           </div>
         )}
       </div>

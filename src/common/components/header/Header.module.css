@@ -34,9 +34,24 @@
 }
 
 .user {
+  cursor: pointer;
+
+  position: relative;
+
   display: flex;
   column-gap: 10px;
   align-items: center;
+}
+
+.user span {
+  border-bottom: 1px #fff dashed;
+}
+
+.name {
+  font-family: 'Montserrat';
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
 }
 
 .photo {
@@ -59,4 +74,37 @@
   height: 100%;
 
   object-fit: cover;
+}
+
+.popup {
+  position: absolute;
+  top: 50px;
+  right: 0;
+
+  overflow: hidden;
+
+  width: 130px;
+
+  background-color: #fff;
+  border-radius: 10px;
+}
+
+.link {
+  display: flex;
+  column-gap: 15px;
+  align-items: center;
+
+  padding: 10px 20px;
+
+  transition: all 0.2s ease-in-out;
+}
+
+.link span {
+  font-family: 'Montserrat';
+  font-size: 14px;
+  color: #0d0c0b;
+}
+
+.link:hover {
+  background-color: #f0f2f5;
 }
