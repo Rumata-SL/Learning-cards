@@ -1,0 +1,35 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    margin-bottom: 35px;
+}
+
+.settings{
+    display: grid;
+    grid-column-gap: 25px;
+    grid-template-columns: 1.7fr 1fr 1fr 0.3fr;
+
+    margin-bottom: 25px;
+}
+
+.searchBlock {
+    background-color: #03b6b3;
+}
+
+.filterByBlock {
+    background-color: brown;
+}
+
+.filterNumberCardsBlock {
+    background-color: chartreuse;
+}
+
+.resetFilterBlock {
+    background-color: darkorange;
+}
+
+.paginationBlock {
+    margin-top: 35px;
+}
