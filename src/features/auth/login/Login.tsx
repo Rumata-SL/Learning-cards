@@ -129,7 +129,7 @@ export const Login = () => {
         >
           Sign in
         </SuperButton>
-        <span className={styles.text}>Don't have an account?</span>
+        <span className={styles.text}>Don`t have an account?</span>
 
         <Link className={styles.link} to={'/registration'}>
           Sign Up

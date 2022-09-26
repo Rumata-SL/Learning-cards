@@ -26,10 +26,10 @@ const packsListAC = () =>
 
 //TC
 export const packsListTC = (): ThunkType => async dispatch => {
-  try {
-  } catch (e) {
-  } finally {
-  }
+  // try {
+  // } catch (e) {
+  // } finally {
+  // }
 }
 
 //types
