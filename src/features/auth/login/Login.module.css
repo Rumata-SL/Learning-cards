@@ -1,74 +1,81 @@
 h2 {
-    margin: 0
+  margin: 0;
 }
 
 .formContainer {
-    margin: 0 auto;
-    max-width: 413px;
-    height: 528px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  max-width: 413px;
+  height: 528px;
+  margin: 0 auto;
+  padding: 20px;
+
+  background-color: #fff;
+  border-radius: 10px;
 }
 
 .title {
-    font-family: 'Montserrat', serif;
-    text-align: center;
-    font-weight: 600;
-    font-size: 26px;
-    line-height: 32px;
+  font-family: 'Montserrat', serif;
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 32px;
+  text-align: center;
 }
 
 .recover {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 40px;
+  display: flex;
+  justify-content: flex-end;
+
+  margin-bottom: 40px;
 }
 
 .recover span {
-    font-family: 'Montserrat', serif;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 14px;
-    line-height: 17px;
+  font-family: 'Montserrat', serif;
+  font-size: 14px;
+  font-weight: 500;
+  font-style: normal;
+  line-height: 17px;
 }
 
 a.link:active,
 a.link:hover,
 a.link {
-    text-decoration-line: underline;
-    font-size: 16px;
-    line-height: 24px;
-    font-weight: 600;
-    font-family: 'Montserrat', serif;
-    color: #366EFF;
+  font-family: 'Montserrat', serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  color: #366eff;
+  text-decoration-line: underline;
 }
 
 .text {
-    font-family: 'Montserrat', serif;
-    font-style: normal;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 24px;
-    color: #000;
-    opacity: 0.5;
+  font-family: 'Montserrat', serif;
+  font-size: 14px;
+  font-weight: 600;
+  font-style: normal;
+  line-height: 24px;
+  color: #000;
+
+  opacity: 0.5;
 }
-.emailError, .passwordError{
-    position: absolute;
-    width: 413px;
-    display: flex;
-    justify-content: center;
-    font-size: 14px;
-    font-style: italic;
-    color: red;
+.emailError,
+.passwordError {
+  position: absolute;
+
+  display: flex;
+  justify-content: center;
+
+  width: 413px;
+
+  font-size: 14px;
+  font-style: italic;
+  color: red;
 }
 .emailError {
-    top: 145px;
+  top: 145px;
 }
 .passwordError {
-    top: 215px;
+  top: 215px;
 }
-

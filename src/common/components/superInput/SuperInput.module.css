@@ -1,18 +1,20 @@
 .superInput {
-margin:5px;
-    width: 200px;
-    height: 30px;
-    border-radius: 3px;
-    background-color: rgba(255, 255, 255, 0.16);
-    text-align: center;
-    border: 1px solid #fff;
+  width: 200px;
+  height: 30px;
+  margin: 5px;
+
+  text-align: center;
+
+  background-color: rgba(255, 255, 255, 0.16);
+  border: 1px solid #fff;
+  border-radius: 3px;
 }
 
 .errorInput {
-    border: 3px solid lime;
-    background: red;
+  background: red;
+  border: 3px solid lime;
 }
 
 .error {
-    color: red;
+  color: red;
 }
