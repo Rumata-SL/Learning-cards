@@ -1,9 +1,9 @@
-import {instance} from "../instance";
+import { instance } from '../instance'
 
 export const cardsAPI = {
-    card() {
-        return instance.get('/cards/card')
-    },
+  card() {
+    return instance.get('/cards/card')
+  },
 }
 
 //types

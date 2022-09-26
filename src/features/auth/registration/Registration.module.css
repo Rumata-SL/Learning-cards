@@ -1,62 +1,70 @@
 .formContainer {
-    position: relative;
-    margin: 0 auto;
-    max-width: 413px;
-    height: 528px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 10px;
+  position: relative;
 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  max-width: 413px;
+  height: 528px;
+  margin: 0 auto;
+  padding: 20px;
+
+  background-color: #fff;
+  border-radius: 10px;
 }
-.title, a.link, .text{
-    font-family: 'Montserrat', serif;
-    font-weight: 600;
+.title,
+a.link,
+.text {
+  font-family: 'Montserrat', serif;
+  font-weight: 600;
 }
 
 .title {
-    text-align: center;
-    font-size: 26px;
-    line-height: 30px;
+  font-size: 26px;
+  line-height: 30px;
+  text-align: center;
 }
 
 .input {
-    margin-bottom: 15px;
+  margin-bottom: 15px;
 }
 
 a.link {
-    text-decoration-line: underline;
-    font-size: 16px;
-    line-height: 24px;
-    color: #366EFF;
+  font-size: 16px;
+  line-height: 24px;
+  color: #366eff;
+  text-decoration-line: underline;
 }
 
 .text {
-    font-size: 14px;
-    line-height: 24px;
-    color: #000;
-    opacity: 0.5;
+  font-size: 14px;
+  line-height: 24px;
+  color: #000;
+
+  opacity: 0.5;
 }
 
-.emailError, .passwordError, .confirmPasswordError{
-    position: absolute;
-    width: 413px;
-    display: flex;
-    justify-content: center;
-    font-size: 14px;
-    font-style: italic;
-    color: red;
+.emailError,
+.passwordError,
+.confirmPasswordError {
+  position: absolute;
+
+  display: flex;
+  justify-content: center;
+
+  width: 413px;
+
+  font-size: 14px;
+  font-style: italic;
+  color: red;
 }
 .emailError {
-    top: 145px;
+  top: 145px;
 }
-.passwordError{
-    top: 240px;
+.passwordError {
+  top: 240px;
 }
-.confirmPasswordError{
-    top: 335px;
+.confirmPasswordError {
+  top: 335px;
 }
-
-

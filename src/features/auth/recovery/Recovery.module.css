@@ -1,67 +1,70 @@
-
 .formContainer {
-    margin: 0 auto;
-    max-width: 413px;
-    height: 350px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  max-width: 413px;
+  height: 350px;
+  margin: 0 auto;
+  padding: 20px;
+
+  background-color: #fff;
+  border-radius: 10px;
 }
 
 .title {
-    font-family: 'Montserrat', serif;
-    text-align: center;
-    font-size: 26px;
-    font-weight: 600;
-    line-height: 30px;
+  font-family: 'Montserrat', serif;
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 30px;
+  text-align: center;
 }
 
 .input {
 }
 
 .instructionsText {
-    font-family: 'Montserrat', serif;
-    font-size: 14px;
-    margin-bottom: 10px;
-    text-align: center;
+  margin-bottom: 10px;
+
+  font-family: 'Montserrat', serif;
+  font-size: 14px;
+  text-align: center;
 }
 
 .loginMessage {
-    font-family: 'Montserrat', serif;
-    font-size: 14px;
-    margin-bottom: 10px;
-    font-weight: 600;
-    text-align: center;
-    opacity: 0.5;
+  margin-bottom: 10px;
+
+  font-family: 'Montserrat', serif;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+
+  opacity: 0.5;
 }
 
 .link {
-    font-size: 16px;
+  font-size: 16px;
 }
 
 a.link:active,
 a.link:hover,
 a.link {
-    text-decoration-line: underline;
-    font-size: 16px;
-    line-height: 24px;
-    font-weight: 600;
-    font-family: 'Montserrat', serif;
-    color: #366EFF;
+  font-family: 'Montserrat', serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+  color: #366eff;
+  text-decoration-line: underline;
 }
 
 .btn {
-    color: #fff;
+  color: #fff;
 }
 
 .error {
-    color: red;
+  color: red;
 }
 
 .inputBlock {
-    height: 80px;
+  height: 80px;
 }
-
