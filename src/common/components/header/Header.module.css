@@ -16,18 +16,20 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  max-width: 1010px;
+    width: 100%;
+  /*max-width: 1010px;*/
   height: 100%;
   margin: 0 auto;
 }
 
 .logo {
+    margin:20px;
   min-width: 210px;
   height: 50px;
 }
 
 .buttonSignIn {
+    margin-right: 8%;
   max-width: 113px;
   height: 36px;
   padding: 0 10px;
