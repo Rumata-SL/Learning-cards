@@ -4,7 +4,7 @@ import React, {useState} from 'react'
 
 import s from './Pack.module.css'
 import {
-    FormControl,
+    FormControl, IconButton,
     Link,
     MenuItem,
     Pagination,
@@ -24,6 +24,10 @@ import MoreVertOutlinedIcon from '@mui/icons-material/MoreVertOutlined';
 import {SuperInput} from '../../../common/components/superInput/SuperInput';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import {useAppSelector} from '../../../bll/store';
+import {Grade} from './Grade';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+
 
 type PackPropsType = {}
 
@@ -58,33 +62,33 @@ const cardsState: cardsStateType = {
             answer: 'no answer',
             question: 'no question',
             cardsPack_id: '5eb6a2f72f8g49402d46c6ac43',
-            grade: 4.987525071790364,
+            grade: 2.987525071790364,
             shots: 1,
             user_id: '142151531535151',
             created: '2020-05-13T11:05:44.867Z',
-            updated: '2020-05-13T11:05:44.867Z',
+            updated: '2020-03-13T11:05:44.867Z',
             _id: '5ebbdfbf48876810f1adk0e7ece3',
         },
         {
             answer: 'no answer',
             question: 'no question',
             cardsPack_id: '5eb6a2f72f8g49402d46c6ac43',
-            grade: 4.987525071790364,
+            grade: 3.987525071790364,
             shots: 1,
             user_id: '142151531535151',
             created: '2020-05-13T11:05:44.867Z',
-            updated: '2020-05-13T11:05:44.867Z',
+            updated: '2020-09-13T11:05:44.867Z',
             _id: '5ebbdf4887681f0f1adk0evf7ece3',
         },
         {
             answer: 'no answer',
             question: 'no question',
             cardsPack_id: '5eb6a2f72f8g49402d46c6ac43',
-            grade: 4.987525071790364,
+            grade: 4.457525071790364,
             shots: 1,
             user_id: '142151531535151',
-            created: '2020-05-13T11:05:44.867Z',
-            updated: '2020-05-13T11:05:44.867Z',
+            created: '2020-10-13T11:05:44.867Z',
+            updated: '2020-10-13T11:05:44.867Z',
             _id: '5ebbgdf4887681g0f1adk0e7ece3',
         },
 
@@ -111,7 +115,7 @@ export const Pack: React.FC<PackPropsType> = props => {
 
     return <div>
 
-        <Link className={s.backLink} href="#">
+        <Link className={s.backLink} href="">
             <ArrowBackIcon sx={{color: '#ffffff'}}/>
             Back to Packs List
         </Link>
@@ -121,16 +125,17 @@ export const Pack: React.FC<PackPropsType> = props => {
                 {cardsState.packUserId === userId ? 'My Pack' : 'Friend\'s Pack'}
 
                 {cardsState.packUserId === userId ?
-                    <div onClick={() => alert('Не лезь сюда')} className={s.moreButton}>
+                    <IconButton onClick={() => alert('Не лезь сюда')} className={s.moreButton}>
                         <MoreVertOutlinedIcon sx={{color: '#ffffff'}}/>
-                    </div>
+                    </IconButton>
                     : null}
 
             </div>
 
             {cardsState.packUserId === userId ?
                 <SuperButton onClick={() => alert('Пока не работает')} className={s.button}>Add new card</SuperButton>
-                : <SuperButton onClick={() => alert('Пока не работает')} className={s.button}>Learn to Pack</SuperButton>}
+                :
+                <SuperButton onClick={() => alert('Пока не работает')} className={s.button}>Learn to Pack</SuperButton>}
 
         </div>
 
@@ -145,30 +150,43 @@ export const Pack: React.FC<PackPropsType> = props => {
 
 
         <TableContainer className={s.tableBlock} component={Paper}>
-            <Table>
+            <Table size={'small'}>
                 <TableHead className={s.tableHeader}>
-                    <TableRow>
+                    <TableRow style={{height: '48px'}}>
                         <TableCell>Question</TableCell>
                         <TableCell align="left">Answer</TableCell>
                         <TableCell align="left">Last Updated</TableCell>
-                        <TableCell align="left">Grade</TableCell>
+                        <TableCell width={180} align="left">Grade</TableCell>
+                        <TableCell width={80} align="left"></TableCell>
                     </TableRow>
                 </TableHead>
 
 
                 <TableBody>
-                    {cardsState.cards.map((row) => (
-                        <TableRow
+                    {cardsState.cards.map((row) => {
+
+                        return < TableRow
                             key={row._id}
                         >
-                            <TableCell component="th" scope="row">
+                            < TableCell
+                                component="th"
+                                scope="row">
                                 {row.question}
                             </TableCell>
                             <TableCell align="left">{row.answer}</TableCell>
-                            <TableCell align="left">{row.updated}</TableCell>
-                            <TableCell align="left">{row.grade}</TableCell>
+                            <TableCell
+                                align="left">{FormatDate(row.updated)}</TableCell>
+                            <TableCell align="left"><Grade grade={row.grade}/></TableCell>
+                            <TableCell align="left">
+                                <IconButton onClick={() => alert('Пока не работает')}>
+                                    <EditIcon/>
+                                </IconButton>
+                                <IconButton onClick={() => alert('Пока не работает')}>
+                                    <DeleteIcon/>
+                                </IconButton>
+                            </TableCell>
                         </TableRow>
-                    ))}
+                    })}
                 </TableBody>
             </Table>
         </TableContainer>
@@ -196,4 +214,14 @@ export const Pack: React.FC<PackPropsType> = props => {
         </div>
 
     </div>
+}
+
+
+const FormatDate = (date: string) => {
+    const DateISOFormat = new Date(date)
+    const day = DateISOFormat.getDate()
+    const month = Number(DateISOFormat.getMonth()) < 9 ? '0' + (Number(DateISOFormat.getMonth()) + 1) : Number(DateISOFormat.getMonth()) + 1
+    const year = DateISOFormat.getFullYear()
+
+    return day + '.' + month + '.' + year
 }

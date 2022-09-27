@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    color: white;
+    color: white !important;
 }
 
 .backLink svg {
@@ -127,10 +127,10 @@
 }
 
 .selectBlock{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 7px;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 7px !important;
 }
 
 .selectBlock div{
