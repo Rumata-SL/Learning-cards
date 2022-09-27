@@ -91,3 +91,59 @@
     left: 7px;
     top: 12px;
 }
+
+
+
+
+.tableBlock{
+    margin-top: 20px;
+}
+
+.tableHeader{
+    background-color: #EFEFEF;
+}
+
+
+
+.paginationBlock{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 15px;
+    gap: 30px;
+}
+
+
+
+.pagination li button{
+    font-family: Montserrat, serif;
+    font-size: 12px;
+    font-weight: 400;
+    color: white;
+}
+
+.pagination li div{
+    color: white;
+}
+
+.selectBlock{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 7px;
+}
+
+.selectBlock div{
+    font-family: Montserrat, serif;
+    font-size: 12px;
+    font-weight: 400;
+    color: white;
+}
+
+.select{
+    font-family: Montserrat, serif;
+    font-size: 12px;
+    font-weight: 400;
+    height: 24px;
+    color: white;
+}
