@@ -120,21 +120,6 @@ type PacksListPropsType = {}
 export const PacksList: React.FC<PacksListPropsType> = props => {
   const [numberCards, setNumberCards] = useState([2, 10])
 
-  // const StyledTableCell = styled(TableCell)(({ theme }) => ({
-  //   [`&.${tableCellClasses.head}`]: {
-  //     backgroundColor: '#EFEFEF',
-  //     color: '#000000',
-  //     fontFamily: 'Montserrat',
-  //     fontWeight: 500,
-  //     fontSize: 14,
-  //   },
-  //   [`&.${tableCellClasses.body}`]: {
-  //     fontFamily: 'Montserrat',
-  //     fontWeight: 400,
-  //     fontSize: 13,
-  //   },
-  // }))
-
   const handleChangeNumberCards = (event: Event, newValue: number | number[]) => {
     setNumberCards(newValue as number[])
   }
