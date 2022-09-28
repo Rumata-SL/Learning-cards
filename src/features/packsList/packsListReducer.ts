@@ -16,7 +16,7 @@ const initialState = {
     max: 110,
     sortPacks: '',
     page: 1,
-    pageCount: 5,
+    pageCount: 10,
     user_id: '',
   },
   cardPacksTotalCount: 0,
@@ -34,18 +34,30 @@ export const packsListReducer = (
   switch (action.type) {
     case 'packsList/GET_CARD_PACKS':
       return { ...state, cardPacks: action.cardPacks }
+    case 'packsList/SET_PACK_PAGE':
+      return { ...state, params: { ...state.params, page: action.page } }
+    case 'packsList/SET_PACK_PAGE_COUNT':
+      return { ...state, params: { ...state.params, pageCount: action.pageCount } }
+    case 'packsList/SET_PACKS_TOTAL_COUNT':
+      return { ...state, cardPacksTotalCount: action.cardPacksTotalCount }
     default:
       return state
   }
 }
 
 //AC
-const getCardPacksAC = (cardPacks: Array<CardPacksType>) =>
+export const getCardPacksAC = (cardPacks: Array<CardPacksType>) =>
   ({ type: 'packsList/GET_CARD_PACKS', cardPacks } as const)
 
-const packsListAC = () =>
+export const setPackPageAC = (page: number) => ({ type: 'packsList/SET_PACK_PAGE', page } as const)
+
+export const setCardsPageCountAC = (pageCount: number) =>
+  ({ type: 'packsList/SET_PACK_PAGE_COUNT', pageCount } as const)
+
+export const setPacksTotalCountAC = (cardPacksTotalCount: number) =>
   ({
-    type: 'packsList/your-action',
+    type: 'packsList/SET_PACKS_TOTAL_COUNT',
+    cardPacksTotalCount,
   } as const)
 
 //TC
@@ -56,8 +68,12 @@ export const packsListTC = (): ThunkType => async (dispatch, getState) => {
 
   try {
     const res = await packsAPI.getPacks(params)
+    const { cardPacks, page, pageCount, cardPacksTotalCount } = res.data
 
-    dispatch(getCardPacksAC(res.data.cardPacks))
+    dispatch(getCardPacksAC(cardPacks))
+    dispatch(setPackPageAC(page))
+    dispatch(setCardsPageCountAC(pageCount))
+    dispatch(setPacksTotalCountAC(cardPacksTotalCount))
   } catch (e) {
     const err = e as Error | AxiosError<{ error: string }>
 
@@ -68,4 +84,8 @@ export const packsListTC = (): ThunkType => async (dispatch, getState) => {
 }
 
 //types
-export type PacksListActionType = ReturnType<typeof getCardPacksAC>
+export type PacksListActionType =
+  | ReturnType<typeof getCardPacksAC>
+  | ReturnType<typeof setPackPageAC>
+  | ReturnType<typeof setCardsPageCountAC>
+  | ReturnType<typeof setPacksTotalCountAC>
