@@ -16,7 +16,7 @@ const initialState = {
     max: 110,
     sortPacks: '',
     page: 1,
-    pageCount: 10,
+    pageCount: 6,
     user_id: '',
   },
   cardPacksTotalCount: 0,
@@ -84,7 +84,7 @@ export const packsListTC = (): ThunkType => async (dispatch, getState) => {
 }
 
 export const addPackTC =
-  (packName: string, deckCover: string): ThunkType =>
+  (packName: string, deckCover?: string): ThunkType =>
   async dispatch => {
     dispatch(setAppStatusAC('loading'))
     try {
@@ -103,7 +103,7 @@ export const addPackTC =
   }
 
 export const updatePackTC =
-  (_id: string, name: string, deckCover: string): ThunkType =>
+  (_id: string, name: string, deckCover?: string): ThunkType =>
   async dispatch => {
     dispatch(setAppStatusAC('loading'))
     try {

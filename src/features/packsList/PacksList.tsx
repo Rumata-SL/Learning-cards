@@ -25,103 +25,36 @@ import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 
 import filterRemoveIcon from '../../assets/image/icons/filter-remove.svg'
+import { useAppDispatch, useAppSelector } from '../../bll/store'
 import SuperButton from '../../common/components/superButton/SuperButton'
 import { SuperInput } from '../../common/components/superInput/SuperInput'
 import t from '../../common/styles/Title.module.css'
+import { FormatDate } from '../../utils/formatDate'
 
 import s from './PacksList.module.css'
-
-const packs = {
-  cardPacks: [
-    {
-      _id: '63219bd4b2ed601258b19109',
-      user_id: '62d013204d4a530a949a8238',
-      user_name: 'fff',
-      private: false,
-      name: 'super pack ff',
-      path: '/def',
-      grade: 0,
-      shots: 0,
-      cardsCount: 6,
-      type: 'pack',
-      rating: 0,
-      created: '2022-09-14T09:16:04.154Z',
-      updated: '2022-09-27T18:44:58.483Z',
-      more_id: '62d013204d4a530a949a8238',
-      __v: 0,
-      deckCover: '',
-    },
-    {
-      _id: '631ce93ca1cdee256461050b',
-      user_id: '62d013204d4a530a949a8238',
-      user_name: 'fff',
-      private: false,
-      name: 'rrr',
-      path: '/def',
-      grade: 0,
-      shots: 0,
-      cardsCount: 2,
-      type: 'pack',
-      rating: 0,
-      created: '2022-09-10T19:45:00.117Z',
-      updated: '2022-09-27T18:18:44.541Z',
-      more_id: '62d013204d4a530a949a8238',
-      __v: 0,
-      deckCover: 'custom url',
-    },
-    {
-      _id: '6331d906d834d1097c4757be',
-      user_id: '62d013204d4a530a949a8238',
-      user_name: 'fff',
-      private: false,
-      name: 'bfed',
-      path: '/def',
-      grade: 0,
-      shots: 0,
-      cardsCount: 0,
-      type: 'pack',
-      rating: 0,
-      created: '2022-09-26T16:53:26.117Z',
-      updated: '2022-09-27T18:11:06.404Z',
-      more_id: '62d013204d4a530a949a8238',
-      __v: 0,
-      deckCover: 'ffffff',
-    },
-    {
-      _id: '630b326708095407487d7a74',
-      user_id: '62d013204d4a530a949a8238',
-      user_name: 'fff',
-      private: false,
-      name: '01234',
-      path: '/def',
-      grade: 0,
-      shots: 0,
-      deckCover: 'url',
-      cardsCount: 2,
-      type: 'pack',
-      rating: 0,
-      created: '2022-08-28T09:16:23.951Z',
-      updated: '2022-09-27T18:05:53.832Z',
-      more_id: '62d013204d4a530a949a8238',
-      __v: 0,
-    },
-  ],
-  page: 1,
-  pageCount: 4,
-  cardPacksTotalCount: 3430,
-  minCardsCount: 0,
-  maxCardsCount: 110,
-  token: '14124cb0-3e9b-11ed-ae23-179e876f2699',
-  tokenDeathTime: 1664317929595,
-}
+import { addPackTC, deletePackTC, updatePackTC } from './packsListReducer'
 
 type PacksListPropsType = {}
 
 export const PacksList: React.FC<PacksListPropsType> = props => {
+  const dispatch = useAppDispatch()
+  const cardPacks = useAppSelector(state => state.packsList.cardPacks)
   const [numberCards, setNumberCards] = useState([2, 10])
 
   const handleChangeNumberCards = (event: Event, newValue: number | number[]) => {
     setNumberCards(newValue as number[])
+  }
+
+  const addPackHandler = () => {
+    dispatch(addPackTC('test pack'))
+  }
+
+  const deletePackHandler = (id: string) => {
+    dispatch(deletePackTC(id))
+  }
+
+  const updatePackHandler = (id: string, name: string) => {
+    dispatch(updatePackTC(id, name))
   }
 
   return (
@@ -129,7 +62,9 @@ export const PacksList: React.FC<PacksListPropsType> = props => {
       <div className={s.header}>
         <h2 className={t.title}>Packs list</h2>
         <div>
-          <SuperButton className={s.button}>Add new pack</SuperButton>
+          <SuperButton onClick={addPackHandler} className={s.button}>
+            Add new pack
+          </SuperButton>
         </div>
       </div>
 
@@ -181,7 +116,7 @@ export const PacksList: React.FC<PacksListPropsType> = props => {
             </TableRow>
           </TableHead>
           <TableBody className={s.tableBody}>
-            {packs.cardPacks.map(pack => (
+            {cardPacks.map(pack => (
               <TableRow key={pack._id}>
                 <TableCell>{pack.name}</TableCell>
                 <TableCell>{pack.cardsCount}</TableCell>
@@ -191,10 +126,10 @@ export const PacksList: React.FC<PacksListPropsType> = props => {
                   <IconButton>
                     <SchoolIcon />
                   </IconButton>
-                  <IconButton>
+                  <IconButton onClick={() => updatePackHandler(pack._id, 'updated pack')}>
                     <EditIcon />
                   </IconButton>
-                  <IconButton>
+                  <IconButton onClick={() => deletePackHandler(pack._id)}>
                     <DeleteIcon />
                   </IconButton>
                 </TableCell>
@@ -220,16 +155,4 @@ export const PacksList: React.FC<PacksListPropsType> = props => {
       </div>
     </div>
   )
-}
-
-const FormatDate = (date: string) => {
-  const DateISOFormat = new Date(date)
-  const day = DateISOFormat.getDate()
-  const month =
-    Number(DateISOFormat.getMonth()) < 9
-      ? '0' + (Number(DateISOFormat.getMonth()) + 1)
-      : Number(DateISOFormat.getMonth()) + 1
-  const year = DateISOFormat.getFullYear()
-
-  return day + '.' + month + '.' + year
 }

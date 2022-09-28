@@ -3,6 +3,7 @@ import { AxiosError } from 'axios'
 import { authAPI } from '../api/auth/authAPI'
 import { ThunkType } from '../bll/store'
 import { loginAC } from '../features/auth/login/loginReducer'
+import { packsListTC } from '../features/packsList/packsListReducer'
 import { setProfileAC } from '../features/profile/profileReducer'
 
 //initial state
@@ -60,6 +61,7 @@ export const authMeTC = (): ThunkType => async dispatch => {
     const res = await authAPI.authMe()
 
     dispatch(setProfileAC(res.data))
+    dispatch(packsListTC())
     dispatch(loginAC(true))
   } catch (e) {
     const err = e as Error | AxiosError<{ error: string }>
