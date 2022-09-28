@@ -89,6 +89,7 @@ export const addPackTC =
     dispatch(setAppStatusAC('loading'))
     try {
       const res = await packsAPI.addPack(packName, deckCover)
+
       if (res) {
         dispatch(packsListTC())
       }
@@ -107,6 +108,7 @@ export const updatePackTC =
     dispatch(setAppStatusAC('loading'))
     try {
       const res = await packsAPI.updatePack(_id, name)
+
       if (res) {
         dispatch(packsListTC())
       }
@@ -125,6 +127,7 @@ export const deletePackTC =
     dispatch(setAppStatusAC('loading'))
     try {
       const res = await packsAPI.deletePack(id)
+
       if (res) {
         dispatch(packsListTC())
       }
