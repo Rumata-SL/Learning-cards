@@ -10,10 +10,10 @@ type InitialStateType = typeof initialState
 
 const initialState = {
   cardPacks: [] as Array<CardPacksType>,
-  params: {
+  deckData: {
     packName: '',
-    min: 0,
-    max: 110,
+    minCount: 0,
+    maxCount: 100,
     sortPacks: '',
     page: 1,
     pageCount: 6,
@@ -24,6 +24,7 @@ const initialState = {
   maxCardsCount: 100,
   token: '',
   tokenDeathTime: 0,
+  isMyDeck: false,
 }
 
 //reducer
@@ -33,13 +34,26 @@ export const packsListReducer = (
 ): InitialStateType => {
   switch (action.type) {
     case 'packsList/GET_CARD_PACKS':
-      return { ...state, cardPacks: action.cardPacks }
+      return { ...state, cardPacks: action.payload.cardPacks }
     case 'packsList/SET_PACK_PAGE':
-      return { ...state, params: { ...state.params, page: action.page } }
+      return { ...state, deckData: { ...state.deckData, page: action.payload.page } }
     case 'packsList/SET_PACK_PAGE_COUNT':
-      return { ...state, params: { ...state.params, pageCount: action.pageCount } }
+      return { ...state, deckData: { ...state.deckData, pageCount: action.payload.pageCount } }
     case 'packsList/SET_PACKS_TOTAL_COUNT':
-      return { ...state, cardPacksTotalCount: action.cardPacksTotalCount }
+      return { ...state, cardPacksTotalCount: action.payload.cardPacksTotalCount }
+    case 'packsList/SEARCH_PACK_NAME':
+      return { ...state, deckData: { ...state.deckData, packName: action.payload.packName } }
+    case 'packsList/SET_FILTER_MY_ALL_PACK':
+      return { ...state, isMyDeck: action.payload.isMyDeck }
+    case 'packsList/SET_MIN_COUNT_MAX_COUNT':
+      return {
+        ...state,
+        deckData: {
+          ...state.deckData,
+          minCount: action.payload.value[0],
+          maxCount: action.payload.value[1],
+        },
+      }
     default:
       return state
   }
@@ -47,27 +61,42 @@ export const packsListReducer = (
 
 //AC
 export const getCardPacksAC = (cardPacks: Array<CardPacksType>) =>
-  ({ type: 'packsList/GET_CARD_PACKS', cardPacks } as const)
+  ({
+    type: 'packsList/GET_CARD_PACKS',
+    payload: {
+      cardPacks,
+    },
+  } as const)
 
-export const setPackPageAC = (page: number) => ({ type: 'packsList/SET_PACK_PAGE', page } as const)
+export const setPackPageAC = (page: number) =>
+  ({ type: 'packsList/SET_PACK_PAGE', payload: { page } } as const)
 
 export const setCardsPageCountAC = (pageCount: number) =>
-  ({ type: 'packsList/SET_PACK_PAGE_COUNT', pageCount } as const)
+  ({ type: 'packsList/SET_PACK_PAGE_COUNT', payload: { pageCount } } as const)
 
 export const setPacksTotalCountAC = (cardPacksTotalCount: number) =>
   ({
     type: 'packsList/SET_PACKS_TOTAL_COUNT',
-    cardPacksTotalCount,
+    payload: { cardPacksTotalCount },
   } as const)
+
+export const searchPackNameAC = (packName: string) =>
+  ({ type: 'packsList/SEARCH_PACK_NAME', payload: { packName } } as const)
+
+export const setFilterPacksAC = (isMyDeck: boolean) =>
+  ({ type: 'packsList/SET_FILTER_MY_ALL_PACK', payload: { isMyDeck } } as const)
+
+export const setMinCountMaxCountAC = (value: Array<number>) =>
+  ({ type: 'packsList/SET_MIN_COUNT_MAX_COUNT', payload: { value } } as const)
 
 //TC
 export const packsListTC = (): ThunkType => async (dispatch, getState) => {
-  const { params } = getState().packsList
+  const { deckData } = getState().packsList
 
   dispatch(setAppStatusAC('loading'))
 
   try {
-    const res = await packsAPI.getPacks(params)
+    const res = await packsAPI.getPacks(deckData)
     const { cardPacks, page, pageCount, cardPacksTotalCount } = res.data
 
     dispatch(getCardPacksAC(cardPacks))
@@ -103,7 +132,7 @@ export const addPackTC =
   }
 
 export const updatePackTC =
-  (_id: string, name: string, deckCover?: string): ThunkType =>
+  (_id: string, name: string): ThunkType =>
   async dispatch => {
     dispatch(setAppStatusAC('loading'))
     try {
@@ -146,3 +175,6 @@ export type PacksListActionType =
   | ReturnType<typeof setPackPageAC>
   | ReturnType<typeof setCardsPageCountAC>
   | ReturnType<typeof setPacksTotalCountAC>
+  | ReturnType<typeof searchPackNameAC>
+  | ReturnType<typeof setFilterPacksAC>
+  | ReturnType<typeof setMinCountMaxCountAC>
