@@ -83,6 +83,60 @@ export const packsListTC = (): ThunkType => async (dispatch, getState) => {
   }
 }
 
+export const addPackTC =
+  (packName: string, deckCover: string): ThunkType =>
+  async dispatch => {
+    dispatch(setAppStatusAC('loading'))
+    try {
+      const res = await packsAPI.addPack(packName, deckCover)
+      if (res) {
+        dispatch(packsListTC())
+      }
+    } catch (e) {
+      const err = e as Error | AxiosError<{ error: string }>
+
+      utilsError(err, dispatch)
+    } finally {
+      dispatch(setAppStatusAC('idle'))
+    }
+  }
+
+export const updatePackTC =
+  (_id: string, name: string, deckCover: string): ThunkType =>
+  async dispatch => {
+    dispatch(setAppStatusAC('loading'))
+    try {
+      const res = await packsAPI.updatePack(_id, name)
+      if (res) {
+        dispatch(packsListTC())
+      }
+    } catch (e) {
+      const err = e as Error | AxiosError<{ error: string }>
+
+      utilsError(err, dispatch)
+    } finally {
+      dispatch(setAppStatusAC('idle'))
+    }
+  }
+
+export const deletePackTC =
+  (id: string): ThunkType =>
+  async dispatch => {
+    dispatch(setAppStatusAC('loading'))
+    try {
+      const res = await packsAPI.deletePack(id)
+      if (res) {
+        dispatch(packsListTC())
+      }
+    } catch (e) {
+      const err = e as Error | AxiosError<{ error: string }>
+
+      utilsError(err, dispatch)
+    } finally {
+      dispatch(setAppStatusAC('idle'))
+    }
+  }
+
 //types
 export type PacksListActionType =
   | ReturnType<typeof getCardPacksAC>
