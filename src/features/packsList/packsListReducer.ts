@@ -1,6 +1,6 @@
 import { AxiosError } from 'axios'
 
-import { CardPacksType, packsAPI } from '../../api/cards/packsAPI'
+import { CardPacksType, packsListAPI } from '../../api/cards/packsListAPI'
 import { setAppStatusAC } from '../../app/appReducer'
 import { ThunkType } from '../../bll/store'
 import { utilsError } from '../../utils/utils_error'
@@ -96,7 +96,7 @@ export const packsListTC = (): ThunkType => async (dispatch, getState) => {
   dispatch(setAppStatusAC('loading'))
 
   try {
-    const res = await packsAPI.getPacks(deckData)
+    const res = await packsListAPI.getPacks(deckData)
     const { cardPacks, page, pageCount, cardPacksTotalCount } = res.data
 
     dispatch(getCardPacksAC(cardPacks))
@@ -117,7 +117,7 @@ export const addPackTC =
   async dispatch => {
     dispatch(setAppStatusAC('loading'))
     try {
-      const res = await packsAPI.addPack(packName, deckCover)
+      const res = await packsListAPI.addPack(packName, deckCover)
 
       if (res) {
         dispatch(packsListTC())
@@ -136,7 +136,7 @@ export const updatePackTC =
   async dispatch => {
     dispatch(setAppStatusAC('loading'))
     try {
-      const res = await packsAPI.updatePack(_id, name)
+      const res = await packsListAPI.updatePack(_id, name)
 
       if (res) {
         dispatch(packsListTC())
@@ -155,7 +155,7 @@ export const deletePackTC =
   async dispatch => {
     dispatch(setAppStatusAC('loading'))
     try {
-      const res = await packsAPI.deletePack(id)
+      const res = await packsListAPI.deletePack(id)
 
       if (res) {
         dispatch(packsListTC())

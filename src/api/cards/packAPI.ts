@@ -1,7 +1,7 @@
 import { instance } from '../instance'
 
 /* eslint-disable */
-export const cardsAPI = {
+export const packAPI = {
   getCards() {
     return instance.get(`/cards/card`)
   },
@@ -12,7 +12,7 @@ export const cardsAPI = {
     return instance.put(`/cards/card`)
   },
   deleteCard(cardID: string) {
-    return instance.delete<string,CardType>(`/cards/card?id=${cardID}`)
+    return instance.delete<string,CardType>(`/cards/card`, {params: {cardID}})
   },
 }
 

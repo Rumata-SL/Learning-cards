@@ -2,7 +2,7 @@ import { AxiosResponse } from 'axios'
 
 import { instance } from '../instance'
 
-export const packsAPI = {
+export const packsListAPI = {
   getPacks(params: PacksRequestType) {
     return instance.get<PacksRequestType, AxiosResponse<CardPacksResponseType>>('/cards/pack', {
       params,
