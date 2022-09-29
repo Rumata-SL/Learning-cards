@@ -38,6 +38,6 @@ yarn-error.log*
 !.vscode/launch.json
 !.vscode/extensions.json
 
-.prettierrc
-.eslintrc
-.stylelintrc
+.prettierrc.js
+.eslintrc.js
+.stylelintrc.js
