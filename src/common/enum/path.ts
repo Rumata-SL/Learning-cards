@@ -5,5 +5,6 @@ export enum PATH {
   NEW_PASSWORD = '/new_password/:token',
   RECOVERY = '/recovery/',
   PACKS_LIST = '/packs_list/',
-  PACK = '/pack/',
+  PACK = '/pack/:packId/:packName',
+  // PACK_LEARN = 'learn/:packId/:packName',
 }
