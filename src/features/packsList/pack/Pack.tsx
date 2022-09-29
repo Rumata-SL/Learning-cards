@@ -31,7 +31,7 @@ import s from './Pack.module.css'
 
 type PackPropsType = {}
 
-type cardsType = Array<{
+/*type cardsType = Array<{
   answer: string
   question: string
   cardsPack_id: string
@@ -43,7 +43,7 @@ type cardsType = Array<{
   _id: string
 }>
 
-type cardsStateType = {
+export type cardsStateType = {
   cards: cardsType
   cardsTotalCount: number
   maxGrade: number
@@ -51,9 +51,9 @@ type cardsStateType = {
   page: number
   pageCount: number
   packUserId: string
-}
+}*/
 
-const cardsState: cardsStateType = {
+/*const cardsState: cardsStateType = {
   cards: [
     {
       answer: 'no answer',
@@ -96,10 +96,11 @@ const cardsState: cardsStateType = {
   pageCount: 4,
   packUserId: '6328b5b0da5de300045fa02a',
   // packUserId: '5eecf82a3ed8f700042f1186',
-}
+}*/
 
 export const Pack: React.FC<PackPropsType> = props => {
   const userId = useAppSelector(state => state.profile.profile._id)
+  const cardsState = useAppSelector(state => state.pack)
 
   const [pageNumber, setPageNumber] = useState('5')
   const handleChange = (event: SelectChangeEvent) => {
