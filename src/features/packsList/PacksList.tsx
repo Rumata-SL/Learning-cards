@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import DeleteIcon from '@mui/icons-material/Delete'
 import EditIcon from '@mui/icons-material/Edit'
@@ -32,7 +32,7 @@ import t from '../../common/styles/Title.module.css'
 import { FormatDate } from '../../utils/formatDate'
 
 import s from './PacksList.module.css'
-import { addPackTC, deletePackTC, updatePackTC } from './packsListReducer'
+import { addPackTC, deletePackTC, packsListTC, updatePackTC } from './packsListReducer'
 
 type PacksListPropsType = {}
 
@@ -40,6 +40,10 @@ export const PacksList: React.FC<PacksListPropsType> = props => {
   const dispatch = useAppDispatch()
   const cardPacks = useAppSelector(state => state.packsList.cardPacks)
   const [numberCards, setNumberCards] = useState([2, 10])
+
+  useEffect(() => {
+    dispatch(packsListTC())
+  }, [])
 
   const handleChangeNumberCards = (event: Event, newValue: number | number[]) => {
     setNumberCards(newValue as number[])
