@@ -17,7 +17,7 @@ type FormikErrorType = {
   confirmPassword?: string
 }
 
-export const Registration: FC = () => {
+const Registration: FC = () => {
   const dispatch = useAppDispatch()
   const isLoggedIn = useAppSelector<boolean>(state => state.login.isLoggedIn)
 
@@ -173,3 +173,5 @@ export const Registration: FC = () => {
     </div>
   )
 }
+
+export default Registration

@@ -15,7 +15,7 @@ type FormikErrorType = {
   email?: string
 }
 
-export const Recovery = () => {
+const Recovery = () => {
   const isRequested = useAppSelector<boolean>(state => state.recovery.isRequested)
   // const error = useAppSelector<string | null>(state => state.recovery.error)
   const isLoggedIn = useAppSelector<boolean>(state => state.login.isLoggedIn)
@@ -107,3 +107,5 @@ export const Recovery = () => {
     </div>
   )
 }
+
+export default Recovery
