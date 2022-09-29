@@ -86,7 +86,7 @@ export const PacksList: React.FC<PacksListPropsType> = props => {
   }
 
   const navigate = useNavigate()
-  const openPack = (packId: string, packName: string) => navigate(`/pack/${packId}/${packName}`)
+  const openPack = (packId: string) => navigate(`/pack/${packId}/`)
 
   return (
     <div>
@@ -149,7 +149,7 @@ export const PacksList: React.FC<PacksListPropsType> = props => {
           <TableBody className={s.tableBody}>
             {cardPacks.map(pack => (
               <TableRow key={pack._id}>
-                <TableCell onClick={() => openPack(pack._id, pack.name)}>{pack.name}</TableCell>
+                <TableCell onClick={() => openPack(pack._id)}>{pack.name}</TableCell>
                 <TableCell>{pack.cardsCount}</TableCell>
                 <TableCell>{FormatDate(pack.updated)}</TableCell>
                 <TableCell>{pack.user_name}</TableCell>
