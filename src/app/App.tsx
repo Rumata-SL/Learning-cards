@@ -1,16 +1,13 @@
 import './App.css'
 import React, { useEffect, Suspense, lazy } from 'react'
 
+import { LinearProgress } from '@mui/material'
 import { Navigate, Route, Routes } from 'react-router-dom'
 
 import { useAppDispatch, useAppSelector } from '../bll/store'
 import { Preloader } from '../common/components/preloader/Preloader'
 import { PATH } from '../common/enum/path'
 import { Login } from '../features/auth/login/Login'
-// import Registration from '../features/auth/registration/Registration'
-// import NewPassword from '../features/auth/newPassword/NewPassword'
-// import Recovery from '../features/auth/recovery/Recovery'
-// import ErrorComponent from '../common/components/errorFolder/ErrorComponent'
 import { Pack } from '../features/packsList/pack/Pack'
 import { PacksList } from '../features/packsList/PacksList'
 import { Profile } from '../features/profile/Profile'
@@ -51,31 +48,45 @@ function App() {
       <Route path="/" element={<MainLayout />}>
         <Route path="/" element={<Navigate to={PATH.PROFILE} />} />
         <Route path={PATH.PROFILE} element={<Profile />}></Route>
-        {/*<Route path={PATH.REGISTRATION} element={<Registration />}></Route>*/}
         <Route
           path={PATH.REGISTRATION}
           element={
-            <Suspense fallback={<Preloader />}>
+            <Suspense
+              fallback={
+                <div className="linearProgress">
+                  <LinearProgress />
+                </div>
+              }
+            >
               <Registration />
             </Suspense>
           }
         ></Route>
         <Route path={PATH.LOGIN} element={<Login />}></Route>
-        {/*<Route path={PATH.RECOVERY} element={<Recovery />}></Route>*/}
         <Route
           path={PATH.RECOVERY}
           element={
-            <Suspense fallback={<Preloader />}>
+            <Suspense
+              fallback={
+                <div className="linearProgress">
+                  <LinearProgress />
+                </div>
+              }
+            >
               <Recovery />
             </Suspense>
           }
         ></Route>
-
-        {/*<Route path={PATH.NEW_PASSWORD} element={<NewPassword />}></Route>*/}
         <Route
           path={PATH.NEW_PASSWORD}
           element={
-            <Suspense fallback={<Preloader />}>
+            <Suspense
+              fallback={
+                <div className="linearProgress">
+                  <LinearProgress />
+                </div>
+              }
+            >
               <NewPassword />
             </Suspense>
           }
@@ -85,16 +96,17 @@ function App() {
         <Route
           path={'/*'}
           element={
-            <Suspense fallback={<Preloader />}>
+            <Suspense
+              fallback={
+                <div className="linearProgress">
+                  <LinearProgress />
+                </div>
+              }
+            >
               <ErrorComponent />
             </Suspense>
           }
         ></Route>
-        {/*<Route path={'/*'} element={<ErrorComponent />}></Route>*/}
-
-        {/*<Route path={PATH.REGISTRATION} element={
-          <Suspense fallback={
-            <Preloader />}><Registration/></Suspense>}></Route>*/}
       </Route>
     </Routes>
   )
