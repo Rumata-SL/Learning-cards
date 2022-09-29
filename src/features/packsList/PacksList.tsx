@@ -22,6 +22,7 @@ import TableCell from '@mui/material/TableCell'
 import TableContainer from '@mui/material/TableContainer'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
+import { useNavigate } from 'react-router-dom'
 
 import filterRemoveIcon from '../../assets/image/icons/filter-remove.svg'
 import { useAppDispatch, useAppSelector } from '../../bll/store'
@@ -84,6 +85,9 @@ export const PacksList: React.FC<PacksListPropsType> = props => {
     dispatch(updatePackTC(id, name))
   }
 
+  const navigate = useNavigate()
+  const openPack = (packId: string, packName: string) => navigate(`/pack/${packId}/${packName}`)
+
   return (
     <div>
       <div className={s.header}>
@@ -145,7 +149,7 @@ export const PacksList: React.FC<PacksListPropsType> = props => {
           <TableBody className={s.tableBody}>
             {cardPacks.map(pack => (
               <TableRow key={pack._id}>
-                <TableCell>{pack.name}</TableCell>
+                <TableCell onClick={() => openPack(pack._id, pack.name)}>{pack.name}</TableCell>
                 <TableCell>{pack.cardsCount}</TableCell>
                 <TableCell>{FormatDate(pack.updated)}</TableCell>
                 <TableCell>{pack.user_name}</TableCell>
