@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap');
 
 .app {
+  position: relative;
 }
 
 .app-wrapper {
@@ -8,7 +9,7 @@
 
   max-width: 1010px;
   margin: 0 auto;
-  padding-top: 120px;
+  padding-top: 100px;
 
   text-align: center;
 }
