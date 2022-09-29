@@ -2,7 +2,7 @@ import React from 'react'
 
 import e from './ErrorComponent.module.css'
 
-export const ErrorComponent = () => {
+const ErrorComponent = () => {
   return (
     <div className={e.wrapper}>
       <div className={e.title}>
@@ -14,3 +14,5 @@ export const ErrorComponent = () => {
     </div>
   )
 }
+
+export default ErrorComponent

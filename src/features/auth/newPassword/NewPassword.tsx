@@ -17,7 +17,7 @@ type FormikErrorType = {
   confirmPassword?: string
 }
 
-export const NewPassword = () => {
+const NewPassword = () => {
   const dispatch = useAppDispatch()
   const isCreated = useAppSelector<boolean>(state => state.newPassword.isCreated)
   const isLoggedIn = useAppSelector<boolean>(state => state.login.isLoggedIn)
@@ -156,3 +156,5 @@ export const NewPassword = () => {
     </div>
   )
 }
+
+export default NewPassword
