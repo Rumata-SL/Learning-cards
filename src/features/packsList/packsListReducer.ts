@@ -16,7 +16,7 @@ const initialState = {
     maxCount: 100,
     sortPacks: '',
     page: 1,
-    pageCount: 6,
+    pageCount: 5,
     user_id: '',
   },
   cardPacksTotalCount: 0,

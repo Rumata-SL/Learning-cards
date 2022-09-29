@@ -12,9 +12,8 @@ import {
   MenuItem,
   Pagination,
   Select,
+  SelectChangeEvent,
   Slider,
-  styled,
-  tableCellClasses,
 } from '@mui/material'
 import Paper from '@mui/material/Paper'
 import Table from '@mui/material/Table'
@@ -32,7 +31,14 @@ import t from '../../common/styles/Title.module.css'
 import { FormatDate } from '../../utils/formatDate'
 
 import s from './PacksList.module.css'
-import { addPackTC, deletePackTC, packsListTC, updatePackTC } from './packsListReducer'
+import {
+  addPackTC,
+  deletePackTC,
+  packsListTC,
+  setCardsPageCountAC,
+  setPackPageAC,
+  updatePackTC,
+} from './packsListReducer'
 
 type PacksListPropsType = {}
 
@@ -41,10 +47,27 @@ export const PacksList: React.FC<PacksListPropsType> = props => {
   const cardPacks = useAppSelector(state => state.packsList.cardPacks)
   const [numberCards, setNumberCards] = useState([2, 10])
 
+  // pagination
+  const cardPacksTotalCount = useAppSelector(state => state.packsList.cardPacksTotalCount)
+  const cardPerPage = useAppSelector(state => state.packsList.deckData.pageCount)
+  const page = useAppSelector(state => state.packsList.deckData.page)
+  const arrCardPerPage = [5, 10, 20, 50, 100]
+
+  const pagesCount = Math.ceil(cardPacksTotalCount / cardPerPage)
+
+  const onChangePagination = (event: React.ChangeEvent<unknown>, page: number) => {
+    dispatch(setPackPageAC(page))
+  }
+
+  const onChangeSelect = (event: SelectChangeEvent) => {
+    dispatch(setCardsPageCountAC(+event.target.value))
+  }
+
   useEffect(() => {
     dispatch(packsListTC())
-  }, [])
+  }, [page, cardPerPage])
 
+  // crud
   const handleChangeNumberCards = (event: Event, newValue: number | number[]) => {
     setNumberCards(newValue as number[])
   }
@@ -144,15 +167,26 @@ export const PacksList: React.FC<PacksListPropsType> = props => {
       </TableContainer>
 
       <div className={s.paginationBlock}>
-        <Pagination className={s.pagination} count={10} shape="rounded" />
+        <Pagination
+          className={s.pagination}
+          count={pagesCount}
+          shape="rounded"
+          page={page}
+          onChange={onChangePagination}
+        />
         <FormControl className={s.selectBlock}>
           <div>Show</div>
-          <Select value={'5'} onChange={() => alert('yo')} autoWidth className={s.select}>
-            <MenuItem value={5}>5</MenuItem>
-            <MenuItem value={10}>10</MenuItem>
-            <MenuItem value={20}>20</MenuItem>
-            <MenuItem value={50}>50</MenuItem>
-            <MenuItem value={100}>100</MenuItem>
+          <Select
+            value={cardPerPage.toString()}
+            onChange={onChangeSelect}
+            autoWidth
+            className={s.select}
+          >
+            {arrCardPerPage.map((el, index) => (
+              <MenuItem key={index} value={el}>
+                {el}
+              </MenuItem>
+            ))}
           </Select>
           <div>Cards per Page</div>
         </FormControl>
