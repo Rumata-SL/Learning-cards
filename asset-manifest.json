@@ -1,20 +1,37 @@
 {
   "files": {
-    "main.css": "/card/static/css/main.e267e090.css",
-    "main.js": "/card/static/js/main.4f1cbd63.js",
+    "main.css": "/card/static/css/main.fbb18953.css",
+    "main.js": "/card/static/js/main.19063f7f.js",
+    "Registration.css": "/card/static/css/Registration.53a29c09.chunk.css",
+    "Registration.js": "/card/static/js/Registration.ff56a8e6.chunk.js",
+    "Recovery.js": "/card/static/js/Recovery.7057235c.chunk.js",
+    "NewPassword.css": "/card/static/css/NewPassword.8cc4d1c2.chunk.css",
+    "NewPassword.js": "/card/static/js/NewPassword.51324290.chunk.js",
+    "ErrorComponent.css": "/card/static/css/ErrorComponent.3becfdd5.chunk.css",
+    "ErrorComponent.js": "/card/static/js/ErrorComponent.f08a4ba0.chunk.js",
     "static/js/496.d02cd838.chunk.js": "/card/static/js/496.d02cd838.chunk.js",
     "static/media/backgr.jpg": "/card/static/media/backgr.21ee20b839884d185717.jpg",
     "static/media/avatar.png": "/card/static/media/avatar.ea8ba7ee9875c88b8c6b.png",
+    "static/media/logo.svg": "/card/static/media/logo.e4b168e94d91d65ba3e88f7f8439a6c7.svg",
+    "static/media/filter-remove.svg": "/card/static/media/filter-remove.3d63a989d310532a812c82da24271d9d.svg",
     "static/media/edit.svg": "/card/static/media/edit.a169cd90c950b39da314c5bb65c8ed51.svg",
     "static/media/photo.svg": "/card/static/media/photo.90ad4ef14262e7bebbb5e1c2b2223f5a.svg",
     "index.html": "/card/index.html",
     "static/media/logout.svg": "/card/static/media/logout.1731b0b18f5a96bdef8218c129e5eaf4.svg",
-    "main.e267e090.css.map": "/card/static/css/main.e267e090.css.map",
-    "main.4f1cbd63.js.map": "/card/static/js/main.4f1cbd63.js.map",
+    "static/media/user.svg": "/card/static/media/user.80fa9754947dabe414f5181c7b26bc2c.svg",
+    "main.fbb18953.css.map": "/card/static/css/main.fbb18953.css.map",
+    "main.19063f7f.js.map": "/card/static/js/main.19063f7f.js.map",
+    "Registration.53a29c09.chunk.css.map": "/card/static/css/Registration.53a29c09.chunk.css.map",
+    "Registration.ff56a8e6.chunk.js.map": "/card/static/js/Registration.ff56a8e6.chunk.js.map",
+    "Recovery.7057235c.chunk.js.map": "/card/static/js/Recovery.7057235c.chunk.js.map",
+    "NewPassword.8cc4d1c2.chunk.css.map": "/card/static/css/NewPassword.8cc4d1c2.chunk.css.map",
+    "NewPassword.51324290.chunk.js.map": "/card/static/js/NewPassword.51324290.chunk.js.map",
+    "ErrorComponent.3becfdd5.chunk.css.map": "/card/static/css/ErrorComponent.3becfdd5.chunk.css.map",
+    "ErrorComponent.f08a4ba0.chunk.js.map": "/card/static/js/ErrorComponent.f08a4ba0.chunk.js.map",
     "496.d02cd838.chunk.js.map": "/card/static/js/496.d02cd838.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.e267e090.css",
-    "static/js/main.4f1cbd63.js"
+    "static/css/main.fbb18953.css",
+    "static/js/main.19063f7f.js"
   ]
 }
