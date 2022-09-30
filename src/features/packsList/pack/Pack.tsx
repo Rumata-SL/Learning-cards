@@ -21,10 +21,12 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material'
+import { useNavigate } from 'react-router-dom'
 
 import { useAppSelector } from '../../../bll/store'
 import SuperButton from '../../../common/components/superButton/SuperButton'
 import { SuperInput } from '../../../common/components/superInput/SuperInput'
+import { FormatDate } from '../../../utils/formatDate'
 
 import { Grade } from './Grade'
 import s from './Pack.module.css'
@@ -56,7 +58,7 @@ type cardsStateType = {
 const cardsState: cardsStateType = {
   cards: [
     {
-      answer: 'no answer',
+      answer: 'no answer no answer no answer',
       question: 'no question',
       cardsPack_id: '5eb6a2f72f8g49402d46c6ac43',
       grade: 2.987525071790364,
@@ -79,7 +81,7 @@ const cardsState: cardsStateType = {
     },
     {
       answer: 'no answer',
-      question: 'no question',
+      question: 'no question no question no question',
       cardsPack_id: '5eb6a2f72f8g49402d46c6ac43',
       grade: 4.457525071790364,
       shots: 1,
@@ -106,11 +108,14 @@ export const Pack: React.FC<PackPropsType> = props => {
     setPageNumber(event.target.value)
   }
 
+  const navigate = useNavigate()
+  const openPackList = () => navigate(`/packs_list/`)
+
   return (
     <div>
       {/*<NavLink className={s.backLink} to={PATH.PACKS_LIST}><ArrowBackIcon sx={{ color: '#ffffff' }} />
         Back to Packs List</NavLink>*/}
-      <Link className={s.backLink} href="">
+      <Link onClick={openPackList} className={s.backLink}>
         <ArrowBackIcon sx={{ color: '#ffffff' }} />
         Back to Packs List
       </Link>
@@ -120,7 +125,7 @@ export const Pack: React.FC<PackPropsType> = props => {
           {cardsState.packUserId === userId ? 'My Pack' : "Friend's Pack"}
 
           {cardsState.packUserId === userId ? (
-            <IconButton onClick={() => alert('Не лезь сюда')} className={s.moreButton}>
+            <IconButton onClick={() => alert('Пока не работает')} className={s.moreButton}>
               <MoreVertOutlinedIcon sx={{ color: '#ffffff' }} />
             </IconButton>
           ) : null}
@@ -153,10 +158,11 @@ export const Pack: React.FC<PackPropsType> = props => {
               <TableCell>Question</TableCell>
               <TableCell align="left">Answer</TableCell>
               <TableCell align="left">Last Updated</TableCell>
-              <TableCell width={180} align="left">
-                Grade
-              </TableCell>
-              <TableCell width={80} align="left"></TableCell>
+              <TableCell align="left">Grade</TableCell>
+
+              {cardsState.packUserId === userId ? (
+                <TableCell width={80} align="left"></TableCell>
+              ) : null}
             </TableRow>
           </TableHead>
 
@@ -172,14 +178,17 @@ export const Pack: React.FC<PackPropsType> = props => {
                   <TableCell align="left">
                     <Grade grade={row.grade} />
                   </TableCell>
-                  <TableCell align="left">
-                    <IconButton onClick={() => alert('Пока не работает')}>
-                      <EditIcon />
-                    </IconButton>
-                    <IconButton onClick={() => alert('Пока не работает')}>
-                      <DeleteIcon />
-                    </IconButton>
-                  </TableCell>
+
+                  {cardsState.packUserId === userId ? (
+                    <TableCell align="left">
+                      <IconButton onClick={() => alert('Пока не работает')}>
+                        <EditIcon />
+                      </IconButton>
+                      <IconButton onClick={() => alert('Пока не работает')}>
+                        <DeleteIcon />
+                      </IconButton>
+                    </TableCell>
+                  ) : null}
                 </TableRow>
               )
             })}
@@ -204,16 +213,4 @@ export const Pack: React.FC<PackPropsType> = props => {
       </div>
     </div>
   )
-}
-
-const FormatDate = (date: string) => {
-  const DateISOFormat = new Date(date)
-  const day = DateISOFormat.getDate()
-  const month =
-    Number(DateISOFormat.getMonth()) < 9
-      ? '0' + (Number(DateISOFormat.getMonth()) + 1)
-      : Number(DateISOFormat.getMonth()) + 1
-  const year = DateISOFormat.getFullYear()
-
-  return day + '.' + month + '.' + year
 }
