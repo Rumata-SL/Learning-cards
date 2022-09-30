@@ -1,12 +1,23 @@
+import React, { FC } from 'react'
+
 import { Checkbox, FormControlLabel, TextField } from '@mui/material'
-import React, { useState } from 'react'
+
 import { ModalComponent } from '../ModalComponent'
 
-export const AddModalPacks = () => {
-  const [isOpenModal, setIsOpenModal] = useState(false)
+type AddModalPacksPropsType = {
+  isOpenModal: boolean
+  setIsModalOpen: (value: boolean) => void
+}
+
+export const AddModalPacks: FC<AddModalPacksPropsType> = props => {
+  const { isOpenModal, setIsModalOpen } = props
 
   return (
-    <ModalComponent isOpenModal={isOpenModal} title={'AddModalPacks'}>
+    <ModalComponent
+      isOpenModal={isOpenModal}
+      title={'AddModalPacks'}
+      setIsModalOpen={setIsModalOpen}
+    >
       <div>
         <TextField
           id="standard-basic"

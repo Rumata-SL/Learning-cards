@@ -1,7 +1,8 @@
-import { Box, Button, IconButton, Modal } from '@mui/material'
 import React, { FC, ReactNode } from 'react'
 
 import CloseIcon from '@mui/icons-material/Close'
+import { Box, Button, IconButton, Modal } from '@mui/material'
+
 import s from './ModalComponent.module.css'
 
 const style = {
@@ -20,12 +21,17 @@ type ModalPropsType = {
   children: ReactNode
   isOpenModal: boolean
   title: string
+  setIsModalOpen: (value: boolean) => void
 }
 
 export const ModalComponent: FC<ModalPropsType> = props => {
-  const { children, isOpenModal, title } = props
+  const { children, isOpenModal, title, setIsModalOpen } = props
+  const closeModalHandler = () => {
+    setIsModalOpen(false)
+  }
+
   return (
-    <Modal open={isOpenModal}>
+    <Modal open={isOpenModal} onClose={closeModalHandler}>
       <Box sx={style}>
         <div className={s.headerModal}>
           <h2>{title}</h2>
@@ -37,7 +43,7 @@ export const ModalComponent: FC<ModalPropsType> = props => {
         <div>{children}</div>
         <div className={s.buttons}>
           <Button variant="outlined">Cancel</Button>
-          <Button variant="contained"></Button>
+          <Button variant="contained">Close</Button>
         </div>
       </Box>
     </Modal>

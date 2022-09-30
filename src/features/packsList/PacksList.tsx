@@ -30,6 +30,7 @@ import SuperButton from '../../common/components/superButton/SuperButton'
 import { SuperInput } from '../../common/components/superInput/SuperInput'
 import t from '../../common/styles/Title.module.css'
 import { FormatDate } from '../../utils/formatDate'
+import { AddModalPacks } from '../modal/modalPacks/AddModalPacks'
 
 import s from './PacksList.module.css'
 import {
@@ -48,6 +49,8 @@ export const PacksList: React.FC<PacksListPropsType> = props => {
   const cardPacks = useAppSelector(state => state.packsList.cardPacks)
   const [numberCards, setNumberCards] = useState([2, 10])
 
+  const [isAddOpenModal, setIsAddOpenModal] = useState(false)
+
   // pagination
   const cardPacksTotalCount = useAppSelector(state => state.packsList.cardPacksTotalCount)
   const cardPerPage = useAppSelector(state => state.packsList.deckData.pageCount)
@@ -55,6 +58,10 @@ export const PacksList: React.FC<PacksListPropsType> = props => {
   const arrCardPerPage = [5, 10, 20, 50, 100]
 
   const pagesCount = Math.ceil(cardPacksTotalCount / cardPerPage)
+
+  const openPackModal = () => {
+    setIsAddOpenModal(true)
+  }
 
   const onChangePagination = (event: React.ChangeEvent<unknown>, page: number) => {
     dispatch(setPackPageAC(page))
@@ -93,7 +100,8 @@ export const PacksList: React.FC<PacksListPropsType> = props => {
       <div className={s.header}>
         <h2 className={t.title}>Packs list</h2>
         <div>
-          <SuperButton onClick={addPackHandler} className={s.button}>
+          {/*<SuperButton onClick={addPackHandler} className={s.button}>*/}
+          <SuperButton onClick={() => openPackModal()} className={s.button}>
             Add new pack
           </SuperButton>
         </div>
@@ -197,6 +205,7 @@ export const PacksList: React.FC<PacksListPropsType> = props => {
           <div>Cards per Page</div>
         </FormControl>
       </div>
+      <AddModalPacks isOpenModal={isAddOpenModal} setIsModalOpen={setIsAddOpenModal} />
     </div>
   )
 }
