@@ -108,6 +108,8 @@ export const Pack: React.FC<PackPropsType> = props => {
 
   return (
     <div>
+      {/*<NavLink className={s.backLink} to={PATH.PACKS_LIST}><ArrowBackIcon sx={{ color: '#ffffff' }} />
+        Back to Packs List</NavLink>*/}
       <Link className={s.backLink} href="">
         <ArrowBackIcon sx={{ color: '#ffffff' }} />
         Back to Packs List

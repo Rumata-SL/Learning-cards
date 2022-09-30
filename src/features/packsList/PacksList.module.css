@@ -197,3 +197,9 @@
     font-weight: 400;
     color: white;
 }
+
+.packName:hover{
+    cursor: pointer;
+    color: rgb(240, 68, 80);
+    text-decoration: underline;
+}

@@ -149,7 +149,9 @@ export const PacksList: React.FC<PacksListPropsType> = props => {
           <TableBody className={s.tableBody}>
             {cardPacks.map(pack => (
               <TableRow key={pack._id}>
-                <TableCell onClick={() => openPack(pack._id)}>{pack.name}</TableCell>
+                <TableCell className={s.packName} onClick={() => openPack(pack._id)}>
+                  {pack.name}
+                </TableCell>
                 <TableCell>{pack.cardsCount}</TableCell>
                 <TableCell>{FormatDate(pack.updated)}</TableCell>
                 <TableCell>{pack.user_name}</TableCell>
