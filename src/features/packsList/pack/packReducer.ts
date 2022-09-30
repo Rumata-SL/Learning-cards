@@ -11,7 +11,7 @@ const initialState = {
   searchData: {
     cardAnswer: 'english',
     cardQuestion: 'english',
-    cardsPack_id: '',
+    cardsPack_id: '6336d4e907774c00049b21ca',
     min: 0,
     max: 100,
     sortCards: '',

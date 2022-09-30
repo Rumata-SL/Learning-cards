@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import DeleteIcon from '@mui/icons-material/Delete'
@@ -21,15 +21,16 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
-import { useAppSelector } from '../../../bll/store'
+import { useAppDispatch, useAppSelector } from '../../../bll/store'
 import SuperButton from '../../../common/components/superButton/SuperButton'
 import { SuperInput } from '../../../common/components/superInput/SuperInput'
 import { FormatDate } from '../../../utils/formatDate'
 
 import { Grade } from './Grade'
 import s from './Pack.module.css'
+import { getPackTC } from './packReducer'
 
 type PackPropsType = {}
 
@@ -103,8 +104,18 @@ export type cardsStateType = {
 export const Pack: React.FC<PackPropsType> = props => {
   const userId = useAppSelector(state => state.profile.profile._id)
   const cardsState = useAppSelector(state => state.pack)
+  const dispatch = useAppDispatch()
+  const { packID } = useParams<any>()
 
   const [pageNumber, setPageNumber] = useState('5')
+
+  useEffect(() => {
+    console.log(packID)
+    if (packID) {
+      dispatch(getPackTC(packID))
+    }
+  }, [])
+
   const handleChange = (event: SelectChangeEvent) => {
     setPageNumber(event.target.value)
   }
@@ -123,7 +134,7 @@ export const Pack: React.FC<PackPropsType> = props => {
 
       <div className={s.nameButtonBlock}>
         <div className={s.nameMoreBlock}>
-          {cardsState.packUserId === userId ? 'My Pack' : "Friend's Pack"}
+          {cardsState.packUserId === userId ? 'My Pack' : 'Friend`s Pack'}
 
           {cardsState.packUserId === userId ? (
             <IconButton onClick={() => alert('Пока не работает')} className={s.moreButton}>

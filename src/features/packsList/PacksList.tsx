@@ -86,7 +86,7 @@ export const PacksList: React.FC<PacksListPropsType> = props => {
   }
 
   const navigate = useNavigate()
-  const openPack = (packId: string) => navigate(`/pack/${packId}/`)
+  const openPack = (packId: string) => navigate(`/pack/${packId}`)
 
   return (
     <div>
