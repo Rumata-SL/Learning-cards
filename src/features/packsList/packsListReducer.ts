@@ -169,6 +169,22 @@ export const deletePackTC =
     }
   }
 
+export const resetAllFiltersTC = (): ThunkType => async dispatch => {
+  dispatch(setAppStatusAC('loading'))
+  try {
+    dispatch(searchPackNameAC(''))
+    dispatch(setFilterPacksAC(false))
+    dispatch(setMinCountMaxCountAC([0, 100]))
+    dispatch(packsListTC())
+  } catch (e) {
+    const err = e as Error | AxiosError<{ error: string }>
+
+    utilsError(err, dispatch)
+  } finally {
+    dispatch(setAppStatusAC('idle'))
+  }
+}
+
 //types
 export type PacksListActionType =
   | ReturnType<typeof getCardPacksAC>
