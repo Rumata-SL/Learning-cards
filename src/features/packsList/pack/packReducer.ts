@@ -90,10 +90,13 @@ export const getPackTC = (cardsPack_id: string): ThunkType => async (dispatch, g
 }
 
 export const createCardTC = (data: CreateCardType): ThunkType => async dispatch => {
+
   dispatch(setAppStatusAC('loading'))
   try {
+    console.log('thunk')
     const res = await packAPI.createCard(data)
     if (res) {
+      console.log(res)
       dispatch(getPackTC(data.cardsPack_id))
     }
   } catch (e) {

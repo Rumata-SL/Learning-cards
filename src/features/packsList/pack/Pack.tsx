@@ -30,7 +30,7 @@ import { FormatDate } from '../../../utils/formatDate'
 
 import { Grade } from './Grade'
 import s from './Pack.module.css'
-import { getPackTC } from './packReducer'
+import { createCardTC, getPackTC } from './packReducer'
 
 type PackPropsType = {}
 
@@ -105,19 +105,26 @@ export const Pack: React.FC<PackPropsType> = props => {
   const userId = useAppSelector(state => state.profile.profile._id)
   const cardsState = useAppSelector(state => state.pack)
   const dispatch = useAppDispatch()
-  const { packID } = useParams<any>()
+  const { packId } = useParams()
 
   const [pageNumber, setPageNumber] = useState('5')
 
   useEffect(() => {
-    console.log(packID)
-    if (packID) {
-      dispatch(getPackTC(packID))
+    if (packId) {
+      dispatch(getPackTC(packId))
     }
   }, [])
 
   const handleChange = (event: SelectChangeEvent) => {
     setPageNumber(event.target.value)
+  }
+
+  const addNewCard = () => {
+    console.log(packId)
+    if (packId) {
+      console.log('adding')
+      dispatch(createCardTC({ cardsPack_id: packId }))
+    }
   }
 
   const navigate = useNavigate()
@@ -144,7 +151,7 @@ export const Pack: React.FC<PackPropsType> = props => {
         </div>
 
         {cardsState.packUserId === userId ? (
-          <SuperButton onClick={() => alert('Пока не работает')} className={s.button}>
+          <SuperButton onClick={addNewCard} className={s.button}>
             Add new card
           </SuperButton>
         ) : (
