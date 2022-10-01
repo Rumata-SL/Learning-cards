@@ -5,7 +5,7 @@ import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'
 import { useAppDispatch } from '../../../../bll/store'
 import { SuperInput } from '../../../../common/components/superInput/SuperInput'
 import useDebounce from '../../../../common/hooks/useDebounce'
-import { searchPackNameAC } from '../../packsListReducer'
+import { changeFiltersAC } from '../../packsListReducer'
 import t from '../PacksListFilters.module.css'
 
 import s from './SearchPacks.module.css'
@@ -22,7 +22,7 @@ export const SearchPacks: FC<PropsType> = () => {
   }
 
   useEffect(() => {
-    dispatch(searchPackNameAC(debouncedValue))
+    dispatch(changeFiltersAC({ packName: debouncedValue }))
   }, [debouncedValue])
 
   return (

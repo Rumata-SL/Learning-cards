@@ -14,8 +14,16 @@ type PropsType = {
   onChangeSelect: (event: SelectChangeEvent) => void
 }
 
-export const PaginationBlock: FC<PropsType> = props => {
-  const pagesCount = Math.ceil(props.totalItemsCount / props.pageItemsCount)
+export const PaginationBlock: FC<PropsType> = ({
+  page,
+  totalItemsCount,
+  pageItemsCount,
+  onChangePage,
+  selectItems,
+  defaultSelectValue,
+  onChangeSelect,
+}) => {
+  const pagesCount = Math.ceil(totalItemsCount / pageItemsCount)
 
   return (
     <div className={s.paginationBlock}>
@@ -23,18 +31,18 @@ export const PaginationBlock: FC<PropsType> = props => {
         className={s.pagination}
         count={pagesCount}
         shape="rounded"
-        page={props.page}
-        onChange={props.onChangePage}
+        page={page}
+        onChange={onChangePage}
       />
       <FormControl className={s.selectBlock}>
         <div>Show</div>
         <Select
-          value={props.defaultSelectValue.toString()}
-          onChange={props.onChangeSelect}
+          value={defaultSelectValue.toString()}
+          onChange={onChangeSelect}
           autoWidth
           className={s.select}
         >
-          {props.selectItems.map((el, index) => (
+          {selectItems.map((el, index) => (
             <MenuItem key={index} value={el}>
               {el}
             </MenuItem>

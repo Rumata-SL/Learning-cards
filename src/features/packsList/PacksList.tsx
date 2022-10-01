@@ -11,37 +11,44 @@ import { AddModalPacks } from '../modal/modalPacks/AddModalPacks'
 
 import s from './PacksList.module.css'
 import { PacksListFilters } from './packsListFilters/PacksListFilters'
-import { addPackTC, packsListTC, setCardsPageCountAC, setPackPageAC } from './packsListReducer'
+import {
+  addPackTC,
+  fetchPacksTC,
+  setPageCountAC,
+  setPageAC,
+  changeFiltersAC,
+} from './packsListReducer'
 import { PacksListTable } from './packsListTable/PacksListTable'
 
 type PacksListPropsType = {}
 
 export const PacksList: React.FC<PacksListPropsType> = props => {
   const dispatch = useAppDispatch()
-  const packName = useAppSelector(state => state.packsList.deckData.packName)
+  const filtersModel = useAppSelector(state => state.packsList.filtersModel)
+
   const isLoggedIn = useAppSelector(state => state.login.isLoggedIn)
-  const isMy = useAppSelector(state => state.packsList.isMyDeck)
+  const isMyPack = useAppSelector(state => state.packsList.isMyPack)
   const cardPacksTotalCount = useAppSelector(state => state.packsList.cardPacksTotalCount)
-  const pagePacksCount = useAppSelector(state => state.packsList.deckData.pageCount)
-  const page = useAppSelector(state => state.packsList.deckData.page)
+  const pagePacksCount = useAppSelector(state => state.packsList.pageCount)
+  const page = useAppSelector(state => state.packsList.page)
   const arrCardPerPage = [5, 10, 20, 50, 100]
 
   const [isAddOpenModal, setIsAddOpenModal] = useState(false)
 
   useEffect(() => {
-    dispatch(packsListTC())
-  }, [page, pagePacksCount, isMy, packName])
+    dispatch(fetchPacksTC())
+  }, [filtersModel, isMyPack])
 
   const openPackModal = () => {
     setIsAddOpenModal(true)
   }
 
   const onChangePagination = (event: React.ChangeEvent<unknown>, page: number) => {
-    dispatch(setPackPageAC(page))
+    dispatch(changeFiltersAC({ page: page }))
   }
 
   const onChangeSelect = (event: SelectChangeEvent) => {
-    dispatch(setCardsPageCountAC(+event.target.value))
+    dispatch(changeFiltersAC({ pageCount: +event.target.value }))
   }
 
   const addPackHandler = () => {

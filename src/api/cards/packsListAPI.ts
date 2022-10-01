@@ -39,6 +39,7 @@ export type PacksRequestType = {
   page?: number
   pageCount?: number
   user_id?: string
+  block?: boolean
 }
 
 type CardPacksResponseType = {

@@ -3,7 +3,6 @@ import { AxiosError } from 'axios'
 import { authAPI } from '../api/auth/authAPI'
 import { ThunkType } from '../bll/store'
 import { loginAC } from '../features/auth/login/loginReducer'
-import { packsListTC } from '../features/packsList/packsListReducer'
 import { setProfileAC } from '../features/profile/profileReducer'
 
 //initial state
