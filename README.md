@@ -13,19 +13,13 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - **Formik**
 - **Axios**
 - 
-## After git clone install all dependencies from package.json: 
+## Git commits: <тип>: <описание> 
 
-### `yarn`
-
-## In the project directory, you can run:
-
-### `yarn start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### `feat:` - добавляет новую функцию в ваш код
+### `fix:` - исправляет баг в коде
+### `refactor:` - рефакторинг кода
+### `style:` - изменение стилей
+### `test:` - добавление тестов, рефакторинг тестов
 
 ## Developers
 - **[Segey Lalakin](https://github.com/Rumata-SL)**
