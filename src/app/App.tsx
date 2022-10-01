@@ -46,7 +46,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<MainLayout />}>
-        <Route path="/" element={<Navigate to={PATH.PROFILE} />} />
+        <Route path="/" element={<Navigate to={PATH.PACKS_LIST} />} />
         <Route path={PATH.PROFILE} element={<Profile />}></Route>
         <Route
           path={PATH.REGISTRATION}
