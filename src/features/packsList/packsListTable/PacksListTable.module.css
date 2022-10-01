@@ -17,3 +17,12 @@
   font-weight: 400;
   color: #000000;
 }
+
+.notFound {
+  font-family: 'Montserrat';
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #fff;
+  text-align: left;
+}
