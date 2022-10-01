@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { ChangeEvent, useEffect } from 'react'
 
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import DeleteIcon from '@mui/icons-material/Delete'
@@ -21,101 +21,44 @@ import {
   TableHead,
   TableRow,
 } from '@mui/material'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
-import { useAppSelector } from '../../../bll/store'
+import { useAppDispatch, useAppSelector } from '../../../bll/store'
 import SuperButton from '../../../common/components/superButton/SuperButton'
 import { SuperInput } from '../../../common/components/superInput/SuperInput'
 import { FormatDate } from '../../../utils/formatDate'
 
 import { Grade } from './Grade'
 import s from './Pack.module.css'
+import { getPackTC, setPageAC, setPageCountAC } from './packReducer'
 
 type PackPropsType = {}
 
-/*type cardsType = Array<{
-  answer: string
-  question: string
-  cardsPack_id: string
-  grade: number
-  shots: number
-  user_id: string
-  created: string
-  updated: string
-  _id: string
-}>
-
-export type cardsStateType = {
-  cards: cardsType
-  cardsTotalCount: number
-  maxGrade: number
-  minGrade: number
-  page: number
-  pageCount: number
-  packUserId: string
-}*/
-
-/*const cardsState: cardsStateType = {
-  cards: [
-    {
-      answer: 'no answer no answer no answer',
-      question: 'no question',
-      cardsPack_id: '5eb6a2f72f8g49402d46c6ac43',
-      grade: 2.987525071790364,
-      shots: 1,
-      user_id: '142151531535151',
-      created: '2020-05-13T11:05:44.867Z',
-      updated: '2020-03-13T11:05:44.867Z',
-      _id: '5ebbdfbf48876810f1adk0e7ece3',
-    },
-    {
-      answer: 'no answer',
-      question: 'no question',
-      cardsPack_id: '5eb6a2f72f8g49402d46c6ac43',
-      grade: 3.987525071790364,
-      shots: 1,
-      user_id: '142151531535151',
-      created: '2020-05-13T11:05:44.867Z',
-      updated: '2020-09-13T11:05:44.867Z',
-      _id: '5ebbdf4887681f0f1adk0evf7ece3',
-    },
-    {
-      answer: 'no answer',
-      question: 'no question no question no question',
-      cardsPack_id: '5eb6a2f72f8g49402d46c6ac43',
-      grade: 4.457525071790364,
-      shots: 1,
-      user_id: '142151531535151',
-      created: '2020-10-13T11:05:44.867Z',
-      updated: '2020-10-13T11:05:44.867Z',
-      _id: '5ebbgdf4887681g0f1adk0e7ece3',
-    },
-  ],
-  cardsTotalCount: 3,
-  maxGrade: 4.987525071790364,
-  minGrade: 2.0100984354076568,
-  page: 1,
-  pageCount: 4,
-  packUserId: '6328b5b0da5de300045fa02a',
-  // packUserId: '5eecf82a3ed8f700042f1186',
-}*/
-
 export const Pack: React.FC<PackPropsType> = props => {
+  const dispatch = useAppDispatch()
+
   const userId = useAppSelector(state => state.profile.profile._id)
   const cardsState = useAppSelector(state => state.pack)
 
-  const [pageNumber, setPageNumber] = useState('5')
-  const handleChange = (event: SelectChangeEvent) => {
-    setPageNumber(event.target.value)
-  }
-
   const navigate = useNavigate()
   const openPackList = () => navigate(`/packs_list/`)
+  const { packId } = useParams<{ packId: string }>()
+
+  useEffect(() => {
+    dispatch(getPackTC(packId ? packId : ''))
+  }, [cardsState.searchData.pageCount, cardsState.searchData.page])
+
+  // pagination functions
+  const pagesCount = Math.ceil(cardsState.cardsTotalCount / cardsState.searchData.pageCount)
+  const handlePageCountChange = (event: SelectChangeEvent) => {
+    dispatch(setPageCountAC(+event.target.value))
+  }
+  const handlePageChange = (event: ChangeEvent<unknown>, page: number) => {
+    dispatch(setPageAC(page))
+  }
 
   return (
     <div>
-      {/*<NavLink className={s.backLink} to={PATH.PACKS_LIST}><ArrowBackIcon sx={{ color: '#ffffff' }} />
-        Back to Packs List</NavLink>*/}
       <Link onClick={openPackList} className={s.backLink}>
         <ArrowBackIcon sx={{ color: '#ffffff' }} />
         Back to Packs List
@@ -198,11 +141,21 @@ export const Pack: React.FC<PackPropsType> = props => {
       </TableContainer>
 
       <div className={s.paginationBlock}>
-        <Pagination className={s.pagination} count={10} shape="rounded" />
+        <Pagination
+          onChange={handlePageChange}
+          className={s.pagination}
+          count={pagesCount}
+          shape="rounded"
+        />
 
         <FormControl className={s.selectBlock}>
           <div>Show</div>
-          <Select value={pageNumber} onChange={handleChange} autoWidth className={s.select}>
+          <Select
+            value={cardsState.searchData.pageCount.toString()}
+            onChange={handlePageCountChange}
+            autoWidth
+            className={s.select}
+          >
             <MenuItem value={5}>5</MenuItem>
             <MenuItem value={10}>10</MenuItem>
             <MenuItem value={20}>20</MenuItem>
