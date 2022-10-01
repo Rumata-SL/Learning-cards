@@ -1,0 +1,17 @@
+.buttonsMyAll {
+  width: 100%;
+}
+
+.buttonMyAllGroup {
+  width: 100%;
+}
+
+.buttonsMyAll button {
+  width: 100%;
+  height: 36px;
+
+  font-family: Montserrat, serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: white;
+}
