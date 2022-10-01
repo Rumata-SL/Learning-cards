@@ -1,0 +1,38 @@
+.paginationBlock {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  align-items: center;
+
+  margin-top: 35px;
+}
+
+.pagination li button {
+  font-family: Montserrat, serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: white;
+}
+
+.selectBlock {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 7px !important;
+  align-items: center !important;
+}
+
+.selectBlock div {
+  font-family: Montserrat, serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: white;
+}
+
+.select {
+  height: 24px;
+
+  font-family: Montserrat, serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: white;
+}

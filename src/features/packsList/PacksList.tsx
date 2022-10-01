@@ -10,7 +10,6 @@ import {
   FormControl,
   IconButton,
   MenuItem,
-  Pagination,
   Select,
   SelectChangeEvent,
   Slider,
@@ -26,6 +25,7 @@ import { useNavigate } from 'react-router-dom'
 
 import filterRemoveIcon from '../../assets/image/icons/filter-remove.svg'
 import { useAppDispatch, useAppSelector } from '../../bll/store'
+import { PaginationBlock } from '../../common/components/paginationBlock/PaginationBlock'
 import SuperButton from '../../common/components/superButton/SuperButton'
 import { SuperInput } from '../../common/components/superInput/SuperInput'
 import t from '../../common/styles/Title.module.css'
@@ -180,31 +180,15 @@ export const PacksList: React.FC<PacksListPropsType> = props => {
         </Table>
       </TableContainer>
 
-      <div className={s.paginationBlock}>
-        <Pagination
-          className={s.pagination}
-          count={pagesCount}
-          shape="rounded"
-          page={page}
-          onChange={onChangePagination}
-        />
-        <FormControl className={s.selectBlock}>
-          <div>Show</div>
-          <Select
-            value={cardPerPage.toString()}
-            onChange={onChangeSelect}
-            autoWidth
-            className={s.select}
-          >
-            {arrCardPerPage.map((el, index) => (
-              <MenuItem key={index} value={el}>
-                {el}
-              </MenuItem>
-            ))}
-          </Select>
-          <div>Cards per Page</div>
-        </FormControl>
-      </div>
+      <PaginationBlock
+        page={page}
+        pagesCount={pagesCount}
+        onChangePage={onChangePagination}
+        selectItems={arrCardPerPage}
+        defaultSelectValue={cardPerPage}
+        onChangeSelect={onChangeSelect}
+      />
+
       <AddModalPacks isOpenModal={isAddOpenModal} setIsModalOpen={setIsAddOpenModal} />
     </div>
   )
