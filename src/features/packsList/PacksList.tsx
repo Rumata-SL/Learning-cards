@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 import { SelectChangeEvent } from '@mui/material'
+import { Navigate } from 'react-router-dom'
 
 import { useAppDispatch, useAppSelector } from '../../bll/store'
 import { PaginationBlock } from '../../common/components/paginationBlock/PaginationBlock'
@@ -17,6 +18,7 @@ type PacksListPropsType = {}
 
 export const PacksList: React.FC<PacksListPropsType> = props => {
   const dispatch = useAppDispatch()
+  const isLoggedIn = useAppSelector(state => state.login.isLoggedIn)
   const isMy = useAppSelector(state => state.packsList.isMyDeck)
   const cardPacksTotalCount = useAppSelector(state => state.packsList.cardPacksTotalCount)
   const pagePacksCount = useAppSelector(state => state.packsList.deckData.pageCount)
@@ -43,6 +45,10 @@ export const PacksList: React.FC<PacksListPropsType> = props => {
 
   const addPackHandler = () => {
     dispatch(addPackTC('test pack'))
+  }
+
+  if (!isLoggedIn) {
+    return <Navigate to={'/login'} />
   }
 
   return (
