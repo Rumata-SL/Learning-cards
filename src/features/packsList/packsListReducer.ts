@@ -111,7 +111,7 @@ export const packsListTC = (): ThunkType => async (dispatch, getState) => {
   } catch (e) {
     const err = e as Error | AxiosError<{ error: string }>
 
-    utilsError(err, dispatch)
+    // utilsError(err, dispatch)
   } finally {
     dispatch(setAppStatusAC('idle'))
   }
