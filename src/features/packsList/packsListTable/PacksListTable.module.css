@@ -17,14 +17,3 @@
   font-weight: 400;
   color: #000000;
 }
-
-.tableLink {
-  cursor: pointer;
-
-  transition: all 0.2s ease-in-out;
-}
-
-.tableLink:hover {
-  color: #366eff;
-  text-decoration: underline;
-}
