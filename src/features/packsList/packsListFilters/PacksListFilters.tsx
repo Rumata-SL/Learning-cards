@@ -1,6 +1,4 @@
-import React, { FC, useState } from 'react'
-
-import { Slider } from '@mui/material'
+import React, { FC } from 'react'
 
 import filterRemoveIcon from '../../../assets/image/icons/filter-remove.svg'
 

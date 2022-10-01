@@ -18,6 +18,7 @@ type PacksListPropsType = {}
 
 export const PacksList: React.FC<PacksListPropsType> = props => {
   const dispatch = useAppDispatch()
+  const packName = useAppSelector(state => state.packsList.deckData.packName)
   const isLoggedIn = useAppSelector(state => state.login.isLoggedIn)
   const isMy = useAppSelector(state => state.packsList.isMyDeck)
   const cardPacksTotalCount = useAppSelector(state => state.packsList.cardPacksTotalCount)
@@ -29,7 +30,7 @@ export const PacksList: React.FC<PacksListPropsType> = props => {
 
   useEffect(() => {
     dispatch(packsListTC())
-  }, [page, pagePacksCount, isMy])
+  }, [page, pagePacksCount, isMy, packName])
 
   const openPackModal = () => {
     setIsAddOpenModal(true)
