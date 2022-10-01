@@ -6,7 +6,8 @@ import s from './PaginationBlock.module.css'
 
 type PropsType = {
   page: number
-  pagesCount: number
+  totalItemsCount: number
+  pageItemsCount: number
   onChangePage: (event: React.ChangeEvent<unknown>, page: number) => void
   selectItems: number[]
   defaultSelectValue: number
@@ -14,11 +15,13 @@ type PropsType = {
 }
 
 export const PaginationBlock: FC<PropsType> = props => {
+  const pagesCount = Math.ceil(props.totalItemsCount / props.pageItemsCount)
+
   return (
     <div className={s.paginationBlock}>
       <Pagination
         className={s.pagination}
-        count={props.pagesCount}
+        count={pagesCount}
         shape="rounded"
         page={props.page}
         onChange={props.onChangePage}

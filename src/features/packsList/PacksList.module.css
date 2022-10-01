@@ -118,26 +118,6 @@
   position: relative;
 }
 
-.tableHeader {
-  height: 48px;
-
-  background-color: #efefef;
-}
-
-.tableHeader th {
-  font-family: Montserrat, serif;
-  font-size: 14px;
-  font-weight: 500;
-  color: #000000;
-}
-
-.tableBody td {
-  font-family: Montserrat, serif;
-  font-size: 13px;
-  font-weight: 400;
-  color: #000000;
-}
-
 .filterRemoveButton {
   cursor: pointer;
 
@@ -154,11 +134,4 @@
   background: #ffffff;
   border: 1px solid #d9d9d9;
   border-radius: 2px;
-}
-
-.packName:hover {
-  cursor: pointer;
-
-  color: rgb(240, 68, 80);
-  text-decoration: underline;
 }
