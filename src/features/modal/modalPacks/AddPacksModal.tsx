@@ -1,7 +1,10 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 
 import { Checkbox, FormControlLabel, TextField } from '@mui/material'
 
+import Img from '../../../assets/image/icons/fakeImg.svg'
+import { useAppDispatch } from '../../../bll/store'
+import { addPackTC } from '../../packsList/packsListReducer'
 import { ModalComponent } from '../ModalComponent'
 
 type AddModalPacksPropsType = {
@@ -12,35 +15,46 @@ type AddModalPacksPropsType = {
 export const AddPacksModal: FC<AddModalPacksPropsType> = props => {
   const { isOpenModal, setIsModalOpen } = props
 
-  const addPack = () => {}
+  const dispatch = useAppDispatch()
+
+  const [packName, setPackName] = useState('')
+  const [deckCover, setDeckCover] = useState(Img)
+  const [isPrivate, setIsPrivate] = useState(false)
+
+  const addPack = () => {
+    dispatch(addPackTC(packName, deckCover, isPrivate))
+    setPackName('')
+    setDeckCover(Img)
+    setIsModalOpen(false)
+  }
 
   return (
     <ModalComponent
       isOpenModal={isOpenModal}
-      title={'Add Packs'}
+      title={'Add New Pack'}
       setIsModalOpen={setIsModalOpen}
       buttonTitle={'Save'}
       operationClick={addPack}
       buttonColor={'primary'}
     >
-      <div>
+      <div style={{ margin: '30px 0 0 0 ' }}>
         <TextField
           id="standard-basic"
           fullWidth
           label="Enter Pack Title"
           variant="standard"
-          value={''}
-          onChange={() => {}}
+          value={packName}
+          onChange={e => setPackName(e.currentTarget.value)}
         />
       </div>
       <div>
         <FormControlLabel
-          control={<Checkbox checked={false} onChange={() => {}} />}
           label="Private pack"
+          control={
+            <Checkbox checked={isPrivate} onChange={e => setIsPrivate(e.currentTarget.checked)} />
+          }
         />
       </div>
-      Pack cover preview
-      <div>{/*<img src={$$} alt="img" />*/}</div>
     </ModalComponent>
   )
 }

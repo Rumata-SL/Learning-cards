@@ -38,10 +38,19 @@ export const ModalComponent: FC<ModalPropsType> = props => {
         <hr />
         <div>{children}</div>
         <div className={s.buttons}>
-          <Button variant="outlined" onClick={closeModalHandler}>
+          <Button
+            variant="outlined"
+            style={{ width: '127px', height: '30px', borderRadius: '30px' }}
+            onClick={closeModalHandler}
+          >
             Cancel
           </Button>
-          <Button variant="contained" color={buttonColor} onClick={() => operationClick()}>
+          <Button
+            variant="contained"
+            style={{ width: '127px', height: '30px', borderRadius: '30px', background: '#366EFF' }}
+            color={buttonColor}
+            onClick={() => operationClick()}
+          >
             {buttonTitle}
           </Button>
         </div>
