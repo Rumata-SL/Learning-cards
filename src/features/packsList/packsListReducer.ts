@@ -54,6 +54,8 @@ export const packsListReducer = (
           maxCount: action.payload.value[1],
         },
       }
+    case 'packsList/CHANGE_FILTER_MY_ALL':
+      return { ...state, deckData: { ...state.deckData, user_id: action.payload.value } }
     default:
       return state
   }
@@ -89,6 +91,9 @@ export const setFilterPacksAC = (isMyDeck: boolean) =>
 export const setMinCountMaxCountAC = (value: Array<number>) =>
   ({ type: 'packsList/SET_MIN_COUNT_MAX_COUNT', payload: { value } } as const)
 
+export const changeFilterMyAllAC = (value: string) =>
+  ({ type: 'packsList/CHANGE_FILTER_MY_ALL', payload: { value } } as const)
+
 //TC
 export const packsListTC = (): ThunkType => async (dispatch, getState) => {
   const { deckData } = getState().packsList
@@ -106,7 +111,7 @@ export const packsListTC = (): ThunkType => async (dispatch, getState) => {
   } catch (e) {
     const err = e as Error | AxiosError<{ error: string }>
 
-    utilsError(err, dispatch)
+    // utilsError(err, dispatch)
   } finally {
     dispatch(setAppStatusAC('idle'))
   }
@@ -194,3 +199,4 @@ export type PacksListActionType =
   | ReturnType<typeof searchPackNameAC>
   | ReturnType<typeof setFilterPacksAC>
   | ReturnType<typeof setMinCountMaxCountAC>
+  | ReturnType<typeof changeFilterMyAllAC>
