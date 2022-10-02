@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import React, { ChangeEvent, useEffect } from 'react'
 
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
@@ -30,7 +32,7 @@ import { FormatDate } from '../../../utils/formatDate'
 
 import { Grade } from './Grade'
 import s from './Pack.module.css'
-import { getPackTC, setPageAC, setPageCountAC } from './packReducer'
+import {createCardTC, deleteCardTC, getPackTC, setPageAC, setPageCountAC, updateCardTC} from './packReducer'
 
 type PackPropsType = {}
 
@@ -57,6 +59,29 @@ export const Pack: React.FC<PackPropsType> = props => {
     dispatch(setPageAC(page))
   }
 
+  const handleAddNewCard = () => {
+    const data = {
+      cardsPack_id: packId ? packId : '',
+      question: 'example question',
+      answer: 'example answer',
+      grade: 4,
+    }
+    dispatch(createCardTC(data))
+  }
+
+  const handleUpdateCard = (_id: string) => {
+    const data = {
+      _id: _id,
+      question: 'updated question',
+      answer: 'updated answer',
+    }
+    dispatch(updateCardTC(packId ? packId : '', data))
+  }
+
+  const handleDeleteCard = (_id: string) => {
+    dispatch(deleteCardTC(packId ? packId : '', _id))
+  }
+
   return (
     <div>
       <Link onClick={openPackList} className={s.backLink}>
@@ -76,7 +101,7 @@ export const Pack: React.FC<PackPropsType> = props => {
         </div>
 
         {cardsState.packUserId === userId ? (
-          <SuperButton onClick={() => alert('Пока не работает')} className={s.button}>
+          <SuperButton onClick={handleAddNewCard} className={s.button}>
             Add new card
           </SuperButton>
         ) : (
@@ -125,10 +150,10 @@ export const Pack: React.FC<PackPropsType> = props => {
 
                   {cardsState.packUserId === userId ? (
                     <TableCell align="left">
-                      <IconButton onClick={() => alert('Пока не работает')}>
+                      <IconButton onClick={() => handleUpdateCard(row._id)}>
                         <EditIcon />
                       </IconButton>
-                      <IconButton onClick={() => alert('Пока не работает')}>
+                      <IconButton onClick={() => handleDeleteCard(row._id)}>
                         <DeleteIcon />
                       </IconButton>
                     </TableCell>
