@@ -8,7 +8,7 @@ export const packsListAPI = {
       params,
     })
   },
-  addPack(name: string, deckCover?: string) {
+  addPack(name: string, deckCover?: string, isPrivate?: boolean) {
     return instance.post<AddPackType, AxiosResponse<CardPacksType>>('/cards/pack', {
       cardsPack: {
         name,

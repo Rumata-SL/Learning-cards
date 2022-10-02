@@ -56,13 +56,13 @@ export const PacksList: React.FC<PacksListPropsType> = props => {
       <div className={s.header}>
         <h2 className={t.title}>Packs list</h2>
         <div>
-          <SuperButton onClick={addPackHandler} className={s.button}>
+          {/*<SuperButton onClick={addPackHandler} className={s.button}>
+            Add new pack
+          </SuperButton>*/}
+
+          <SuperButton onClick={() => openPackModal()} className={s.button}>
             Add new pack
           </SuperButton>
-
-          {/* <SuperButton onClick={() => openPackModal()} className={s.button}>
-            Add new pack
-          </SuperButton> */}
         </div>
       </div>
       <PacksListFilters />
