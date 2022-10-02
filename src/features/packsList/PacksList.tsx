@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from '../../bll/store'
 import { PaginationBlock } from '../../common/components/paginationBlock/PaginationBlock'
 import SuperButton from '../../common/components/superButton/SuperButton'
 import t from '../../common/styles/Title.module.css'
-import { AddModalPacks } from '../modal/modalPacks/AddModalPacks'
+import { AddPacksModal } from '../modal/modalPacks/AddPacksModal'
 
 import s from './PacksList.module.css'
 import { PacksListFilters } from './packsListFilters/PacksListFilters'
@@ -76,7 +76,7 @@ export const PacksList: React.FC<PacksListPropsType> = props => {
         totalItemsCount={cardPacksTotalCount}
         pageItemsCount={pagePacksCount}
       />
-      <AddModalPacks isOpenModal={isAddOpenModal} setIsModalOpen={setIsAddOpenModal} />
+      <AddPacksModal isOpenModal={isAddOpenModal} setIsModalOpen={setIsAddOpenModal} />
     </div>
   )
 }

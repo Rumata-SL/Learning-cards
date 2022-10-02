@@ -9,14 +9,19 @@ type AddModalPacksPropsType = {
   setIsModalOpen: (value: boolean) => void
 }
 
-export const AddModalPacks: FC<AddModalPacksPropsType> = props => {
+export const AddPacksModal: FC<AddModalPacksPropsType> = props => {
   const { isOpenModal, setIsModalOpen } = props
+
+  const addPack = () => {}
 
   return (
     <ModalComponent
       isOpenModal={isOpenModal}
-      title={'AddModalPacks'}
+      title={'Add Packs'}
       setIsModalOpen={setIsModalOpen}
+      buttonTitle={'Save'}
+      operationClick={addPack}
+      buttonColor={'primary'}
     >
       <div>
         <TextField
