@@ -24,20 +24,22 @@ type PacksListPropsType = {}
 
 export const PacksList: React.FC<PacksListPropsType> = props => {
   const dispatch = useAppDispatch()
-  const filtersModel = useAppSelector(state => state.packsList.filtersModel)
+  const { packName, page, pageCount, min, max, sortPacks, user_id, block } = useAppSelector(
+    state => state.packsList.filtersModel
+  )
 
   const isLoggedIn = useAppSelector(state => state.login.isLoggedIn)
   const isMyPack = useAppSelector(state => state.packsList.isMyPack)
   const cardPacksTotalCount = useAppSelector(state => state.packsList.cardPacksTotalCount)
   const pagePacksCount = useAppSelector(state => state.packsList.pageCount)
-  const page = useAppSelector(state => state.packsList.page)
+  const pagePacks = useAppSelector(state => state.packsList.page)
   const arrCardPerPage = [5, 10, 20, 50, 100]
 
   const [isAddOpenModal, setIsAddOpenModal] = useState(false)
 
   useEffect(() => {
     dispatch(fetchPacksTC())
-  }, [filtersModel, isMyPack])
+  }, [packName, page, pageCount, min, max, sortPacks, user_id, block, isMyPack])
 
   const openPackModal = () => {
     setIsAddOpenModal(true)
@@ -76,7 +78,7 @@ export const PacksList: React.FC<PacksListPropsType> = props => {
       <PacksListFilters />
       <PacksListTable />
       <PaginationBlock
-        page={page}
+        page={pagePacks}
         onChangePage={onChangePagination}
         selectItems={arrCardPerPage}
         defaultSelectValue={pagePacksCount}

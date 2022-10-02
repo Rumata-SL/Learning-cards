@@ -10,7 +10,16 @@ type InitialStateType = typeof initialState
 
 const initialState = {
   cardPacks: [] as Array<CardPacksType>,
-  filtersModel: {} as PacksRequestType,
+  filtersModel: {
+    packName: '',
+    min: 0,
+    max: 100,
+    sortPacks: '',
+    page: 1,
+    pageCount: 5,
+    user_id: '',
+    block: false,
+  } as PacksRequestType,
   cardPacksTotalCount: 0,
   minCardsCount: 0,
   maxCardsCount: 100,
@@ -38,10 +47,24 @@ export const packsListReducer = (
       }
     case 'packsList/SET_PACKS_TOTAL_COUNT':
       return { ...state, cardPacksTotalCount: action.payload.cardPacksTotalCount }
-    case 'packsList/SET_FILTER_MY_ALL_PACK':
+    case 'packsList/SET_IS_MY_PACKS':
       return { ...state, isMyPack: action.payload.isMyPack }
     case 'packsList/CHANGE_FILTERS':
-      return { ...state, filtersModel: { ...action.filtersModel } }
+      return { ...state, filtersModel: { ...state.filtersModel, ...action.payload.filtersModel } }
+    case 'packsList/RESET_FILTERS':
+      return {
+        ...state,
+        filtersModel: {
+          packName: '',
+          min: 0,
+          max: 100,
+          sortPacks: '',
+          page: 1,
+          pageCount: 5,
+          user_id: '',
+          block: false,
+        },
+      }
     default:
       return state
   }
@@ -68,11 +91,13 @@ export const setPacksTotalCountAC = (cardPacksTotalCount: number) =>
     payload: { cardPacksTotalCount },
   } as const)
 
-export const setFilterPacksAC = (isMyPack: boolean) =>
-  ({ type: 'packsList/SET_FILTER_MY_ALL_PACK', payload: { isMyPack } } as const)
+export const setIsMyPacksAC = (isMyPack: boolean) =>
+  ({ type: 'packsList/SET_IS_MY_PACKS', payload: { isMyPack } } as const)
 
 export const changeFiltersAC = (filtersModel: PacksRequestType) =>
-  ({ type: 'packsList/CHANGE_FILTERS', filtersModel } as const)
+  ({ type: 'packsList/CHANGE_FILTERS', payload: { filtersModel } } as const)
+
+export const resetFiltersAC = () => ({ type: 'packsList/RESET_FILTERS' } as const)
 
 //TC
 export const fetchPacksTC = (): ThunkType => async (dispatch, getState) => {
@@ -154,25 +179,12 @@ export const deletePackTC =
     }
   }
 
-export const resetAllFiltersTC = (): ThunkType => async dispatch => {
-  dispatch(setAppStatusAC('loading'))
-  try {
-    dispatch(setFilterPacksAC(false))
-    dispatch(fetchPacksTC())
-  } catch (e) {
-    const err = e as Error | AxiosError<{ error: string }>
-
-    utilsError(err, dispatch)
-  } finally {
-    dispatch(setAppStatusAC('idle'))
-  }
-}
-
 //types
 export type PacksListActionType =
   | ReturnType<typeof setCardPacksAC>
   | ReturnType<typeof setPageAC>
   | ReturnType<typeof setPageCountAC>
   | ReturnType<typeof setPacksTotalCountAC>
-  | ReturnType<typeof setFilterPacksAC>
+  | ReturnType<typeof setIsMyPacksAC>
   | ReturnType<typeof changeFiltersAC>
+  | ReturnType<typeof resetFiltersAC>

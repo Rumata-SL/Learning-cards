@@ -3,7 +3,7 @@ import React, { FC } from 'react'
 import { Button, ButtonGroup } from '@mui/material'
 
 import { useAppDispatch, useAppSelector } from '../../../../bll/store'
-import { changeFiltersAC, setFilterPacksAC } from '../../packsListReducer'
+import { changeFiltersAC, setIsMyPacksAC } from '../../packsListReducer'
 import t from '../PacksListFilters.module.css'
 
 import s from './FilterMyAllPacks.module.css'
@@ -17,14 +17,14 @@ export const FilterMyAllPacks: FC<PropsType> = props => {
 
   const setAllHandler = () => {
     if (isMyPack === true) {
-      dispatch(setFilterPacksAC(false))
+      dispatch(setIsMyPacksAC(false))
       dispatch(changeFiltersAC({ user_id: '' }))
     }
   }
 
   const setMyHandler = () => {
     if (isMyPack !== true) {
-      dispatch(setFilterPacksAC(true))
+      dispatch(setIsMyPacksAC(true))
       dispatch(changeFiltersAC({ user_id: profileId }))
     }
   }

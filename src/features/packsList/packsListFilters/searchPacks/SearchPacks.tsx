@@ -2,7 +2,7 @@ import React, { ChangeEvent, FC, useEffect, useState } from 'react'
 
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'
 
-import { useAppDispatch } from '../../../../bll/store'
+import { useAppDispatch, useAppSelector } from '../../../../bll/store'
 import { SuperInput } from '../../../../common/components/superInput/SuperInput'
 import useDebounce from '../../../../common/hooks/useDebounce'
 import { changeFiltersAC } from '../../packsListReducer'
@@ -14,8 +14,9 @@ type PropsType = {}
 
 export const SearchPacks: FC<PropsType> = () => {
   const dispatch = useAppDispatch()
-  const [value, setValue] = useState<string>('')
-  const debouncedValue = useDebounce<string>(value, 500)
+  const packName = useAppSelector(state => state.packsList.filtersModel.packName)
+  const [value, setValue] = useState(packName)
+  const debouncedValue = useDebounce(value, 500)
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value)
@@ -24,6 +25,10 @@ export const SearchPacks: FC<PropsType> = () => {
   useEffect(() => {
     dispatch(changeFiltersAC({ packName: debouncedValue }))
   }, [debouncedValue])
+
+  useEffect(() => {
+    setValue(packName)
+  }, [packName])
 
   return (
     <div>
