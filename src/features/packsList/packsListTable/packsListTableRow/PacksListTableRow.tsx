@@ -10,6 +10,7 @@ import { CardPacksType } from '../../../../api/cards/packsListAPI'
 import { useAppDispatch, useAppSelector } from '../../../../bll/store'
 import { FormatDate } from '../../../../utils/formatDate'
 import { DeletePacksModal } from '../../../modal/modalPacks/DeletePacksModal'
+import { UpdatePackModal } from '../../../modal/modalPacks/UpdatePackModal'
 import { deletePackTC, updatePackTC } from '../../packsListReducer'
 
 import s from './PacksListTableRow.module.css'
@@ -22,8 +23,10 @@ export const PacksListTableRow: FC<PropsType> = ({ pack }) => {
   const dispatch = useAppDispatch()
   const userId = useAppSelector(state => state.profile.profile._id)
   const navigate = useNavigate()
-  const [deletePacks, setDeletePacks] = useState<CardPacksType | null>(null)
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
+  const [deletePacks, setDeletePacks] = useState<CardPacksType | null>(null)
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false)
+  const [updatePacks, setUpdatePacks] = useState<CardPacksType | null>(null)
 
   const openPack = (packId: string) => navigate(`/pack/${packId}/`)
 
@@ -34,6 +37,11 @@ export const PacksListTableRow: FC<PropsType> = ({ pack }) => {
   const openDeletePackModal = (pack: CardPacksType) => {
     setIsDeleteModalOpen(true)
     setDeletePacks(pack)
+  }
+
+  const openUpdatePackModal = (id: string, name: string) => {
+    setIsUpdateModalOpen(true)
+    setUpdatePacks(pack)
   }
   const updatePackHandler = (id: string, name: string) => {
     dispatch(updatePackTC(id, name))
@@ -55,7 +63,7 @@ export const PacksListTableRow: FC<PropsType> = ({ pack }) => {
             <IconButton>
               <SchoolIcon />
             </IconButton>
-            <IconButton onClick={() => updatePackHandler(pack._id, 'updated pack')}>
+            <IconButton onClick={() => openUpdatePackModal(pack._id, pack.name)}>
               <EditIcon />
             </IconButton>
             <IconButton onClick={() => openDeletePackModal(pack)}>
@@ -76,6 +84,15 @@ export const PacksListTableRow: FC<PropsType> = ({ pack }) => {
           setIsModalOpen={setIsDeleteModalOpen}
           packName={deletePacks && deletePacks.name}
           id={deletePacks && deletePacks._id}
+        />
+      )}
+      {updatePacks && (
+        <UpdatePackModal
+          isModalOpen={isUpdateModalOpen}
+          setIsModalOpen={setIsUpdateModalOpen}
+          pack={updatePacks}
+          packName={updatePacks && updatePacks.name}
+          id={updatePacks && updatePacks._id}
         />
       )}
     </>

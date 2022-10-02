@@ -41,7 +41,7 @@ export const AddPacksModal: FC<AddModalPacksPropsType> = props => {
         <TextField
           id="standard-basic"
           fullWidth
-          label="Enter Pack Title"
+          label="Enter Pack Name"
           variant="standard"
           value={packName}
           onChange={e => setPackName(e.currentTarget.value)}
