@@ -1,0 +1,9 @@
+.packName{
+    font-size: 20px;
+    color: darkblue;
+    font-style: italic;
+    display: inline-block;
+}
+.packName::first-letter{
+    text-transform: uppercase;
+}

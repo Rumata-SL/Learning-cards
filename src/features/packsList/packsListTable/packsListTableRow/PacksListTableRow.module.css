@@ -4,7 +4,13 @@
   transition: all 0.2s ease-in-out;
 }
 
+.tableLink::first-letter{
+    text-transform: uppercase;
+}
+
 .tableLink:hover {
   color: #366eff;
   text-decoration: underline;
 }
+
+
