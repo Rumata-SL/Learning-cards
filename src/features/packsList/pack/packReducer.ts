@@ -159,7 +159,7 @@ export const deleteCardTC =
   }
 
 //types
-type PackType = typeof initialState
+export type PackType = typeof initialState
 
 type CardType = {
   answer: string
