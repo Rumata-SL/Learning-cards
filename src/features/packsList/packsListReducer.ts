@@ -49,6 +49,12 @@ export const packsListReducer = (
       return { ...state, cardPacksTotalCount: action.payload.cardPacksTotalCount }
     case 'packsList/SET_IS_MY_PACKS':
       return { ...state, isMyPack: action.payload.isMyPack }
+    case 'packsList/SET_MIN_MAX_CARDS_COUNT':
+      return {
+        ...state,
+        minCardsCount: action.payload.minCardsCount,
+        maxCardsCount: action.payload.maxCardsCount,
+      }
     case 'packsList/CHANGE_FILTERS':
       return { ...state, filtersModel: { ...state.filtersModel, ...action.payload.filtersModel } }
     case 'packsList/RESET_FILTERS':
@@ -94,6 +100,12 @@ export const setPacksTotalCountAC = (cardPacksTotalCount: number) =>
 export const setIsMyPacksAC = (isMyPack: boolean) =>
   ({ type: 'packsList/SET_IS_MY_PACKS', payload: { isMyPack } } as const)
 
+export const setMinMaxCardsCountAC = (minCardsCount: number, maxCardsCount: number) =>
+  ({
+    type: 'packsList/SET_MIN_MAX_CARDS_COUNT',
+    payload: { minCardsCount, maxCardsCount },
+  } as const)
+
 export const changeFiltersAC = (filtersModel: PacksRequestType) =>
   ({ type: 'packsList/CHANGE_FILTERS', payload: { filtersModel } } as const)
 
@@ -107,12 +119,14 @@ export const fetchPacksTC = (): ThunkType => async (dispatch, getState) => {
 
   try {
     const res = await packsListAPI.getPacks(filtersModel)
-    const { cardPacks, page, pageCount, cardPacksTotalCount } = res.data
+    const { cardPacks, page, pageCount, cardPacksTotalCount, minCardsCount, maxCardsCount } =
+      res.data
 
     dispatch(setCardPacksAC(cardPacks))
     dispatch(setPageAC(page))
     dispatch(setPageCountAC(pageCount))
     dispatch(setPacksTotalCountAC(cardPacksTotalCount))
+    dispatch(setMinMaxCardsCountAC(minCardsCount, maxCardsCount))
   } catch (e) {
     const err = e as Error | AxiosError<{ error: string }>
 
@@ -186,5 +200,6 @@ export type PacksListActionType =
   | ReturnType<typeof setPageCountAC>
   | ReturnType<typeof setPacksTotalCountAC>
   | ReturnType<typeof setIsMyPacksAC>
+  | ReturnType<typeof setMinMaxCardsCountAC>
   | ReturnType<typeof changeFiltersAC>
   | ReturnType<typeof resetFiltersAC>
