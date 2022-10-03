@@ -114,7 +114,7 @@ export const Pack: React.FC<PackPropsType> = props => {
         cardsState={cardsState}
         userId={userId}
         updateCardCallback={handleUpdateCard}
-        deleteCardCallback={handleDeleteCard}
+        // deleteCardCallback={handleDeleteCard}
       />
 
       <PaginationBlock

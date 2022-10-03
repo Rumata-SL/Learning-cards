@@ -161,7 +161,7 @@ export const deleteCardTC =
 //types
 export type PackType = typeof initialState
 
-type CardType = {
+export type CardType = {
   answer: string
   question: string
   cardsPack_id: string

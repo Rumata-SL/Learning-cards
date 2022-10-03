@@ -12,3 +12,15 @@ export const style = {
   flexDirection: 'column',
   justifyContent: 'space-between',*/
 }
+
+export const styleBtn = {
+  width: '127px',
+  height: '36px',
+  borderRadius: '30px',
+}
+
+/*export const styleBtnVariant = {
+  width: '127px',
+  height: '30px',
+  borderRadius: '30px',
+}*/
