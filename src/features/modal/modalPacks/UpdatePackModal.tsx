@@ -41,14 +41,16 @@ export const UpdatePackModal: FC<UpdatePackModalPropsType> = props => {
       setIsModalOpen={setIsModalOpen}
       operationClick={updatePackHandler}
     >
-      <TextField
-        id="standard-basic"
-        fullWidth
-        label="Enter New Pack Name"
-        variant="standard"
-        value={newName}
-        onChange={e => setNewName(e.currentTarget.value)}
-      />
+      <div style={{ margin: '30px 0 0 0 ' }}>
+        <TextField
+          id="standard-basic"
+          fullWidth
+          label="Enter New Pack Name"
+          variant="standard"
+          value={newName}
+          onChange={e => setNewName(e.currentTarget.value)}
+        />
+      </div>
       <div>
         <FormControlLabel
           control={

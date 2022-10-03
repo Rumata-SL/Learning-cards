@@ -4,14 +4,14 @@ import CloseIcon from '@mui/icons-material/Close'
 import { Box, Button, IconButton, Modal } from '@mui/material'
 
 import s from './ModalComponent.module.css'
-import { style } from './StyleFofModal'
+import { style, styleBtn } from './StyleFofModal'
 
 type ModalPropsType = {
   title: string
-  children: ReactNode
   isOpenModal: boolean
   buttonTitle: string
   buttonColor: 'primary' | 'error'
+  children: ReactNode
 
   setIsModalOpen: (value: boolean) => void
   operationClick: () => void
@@ -22,7 +22,6 @@ export const ModalComponent: FC<ModalPropsType> = props => {
     props
 
   const closeModalHandler = () => {
-    console.log('false')
     setIsModalOpen(false)
   }
 
@@ -38,16 +37,12 @@ export const ModalComponent: FC<ModalPropsType> = props => {
         <hr />
         <div>{children}</div>
         <div className={s.buttons}>
-          <Button
-            variant="outlined"
-            style={{ width: '127px', height: '30px', borderRadius: '30px' }}
-            onClick={closeModalHandler}
-          >
+          <Button variant="outlined" style={styleBtn} onClick={closeModalHandler}>
             Cancel
           </Button>
           <Button
             variant="contained"
-            style={{ width: '127px', height: '30px', borderRadius: '30px', background: '#366EFF' }}
+            style={styleBtn}
             color={buttonColor}
             onClick={() => operationClick()}
           >
