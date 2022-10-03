@@ -2,6 +2,7 @@ import React, { FC } from 'react'
 
 import filterRemoveIcon from '../../../assets/image/icons/filter-remove.svg'
 import { useAppDispatch } from '../../../bll/store'
+import { resetFiltersAC, fetchPacksTC, resetAllFiltersTC } from '../packsListReducer'
 
 import { FilterCountOfItems } from './filterCountOfItems/FilterCountOfItems'
 import { FilterMyAllPacks } from './filterMyAllPacks/FilterMyAllPacks'
@@ -10,10 +11,12 @@ import { SearchPacks } from './searchPacks/SearchPacks'
 
 type PropsType = {}
 
-export const PacksListFilters: FC<PropsType> = () => {
+export const PacksListFilters: FC<PropsType> = props => {
   const dispatch = useAppDispatch()
 
-  const onClickButtonRemoveHandler = () => {}
+  const resetFilters = () => {
+    dispatch(resetAllFiltersTC())
+  }
 
   return (
     <div className={s.filters}>
@@ -21,7 +24,7 @@ export const PacksListFilters: FC<PropsType> = () => {
       <FilterMyAllPacks />
       <FilterCountOfItems />
       <div className={s.resetFilterBlock}>
-        <button className={s.filterRemoveButton} onClick={onClickButtonRemoveHandler}>
+        <button className={s.filterRemoveButton} onClick={resetFilters}>
           <img src={filterRemoveIcon} alt="filter-remove" />
         </button>
       </div>

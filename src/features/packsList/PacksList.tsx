@@ -11,13 +11,7 @@ import { AddModalPacks } from '../modal/modalPacks/AddModalPacks'
 
 import s from './PacksList.module.css'
 import { PacksListFilters } from './packsListFilters/PacksListFilters'
-import {
-  addPackTC,
-  fetchPacksTC,
-  setPageCountAC,
-  setPageAC,
-  changeFiltersAC,
-} from './packsListReducer'
+import { addPackTC, fetchPacksTC, changeFiltersAC } from './packsListReducer'
 import { PacksListTable } from './packsListTable/PacksListTable'
 
 type PacksListPropsType = {}

@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { FC } from 'react'
 
 import { Slider } from '@mui/material'
 
@@ -12,32 +12,29 @@ type PropsType = {}
 
 export const FilterCountOfItems: FC<PropsType> = () => {
   const dispatch = useAppDispatch()
-  const minCardsCount = useAppSelector(state => state.packsList.minCardsCount)
-  const maxCardsCount = useAppSelector(state => state.packsList.maxCardsCount)
-  const [numberCards, setNumberCards] = useState([minCardsCount, maxCardsCount])
+  const minCardsCount = useAppSelector(state => state.packsList.filtersModel.min)
+  const maxCardsCount = useAppSelector(state => state.packsList.filtersModel.max)
 
   const handleChangeNumberCards = (
     event: React.SyntheticEvent | Event,
     value: number | Array<number>
   ) => {
-    setNumberCards(value as number[])
-  }
+    const numberCards = value as number[]
 
-  useEffect(() => {
     dispatch(changeFiltersAC({ min: numberCards[0], max: numberCards[1] }))
-  }, [numberCards])
+  }
 
   return (
     <div>
       <h3 className={t.filtersTitle}>Number of cards</h3>
       <div className={s.slider}>
-        <div className={s.sliderValue}>{numberCards[0]}</div>
+        <div className={s.sliderValue}>{minCardsCount}</div>
         <Slider
-          value={numberCards}
+          value={[minCardsCount, maxCardsCount] as number[]}
           onChangeCommitted={handleChangeNumberCards}
           valueLabelDisplay="auto"
         />
-        <div className={s.sliderValue}>{numberCards[1]}</div>
+        <div className={s.sliderValue}>{maxCardsCount}</div>
       </div>
     </div>
   )
