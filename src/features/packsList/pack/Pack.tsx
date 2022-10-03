@@ -98,8 +98,8 @@ export const Pack: React.FC<PackPropsType> = props => {
       </Link>
 
       <div className={s.nameButtonBlock}>
-        <div className={s.nameMoreBlock}>
-          {cardsState.packName}
+        <div className={s.packNameMenuBlock}>
+          <div className={s.packName}>{cardsState.packName}</div>
 
           {cardsState.packUserId === userId ? (
             <IconButton onClick={handlePopperMenuOpen} className={s.moreButton}>
