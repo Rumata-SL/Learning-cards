@@ -7,11 +7,10 @@ import { TableRow, Tooltip, TableCell, IconButton } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 
 import { CardPacksType } from '../../../../api/cards/packsListAPI'
-import { useAppDispatch, useAppSelector } from '../../../../bll/store'
+import { useAppSelector } from '../../../../bll/store'
 import { FormatDate } from '../../../../utils/formatDate'
 import { DeletePacksModal } from '../../../modal/modalPacks/DeletePacksModal'
 import { UpdatePackModal } from '../../../modal/modalPacks/UpdatePackModal'
-import { deletePackTC, updatePackTC } from '../../packsListReducer'
 
 import s from './PacksListTableRow.module.css'
 
@@ -20,7 +19,6 @@ type PropsType = {
 }
 
 export const PacksListTableRow: FC<PropsType> = ({ pack }) => {
-  const dispatch = useAppDispatch()
   const userId = useAppSelector(state => state.profile.profile._id)
   const navigate = useNavigate()
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
@@ -30,21 +28,14 @@ export const PacksListTableRow: FC<PropsType> = ({ pack }) => {
 
   const openPack = (packId: string) => navigate(`/pack/${packId}/`)
 
-  /*const deletePackHandler = (pack: CardPacksType) => {
-    dispatch(deletePackTC(pack._id))
-  }*/
-
-  const openDeletePackModal = (pack: CardPacksType) => {
+  const openDeletePackModal = () => {
     setIsDeleteModalOpen(true)
     setDeletePacks(pack)
   }
 
-  const openUpdatePackModal = (id: string, name: string) => {
+  const openUpdatePackModal = () => {
     setIsUpdateModalOpen(true)
     setUpdatePacks(pack)
-  }
-  const updatePackHandler = (id: string, name: string) => {
-    dispatch(updatePackTC(id, name))
   }
 
   return (
@@ -63,10 +54,10 @@ export const PacksListTableRow: FC<PropsType> = ({ pack }) => {
             <IconButton>
               <SchoolIcon />
             </IconButton>
-            <IconButton onClick={() => openUpdatePackModal(pack._id, pack.name)}>
+            <IconButton onClick={openUpdatePackModal}>
               <EditIcon />
             </IconButton>
-            <IconButton onClick={() => openDeletePackModal(pack)}>
+            <IconButton onClick={openDeletePackModal}>
               <DeleteIcon />
             </IconButton>
           </TableCell>

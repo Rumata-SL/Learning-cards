@@ -17,7 +17,7 @@ import { PacksListTableRow } from './packsListTableRow/PacksListTableRow'
 
 type PropsType = {}
 
-export const PacksListTable: FC<PropsType> = props => {
+export const PacksListTable: FC<PropsType> = () => {
   const cardPacks = useAppSelector(state => state.packsList.cardPacks)
 
   return (

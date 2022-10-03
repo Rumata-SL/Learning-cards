@@ -11,12 +11,12 @@ import { AddPacksModal } from '../modal/modalPacks/AddPacksModal'
 
 import s from './PacksList.module.css'
 import { PacksListFilters } from './packsListFilters/PacksListFilters'
-import { addPackTC, fetchPacksTC, changeFiltersAC } from './packsListReducer'
+import { fetchPacksTC, changeFiltersAC } from './packsListReducer'
 import { PacksListTable } from './packsListTable/PacksListTable'
 
 type PacksListPropsType = {}
 
-export const PacksList: React.FC<PacksListPropsType> = props => {
+export const PacksList: React.FC<PacksListPropsType> = () => {
   const dispatch = useAppDispatch()
   const { packName, page, pageCount, min, max, sortPacks, user_id, block } = useAppSelector(
     state => state.packsList.filtersModel
@@ -47,10 +47,6 @@ export const PacksList: React.FC<PacksListPropsType> = props => {
     dispatch(changeFiltersAC({ pageCount: +event.target.value }))
   }
 
-  const addPackHandler = () => {
-    dispatch(addPackTC('test pack'))
-  }
-
   if (!isLoggedIn) {
     return <Navigate to={'/login'} />
   }
@@ -60,10 +56,6 @@ export const PacksList: React.FC<PacksListPropsType> = props => {
       <div className={s.header}>
         <h2 className={t.title}>Packs list</h2>
         <div>
-          {/*<SuperButton onClick={addPackHandler} className={s.button}>
-            Add new pack
-          </SuperButton>*/}
-
           <SuperButton onClick={() => openPackModal()} className={s.button}>
             Add new pack
           </SuperButton>
