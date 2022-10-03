@@ -1,9 +1,20 @@
-import React, { ChangeEvent, useEffect } from 'react'
+import React, { ChangeEvent, useEffect, useState } from 'react'
 
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
+import DeleteIcon from '@mui/icons-material/Delete'
+import EditIcon from '@mui/icons-material/Edit'
 import MoreVertOutlinedIcon from '@mui/icons-material/MoreVertOutlined'
+import SchoolIcon from '@mui/icons-material/School'
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'
-import { IconButton, Link, SelectChangeEvent } from '@mui/material'
+import {
+  IconButton,
+  Link,
+  ListItemIcon,
+  ListItemText,
+  Menu,
+  MenuItem,
+  SelectChangeEvent,
+} from '@mui/material'
 import { useNavigate, useParams } from 'react-router-dom'
 
 import { useAppDispatch, useAppSelector } from '../../../bll/store'
@@ -34,6 +45,16 @@ export const Pack: React.FC<PackPropsType> = props => {
   const openPackList = () => navigate(`/packs_list/`)
   const { packId } = useParams<{ packId: string }>()
 
+  // popper functions
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
+  const open = Boolean(anchorEl)
+  const handlePopperMenuOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget)
+  }
+  const handlePopperMenuClose = () => {
+    setAnchorEl(null)
+  }
+
   useEffect(() => {
     dispatch(getPackTC(packId ? packId : ''))
   }, [cardsState.searchData.pageCount, cardsState.searchData.page])
@@ -47,6 +68,7 @@ export const Pack: React.FC<PackPropsType> = props => {
     dispatch(setPageAC(page))
   }
 
+  // handle action functions
   const handleAddNewCard = () => {
     const data = {
       cardsPack_id: packId ? packId : '',
@@ -68,10 +90,6 @@ export const Pack: React.FC<PackPropsType> = props => {
     dispatch(updateCardTC(packId ? packId : '', data))
   }
 
-  const handleDeleteCard = (_id: string) => {
-    dispatch(deleteCardTC(packId ? packId : '', _id))
-  }
-
   return (
     <div>
       <Link onClick={openPackList} className={s.backLink}>
@@ -81,13 +99,70 @@ export const Pack: React.FC<PackPropsType> = props => {
 
       <div className={s.nameButtonBlock}>
         <div className={s.nameMoreBlock}>
-          {cardsState.packUserId === userId ? 'My Pack' : "Friend's Pack"}
+          {cardsState.packName}
 
           {cardsState.packUserId === userId ? (
-            <IconButton onClick={() => alert('Пока не работает')} className={s.moreButton}>
+            <IconButton onClick={handlePopperMenuOpen} className={s.moreButton}>
               <MoreVertOutlinedIcon sx={{ color: '#ffffff' }} />
             </IconButton>
           ) : null}
+
+          <Menu
+            id="basic-menu"
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handlePopperMenuClose}
+            MenuListProps={{
+              'aria-labelledby': 'basic-button',
+            }}
+            PaperProps={{
+              elevation: 0,
+              sx: {
+                overflow: 'visible',
+                filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                mt: 1.5,
+                '& .MuiAvatar-root': {
+                  width: 32,
+                  height: 32,
+                  ml: -0.5,
+                  mr: 1,
+                },
+                '&:before': {
+                  content: '""',
+                  display: 'block',
+                  position: 'absolute',
+                  top: 0,
+                  right: 14,
+                  width: 10,
+                  height: 10,
+                  bgcolor: 'background.paper',
+                  transform: 'translateY(-50%) rotate(45deg)',
+                  zIndex: 0,
+                },
+              },
+            }}
+            transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+            anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+          >
+            <MenuItem onClick={handlePopperMenuClose}>
+              <ListItemIcon>
+                <EditIcon />
+              </ListItemIcon>
+              <ListItemText>Edit</ListItemText>
+            </MenuItem>
+            <MenuItem onClick={handlePopperMenuClose}>
+              <ListItemIcon>
+                <DeleteIcon />
+              </ListItemIcon>
+              <ListItemText>Delete</ListItemText>
+            </MenuItem>
+            <MenuItem onClick={handlePopperMenuClose}>
+              <ListItemIcon>
+                <SchoolIcon />
+              </ListItemIcon>
+              <ListItemText>Learn</ListItemText>
+            </MenuItem>
+          </Menu>
         </div>
 
         {cardsState.packUserId === userId ? (
