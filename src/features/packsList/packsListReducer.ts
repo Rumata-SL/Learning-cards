@@ -1,6 +1,6 @@
 import { AxiosError } from 'axios'
 
-import { CardPacksType, packsListAPI } from '../../api/cards/packsListAPI'
+import { CardPacksType, packsListAPI, PacksRequestType } from '../../api/cards/packsListAPI'
 import { setAppStatusAC } from '../../app/appReducer'
 import { ThunkType } from '../../bll/store'
 import { utilsError } from '../../utils/utils_error'
@@ -10,21 +10,24 @@ type InitialStateType = typeof initialState
 
 const initialState = {
   cardPacks: [] as Array<CardPacksType>,
-  deckData: {
+  filtersModel: {
     packName: '',
-    minCount: 0,
-    maxCount: 100,
+    min: 0,
+    max: 100,
     sortPacks: '',
     page: 1,
     pageCount: 5,
     user_id: '',
-  },
+    block: false,
+  } as PacksRequestType,
   cardPacksTotalCount: 0,
   minCardsCount: 0,
   maxCardsCount: 100,
+  page: 1,
+  pageCount: 5,
+  isMyPack: false,
   token: '',
   tokenDeathTime: 0,
-  isMyDeck: false,
 }
 
 //reducer
@@ -33,48 +36,60 @@ export const packsListReducer = (
   action: PacksListActionType
 ): InitialStateType => {
   switch (action.type) {
-    case 'packsList/GET_CARD_PACKS':
+    case 'packsList/SET_CARD_PACKS':
       return { ...state, cardPacks: action.payload.cardPacks }
-    case 'packsList/SET_PACK_PAGE':
-      return { ...state, deckData: { ...state.deckData, page: action.payload.page } }
-    case 'packsList/SET_PACK_PAGE_COUNT':
-      return { ...state, deckData: { ...state.deckData, pageCount: action.payload.pageCount } }
-    case 'packsList/SET_PACKS_TOTAL_COUNT':
-      return { ...state, cardPacksTotalCount: action.payload.cardPacksTotalCount }
-    case 'packsList/SEARCH_PACK_NAME':
-      return { ...state, deckData: { ...state.deckData, packName: action.payload.packName } }
-    case 'packsList/SET_FILTER_MY_ALL_PACK':
-      return { ...state, isMyDeck: action.payload.isMyDeck }
-    case 'packsList/SET_MIN_COUNT_MAX_COUNT':
+    case 'packsList/SET_PAGE':
+      return { ...state, page: action.payload.page }
+    case 'packsList/SET_PAGE_COUNT':
       return {
         ...state,
-        deckData: {
-          ...state.deckData,
-          minCount: action.payload.value[0],
-          maxCount: action.payload.value[1],
+        pageCount: action.payload.pageCount,
+      }
+    case 'packsList/SET_PACKS_TOTAL_COUNT':
+      return { ...state, cardPacksTotalCount: action.payload.cardPacksTotalCount }
+    case 'packsList/SET_IS_MY_PACKS':
+      return { ...state, isMyPack: action.payload.isMyPack }
+    case 'packsList/SET_MIN_MAX_CARDS_COUNT':
+      return {
+        ...state,
+        minCardsCount: action.payload.minCardsCount,
+        maxCardsCount: action.payload.maxCardsCount,
+      }
+    case 'packsList/CHANGE_FILTERS':
+      return { ...state, filtersModel: { ...state.filtersModel, ...action.payload.filtersModel } }
+    case 'packsList/RESET_FILTERS':
+      return {
+        ...state,
+        filtersModel: {
+          packName: '',
+          min: 0,
+          max: 100,
+          sortPacks: '',
+          page: 1,
+          pageCount: 5,
+          user_id: '',
+          block: false,
         },
       }
-    case 'packsList/CHANGE_FILTER_MY_ALL':
-      return { ...state, deckData: { ...state.deckData, user_id: action.payload.value } }
     default:
       return state
   }
 }
 
 //AC
-export const getCardPacksAC = (cardPacks: Array<CardPacksType>) =>
+export const setCardPacksAC = (cardPacks: Array<CardPacksType>) =>
   ({
-    type: 'packsList/GET_CARD_PACKS',
+    type: 'packsList/SET_CARD_PACKS',
     payload: {
       cardPacks,
     },
   } as const)
 
-export const setPackPageAC = (page: number) =>
-  ({ type: 'packsList/SET_PACK_PAGE', payload: { page } } as const)
+export const setPageAC = (page: number) =>
+  ({ type: 'packsList/SET_PAGE', payload: { page } } as const)
 
-export const setCardsPageCountAC = (pageCount: number) =>
-  ({ type: 'packsList/SET_PACK_PAGE_COUNT', payload: { pageCount } } as const)
+export const setPageCountAC = (pageCount: number) =>
+  ({ type: 'packsList/SET_PAGE_COUNT', payload: { pageCount } } as const)
 
 export const setPacksTotalCountAC = (cardPacksTotalCount: number) =>
   ({
@@ -82,32 +97,36 @@ export const setPacksTotalCountAC = (cardPacksTotalCount: number) =>
     payload: { cardPacksTotalCount },
   } as const)
 
-export const searchPackNameAC = (packName: string) =>
-  ({ type: 'packsList/SEARCH_PACK_NAME', payload: { packName } } as const)
+export const setIsMyPacksAC = (isMyPack: boolean) =>
+  ({ type: 'packsList/SET_IS_MY_PACKS', payload: { isMyPack } } as const)
 
-export const setFilterPacksAC = (isMyDeck: boolean) =>
-  ({ type: 'packsList/SET_FILTER_MY_ALL_PACK', payload: { isMyDeck } } as const)
+export const setMinMaxCardsCountAC = (minCardsCount: number, maxCardsCount: number) =>
+  ({
+    type: 'packsList/SET_MIN_MAX_CARDS_COUNT',
+    payload: { minCardsCount, maxCardsCount },
+  } as const)
 
-export const setMinCountMaxCountAC = (value: Array<number>) =>
-  ({ type: 'packsList/SET_MIN_COUNT_MAX_COUNT', payload: { value } } as const)
+export const changeFiltersAC = (filtersModel: PacksRequestType) =>
+  ({ type: 'packsList/CHANGE_FILTERS', payload: { filtersModel } } as const)
 
-export const changeFilterMyAllAC = (value: string) =>
-  ({ type: 'packsList/CHANGE_FILTER_MY_ALL', payload: { value } } as const)
+export const resetFiltersAC = () => ({ type: 'packsList/RESET_FILTERS' } as const)
 
 //TC
-export const packsListTC = (): ThunkType => async (dispatch, getState) => {
-  const { deckData } = getState().packsList
+export const fetchPacksTC = (): ThunkType => async (dispatch, getState) => {
+  const { filtersModel } = getState().packsList
 
   dispatch(setAppStatusAC('loading'))
 
   try {
-    const res = await packsListAPI.getPacks(deckData)
-    const { cardPacks, page, pageCount, cardPacksTotalCount } = res.data
+    const res = await packsListAPI.getPacks(filtersModel)
+    const { cardPacks, page, pageCount, cardPacksTotalCount, minCardsCount, maxCardsCount } =
+      res.data
 
-    dispatch(getCardPacksAC(cardPacks))
-    dispatch(setPackPageAC(page))
-    dispatch(setCardsPageCountAC(pageCount))
+    dispatch(setCardPacksAC(cardPacks))
+    dispatch(setPageAC(page))
+    dispatch(setPageCountAC(pageCount))
     dispatch(setPacksTotalCountAC(cardPacksTotalCount))
+    dispatch(setMinMaxCardsCountAC(minCardsCount, maxCardsCount))
   } catch (e) {
     const err = e as Error | AxiosError<{ error: string }>
 
@@ -125,7 +144,7 @@ export const addPackTC =
       const res = await packsListAPI.addPack(packName, deckCover, isPrivate)
 
       if (res) {
-        dispatch(packsListTC())
+        dispatch(fetchPacksTC())
       }
     } catch (e) {
       const err = e as Error | AxiosError<{ error: string }>
@@ -144,7 +163,7 @@ export const updatePackTC =
       const res = await packsListAPI.updatePack(_id, name)
 
       if (res) {
-        dispatch(packsListTC())
+        dispatch(fetchPacksTC())
       }
     } catch (e) {
       const err = e as Error | AxiosError<{ error: string }>
@@ -163,7 +182,7 @@ export const deletePackTC =
       const res = await packsListAPI.deletePack(id)
 
       if (res) {
-        dispatch(packsListTC())
+        dispatch(fetchPacksTC())
       }
     } catch (e) {
       const err = e as Error | AxiosError<{ error: string }>
@@ -177,10 +196,9 @@ export const deletePackTC =
 export const resetAllFiltersTC = (): ThunkType => async dispatch => {
   dispatch(setAppStatusAC('loading'))
   try {
-    dispatch(searchPackNameAC(''))
-    dispatch(setFilterPacksAC(false))
-    dispatch(setMinCountMaxCountAC([0, 100]))
-    dispatch(packsListTC())
+    dispatch(resetFiltersAC())
+    dispatch(setIsMyPacksAC(false))
+    dispatch(fetchPacksTC())
   } catch (e) {
     const err = e as Error | AxiosError<{ error: string }>
 
@@ -192,11 +210,11 @@ export const resetAllFiltersTC = (): ThunkType => async dispatch => {
 
 //types
 export type PacksListActionType =
-  | ReturnType<typeof getCardPacksAC>
-  | ReturnType<typeof setPackPageAC>
-  | ReturnType<typeof setCardsPageCountAC>
+  | ReturnType<typeof setCardPacksAC>
+  | ReturnType<typeof setPageAC>
+  | ReturnType<typeof setPageCountAC>
   | ReturnType<typeof setPacksTotalCountAC>
-  | ReturnType<typeof searchPackNameAC>
-  | ReturnType<typeof setFilterPacksAC>
-  | ReturnType<typeof setMinCountMaxCountAC>
-  | ReturnType<typeof changeFilterMyAllAC>
+  | ReturnType<typeof setIsMyPacksAC>
+  | ReturnType<typeof setMinMaxCardsCountAC>
+  | ReturnType<typeof changeFiltersAC>
+  | ReturnType<typeof resetFiltersAC>

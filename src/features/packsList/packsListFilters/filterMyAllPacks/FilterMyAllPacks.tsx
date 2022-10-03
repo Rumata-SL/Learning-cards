@@ -1,9 +1,9 @@
-import React, { FC, useEffect } from 'react'
+import React, { FC } from 'react'
 
 import { Button, ButtonGroup } from '@mui/material'
 
 import { useAppDispatch, useAppSelector } from '../../../../bll/store'
-import { changeFilterMyAllAC, packsListTC, setFilterPacksAC } from '../../packsListReducer'
+import { changeFiltersAC, setIsMyPacksAC } from '../../packsListReducer'
 import t from '../PacksListFilters.module.css'
 
 import s from './FilterMyAllPacks.module.css'
@@ -12,20 +12,20 @@ type PropsType = {}
 
 export const FilterMyAllPacks: FC<PropsType> = props => {
   const dispatch = useAppDispatch()
-  const isMy = useAppSelector(state => state.packsList.isMyDeck)
+  const isMyPack = useAppSelector(state => state.packsList.isMyPack)
   const profileId = useAppSelector(state => state.profile.profile._id)
 
   const setAllHandler = () => {
-    if (isMy === true) {
-      dispatch(setFilterPacksAC(false))
-      dispatch(changeFilterMyAllAC(''))
+    if (isMyPack === true) {
+      dispatch(setIsMyPacksAC(false))
+      dispatch(changeFiltersAC({ user_id: '' }))
     }
   }
 
   const setMyHandler = () => {
-    if (isMy !== true) {
-      dispatch(setFilterPacksAC(true))
-      dispatch(changeFilterMyAllAC(profileId))
+    if (isMyPack !== true) {
+      dispatch(setIsMyPacksAC(true))
+      dispatch(changeFiltersAC({ user_id: profileId }))
     }
   }
 
@@ -34,10 +34,10 @@ export const FilterMyAllPacks: FC<PropsType> = props => {
       <h3 className={t.filtersTitle}>Show packs cards</h3>
       <div className={s.buttonsMyAll}>
         <ButtonGroup className={s.buttonMyAllGroup}>
-          <Button onClick={setMyHandler} variant={isMy ? 'contained' : 'outlined'}>
+          <Button onClick={setMyHandler} variant={isMyPack ? 'contained' : 'outlined'}>
             My
           </Button>
-          <Button onClick={setAllHandler} variant={isMy ? 'outlined' : 'contained'}>
+          <Button onClick={setAllHandler} variant={isMyPack ? 'outlined' : 'contained'}>
             All
           </Button>
         </ButtonGroup>
