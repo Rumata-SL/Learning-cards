@@ -51,7 +51,7 @@ export const PacksListTableRow: FC<PropsType> = ({ pack }) => {
         <TableCell>{pack.user_name}</TableCell>
         {userId === pack.user_id ? (
           <TableCell align="center">
-            <IconButton>
+            <IconButton disabled={pack.cardsCount === 0}>
               <SchoolIcon />
             </IconButton>
             <IconButton onClick={openUpdatePackModal}>
@@ -63,7 +63,7 @@ export const PacksListTableRow: FC<PropsType> = ({ pack }) => {
           </TableCell>
         ) : (
           <TableCell align="center">
-            <IconButton>
+            <IconButton disabled={pack.cardsCount === 0}>
               <SchoolIcon />
             </IconButton>
           </TableCell>
