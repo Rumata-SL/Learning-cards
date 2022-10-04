@@ -22,12 +22,15 @@ import { PaginationBlock } from '../../../common/components/paginationBlock/Pagi
 import SuperButton from '../../../common/components/superButton/SuperButton'
 import { SuperInput } from '../../../common/components/superInput/SuperInput'
 import { AddCardModal } from '../../modal/modalCards/AddCardModal'
+import { DeletePacksModal } from '../../modal/modalPacks/DeletePacksModal'
+import { UpdatePackModal } from '../../modal/modalPacks/UpdatePackModal'
 
 import s from './Pack.module.css'
 import {
   createCardTC,
   deleteCardTC,
   getPackTC,
+  PackType,
   setPageAC,
   setPageCountAC,
   updateCardTC,
@@ -42,6 +45,10 @@ export const Pack: React.FC<PackPropsType> = props => {
   const userId = useAppSelector(state => state.profile.profile._id)
   const cardsState = useAppSelector(state => state.pack)
   const [isAddModalOpen, setIsAddModalOpen] = useState(false)
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
+  const [deletePacks, setDeletePacks] = useState<PackType | null>(null)
+  // const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false)
+  // const [updatePacks, setUpdatePacks] = useState<PackType | null>(null)
 
   const navigate = useNavigate()
   const openPackList = () => navigate(`/packs_list/`)
@@ -54,6 +61,7 @@ export const Pack: React.FC<PackPropsType> = props => {
     setAnchorEl(event.currentTarget)
   }
   const handlePopperMenuClose = () => {
+    openDeletePackModal()
     setAnchorEl(null)
   }
 
@@ -75,6 +83,16 @@ export const Pack: React.FC<PackPropsType> = props => {
   const addCardModalOpenHandler = () => {
     setIsAddModalOpen(true)
   }
+
+  const openDeletePackModal = () => {
+    setIsDeleteModalOpen(true)
+    setDeletePacks(cardsState)
+  }
+
+  /*const openUpdatePackModal = () => {
+    setIsUpdateModalOpen(true)
+    setUpdatePacks(cardsState)
+  }*/
   const handleAddNewCard = () => {
     const data = {
       cardsPack_id: packId ? packId : '',
@@ -97,118 +115,138 @@ export const Pack: React.FC<PackPropsType> = props => {
   }
 
   return (
-    <div>
-      <Link onClick={openPackList} className={s.backLink}>
-        <ArrowBackIcon sx={{ color: '#ffffff' }} />
-        Back to Packs List
-      </Link>
+    <>
+      <div>
+        <Link onClick={openPackList} className={s.backLink}>
+          <ArrowBackIcon sx={{ color: '#ffffff' }} />
+          Back to Packs List
+        </Link>
 
-      <div className={s.nameButtonBlock}>
-        <div className={s.packNameMenuBlock}>
-          <div className={s.packName}>{cardsState.packName}</div>
+        <div className={s.nameButtonBlock}>
+          <div className={s.packNameMenuBlock}>
+            <div className={s.packName}>{cardsState.packName}</div>
+
+            {cardsState.packUserId === userId ? (
+              <IconButton onClick={handlePopperMenuOpen} className={s.moreButton}>
+                <MoreVertOutlinedIcon sx={{ color: '#ffffff' }} />
+              </IconButton>
+            ) : null}
+
+            <Menu
+              id="basic-menu"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handlePopperMenuClose}
+              MenuListProps={{
+                'aria-labelledby': 'basic-button',
+              }}
+              PaperProps={{
+                elevation: 0,
+                sx: {
+                  overflow: 'visible',
+                  filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+                  mt: 1.5,
+                  '& .MuiAvatar-root': {
+                    width: 32,
+                    height: 32,
+                    ml: -0.5,
+                    mr: 1,
+                  },
+                  '&:before': {
+                    content: '""',
+                    display: 'block',
+                    position: 'absolute',
+                    top: 0,
+                    right: 14,
+                    width: 10,
+                    height: 10,
+                    bgcolor: 'background.paper',
+                    transform: 'translateY(-50%) rotate(45deg)',
+                    zIndex: 0,
+                  },
+                },
+              }}
+              transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+              anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+            >
+              <MenuItem onClick={handlePopperMenuClose}>
+                <ListItemIcon>
+                  <EditIcon />
+                </ListItemIcon>
+                <ListItemText>Edit</ListItemText>
+              </MenuItem>
+              <MenuItem onClick={handlePopperMenuClose}>
+                <ListItemIcon>
+                  <DeleteIcon />
+                </ListItemIcon>
+                <ListItemText>Delete</ListItemText>
+              </MenuItem>
+              <MenuItem onClick={handlePopperMenuClose}>
+                <ListItemIcon>
+                  <SchoolIcon />
+                </ListItemIcon>
+                <ListItemText>Learn</ListItemText>
+              </MenuItem>
+            </Menu>
+          </div>
 
           {cardsState.packUserId === userId ? (
-            <IconButton onClick={handlePopperMenuOpen} className={s.moreButton}>
-              <MoreVertOutlinedIcon sx={{ color: '#ffffff' }} />
-            </IconButton>
-          ) : null}
-
-          <Menu
-            id="basic-menu"
-            anchorEl={anchorEl}
-            open={open}
-            onClose={handlePopperMenuClose}
-            MenuListProps={{
-              'aria-labelledby': 'basic-button',
-            }}
-            PaperProps={{
-              elevation: 0,
-              sx: {
-                overflow: 'visible',
-                filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-                mt: 1.5,
-                '& .MuiAvatar-root': {
-                  width: 32,
-                  height: 32,
-                  ml: -0.5,
-                  mr: 1,
-                },
-                '&:before': {
-                  content: '""',
-                  display: 'block',
-                  position: 'absolute',
-                  top: 0,
-                  right: 14,
-                  width: 10,
-                  height: 10,
-                  bgcolor: 'background.paper',
-                  transform: 'translateY(-50%) rotate(45deg)',
-                  zIndex: 0,
-                },
-              },
-            }}
-            transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-            anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
-          >
-            <MenuItem onClick={handlePopperMenuClose}>
-              <ListItemIcon>
-                <EditIcon />
-              </ListItemIcon>
-              <ListItemText>Edit</ListItemText>
-            </MenuItem>
-            <MenuItem onClick={handlePopperMenuClose}>
-              <ListItemIcon>
-                <DeleteIcon />
-              </ListItemIcon>
-              <ListItemText>Delete</ListItemText>
-            </MenuItem>
-            <MenuItem onClick={handlePopperMenuClose}>
-              <ListItemIcon>
-                <SchoolIcon />
-              </ListItemIcon>
-              <ListItemText>Learn</ListItemText>
-            </MenuItem>
-          </Menu>
+            // <SuperButton onClick={handleAddNewCard} className={s.button}>
+            <SuperButton onClick={addCardModalOpenHandler} className={s.button}>
+              Add new card
+            </SuperButton>
+          ) : (
+            <SuperButton onClick={() => alert('Пока не работает')} className={s.button}>
+              Learn to Pack
+            </SuperButton>
+          )}
         </div>
 
-        {cardsState.packUserId === userId ? (
-          // <SuperButton onClick={handleAddNewCard} className={s.button}>
-          <SuperButton onClick={addCardModalOpenHandler} className={s.button}>
-            Add new card
-          </SuperButton>
-        ) : (
-          <SuperButton onClick={() => alert('Пока не работает')} className={s.button}>
-            Learn to Pack
-          </SuperButton>
-        )}
-      </div>
+        <div className={s.searchBlock}>
+          <div className={s.searchBlockText}>Search</div>
 
-      <div className={s.searchBlock}>
-        <div className={s.searchBlockText}>Search</div>
-
-        <div className={s.inputBlock}>
-          <SuperInput placeholder={'Provide your text'} />
-          <SearchOutlinedIcon className={s.searchIcon} sx={{ color: '#ffffff' }} />
+          <div className={s.inputBlock}>
+            <SuperInput placeholder={'Provide your text'} />
+            <SearchOutlinedIcon className={s.searchIcon} sx={{ color: '#ffffff' }} />
+          </div>
         </div>
+
+        <PackTable
+          cardsState={cardsState}
+          userId={userId}
+          updateCardCallback={handleUpdateCard}
+          // deleteCardCallback={handleDeleteCard}
+        />
+
+        <PaginationBlock
+          page={cardsState.searchData.page}
+          totalItemsCount={cardsState.cardsTotalCount}
+          pageItemsCount={cardsState.searchData.pageCount}
+          onChangePage={handlePageChange}
+          selectItems={arrCardPerPage}
+          defaultSelectValue={cardsState.searchData.pageCount}
+          onChangeSelect={handlePageCountChange}
+        />
+        <AddCardModal isOpenModal={isAddModalOpen} setIsModalOpen={setIsAddModalOpen} />
       </div>
 
-      <PackTable
-        cardsState={cardsState}
-        userId={userId}
-        updateCardCallback={handleUpdateCard}
-        // deleteCardCallback={handleDeleteCard}
-      />
-
-      <PaginationBlock
-        page={cardsState.searchData.page}
-        totalItemsCount={cardsState.cardsTotalCount}
-        pageItemsCount={cardsState.searchData.pageCount}
-        onChangePage={handlePageChange}
-        selectItems={arrCardPerPage}
-        defaultSelectValue={cardsState.searchData.pageCount}
-        onChangeSelect={handlePageCountChange}
-      />
-      <AddCardModal isOpenModal={isAddModalOpen} setIsModalOpen={setIsAddModalOpen} />
-    </div>
+      {deletePacks && (
+        <DeletePacksModal
+          isModalOpen={isDeleteModalOpen}
+          setIsModalOpen={setIsDeleteModalOpen}
+          packName={deletePacks && deletePacks.packName}
+          id={deletePacks && deletePacks.packUserId}
+        />
+      )}
+      {/*{updatePacks && (
+        <UpdatePackModal
+          isModalOpen={isUpdateModalOpen}
+          setIsModalOpen={setIsUpdateModalOpen}
+          pack={updatePacks}
+          packName={updatePacks && updatePacks.packName}
+          id={updatePacks && updatePacks.packUserId}
+        />
+      )}*/}
+    </>
   )
 }
