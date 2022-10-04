@@ -51,7 +51,7 @@ export const ModalComponent: FC<ModalPropsType> = props => {
             variant="contained"
             style={styleBtn}
             color={buttonColor}
-            onClick={() => operationClick()}
+            onClick={operationClick}
             onKeyPress={onKeyPressHandler}
           >
             {buttonTitle}
