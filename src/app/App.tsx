@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from '../bll/store'
 import { Preloader } from '../common/components/preloader/Preloader'
 import { PATH } from '../common/enum/path'
 import { Login } from '../features/auth/login/Login'
+import { Learn } from '../features/learn/Learn'
 import { Pack } from '../features/packsList/pack/Pack'
 import { PacksList } from '../features/packsList/PacksList'
 import { Profile } from '../features/profile/Profile'
@@ -93,6 +94,7 @@ function App() {
         ></Route>
         <Route path={PATH.PACKS_LIST} element={<PacksList />}></Route>
         <Route path={PATH.PACK} element={<Pack />}></Route>
+        <Route path={PATH.LEARN} element={<Learn />}></Route>
         <Route
           path={'/*'}
           element={

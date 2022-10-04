@@ -6,5 +6,5 @@ export enum PATH {
   RECOVERY = '/recovery/',
   PACKS_LIST = '/packs_list/',
   PACK = '/pack/:packId',
-  // PACK_LEARN = 'learn/:packId/:packName',
+  LEARN = '/learn/:packId',
 }

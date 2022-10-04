@@ -27,6 +27,7 @@ export const PacksListTableRow: FC<PropsType> = ({ pack }) => {
   const [updatePacks, setUpdatePacks] = useState<CardPacksType | null>(null)
 
   const openPack = (packId: string) => navigate(`/pack/${packId}/`)
+  const learnPack = (packId: string) => navigate(`/learn/${packId}/`)
 
   const openDeletePackModal = () => {
     setIsDeleteModalOpen(true)
@@ -51,7 +52,7 @@ export const PacksListTableRow: FC<PropsType> = ({ pack }) => {
         <TableCell>{pack.user_name}</TableCell>
         {userId === pack.user_id ? (
           <TableCell align="center">
-            <IconButton disabled={pack.cardsCount === 0}>
+            <IconButton disabled={pack.cardsCount === 0} onClick={() => learnPack(pack._id)}>
               <SchoolIcon />
             </IconButton>
             <IconButton onClick={openUpdatePackModal}>
@@ -62,7 +63,7 @@ export const PacksListTableRow: FC<PropsType> = ({ pack }) => {
             </IconButton>
           </TableCell>
         ) : (
-          <TableCell align="center">
+          <TableCell align="center" onClick={() => learnPack(pack._id)}>
             <IconButton disabled={pack.cardsCount === 0}>
               <SchoolIcon />
             </IconButton>
