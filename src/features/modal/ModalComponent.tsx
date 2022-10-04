@@ -25,6 +25,12 @@ export const ModalComponent: FC<ModalPropsType> = props => {
     setIsModalOpen(false)
   }
 
+  const onKeyPressHandler = (e: React.KeyboardEvent<HTMLButtonElement>) => {
+    if (e.code === 'Enter') {
+      operationClick()
+    }
+  }
+
   return (
     <Modal open={isOpenModal} onClose={closeModalHandler}>
       <Box sx={style}>
@@ -41,10 +47,12 @@ export const ModalComponent: FC<ModalPropsType> = props => {
             Cancel
           </Button>
           <Button
+            autoFocus={true}
             variant="contained"
             style={styleBtn}
             color={buttonColor}
-            onClick={() => operationClick()}
+            onClick={operationClick}
+            onKeyPress={onKeyPressHandler}
           >
             {buttonTitle}
           </Button>

@@ -26,11 +26,23 @@
     font-size: 22px;
 }
 
-.nameMoreBlock {
+.packNameMenuBlock {
     display: flex;
     flex-direction: row;
     align-items: center;
 }
+
+
+.packName{
+    font-family: 'Montserrat', serif;
+    font-weight: 600;
+    line-height: 27px;
+}
+
+.packName::first-letter{
+    text-transform: uppercase;
+}
+
 
 .moreButton {
     display: flex;
@@ -38,7 +50,7 @@
     width: 30px;
     align-items: center;
     justify-content: center;
-    margin-left: 3px;
+    margin-left: 5px;
     cursor: pointer;
 }
 

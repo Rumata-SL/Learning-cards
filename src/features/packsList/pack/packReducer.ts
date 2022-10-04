@@ -50,9 +50,10 @@ export const packReducer = (state: PackType = initialState, action: PackActionTy
       return { ...state, searchData: { ...state.searchData, pageCount: action.pageCount } }
     case 'pack/SET-CARDS-TOTAL-COUNT':
       return { ...state, cardsTotalCount: action.cardsTotalCount }
-
+    case 'pack/SET-PACK-NAME':
+      return { ...state, packName: action.name }
     /*case 'pack/DELETE-CARD':
-        return {...state, cards: state.cards.filter(el => el._id !== action.cardID)}*/
+              return {...state, cards: state.cards.filter(el => el._id !== action.cardID)}*/
     default:
       return state
   }
@@ -76,6 +77,7 @@ export const setPageCountAC = (pageCount: number) =>
 const setMinGradeAC = (min: number) => ({ type: 'pack/SET-MIN-GRADE', min } as const)
 
 const setMaxGradeAC = (max: number) => ({ type: 'pack/SET-MAX-GRADE', max } as const)
+const setPackNameAC = (name: string) => ({ type: 'pack/SET-PACK-NAME', name } as const)
 
 //TC
 export const getPackTC =
@@ -92,6 +94,7 @@ export const getPackTC =
       dispatch(setCardsTotalCountAC(res.data.cardsTotalCount))
       dispatch(setPageAC(res.data.page))
       dispatch(setPageCountAC(res.data.pageCount))
+      dispatch(setPackNameAC(res.data.packName))
     } catch (e) {
       const err = e as Error | AxiosError<{ error: string }>
 
@@ -180,7 +183,9 @@ export type PackActionType =
   | SetUSerIDACType
   | SetCardsTotalCountACType
   | SetPageACType
-  | SetPageCountACType /*| AddCardACType | DeleteCardACType*/
+  | SetPageCountACType
+  | SetPackNameACType
+/*| AddCardACType | DeleteCardACType*/
 
 type GetPackACType = ReturnType<typeof setPackAC>
 type SetMinGradeACType = ReturnType<typeof setMinGradeAC>
@@ -189,5 +194,7 @@ type SetUSerIDACType = ReturnType<typeof setUserIDAC>
 type SetCardsTotalCountACType = ReturnType<typeof setCardsTotalCountAC>
 type SetPageACType = ReturnType<typeof setPageAC>
 type SetPageCountACType = ReturnType<typeof setPageCountAC>
+type SetPackNameACType = ReturnType<typeof setPackNameAC>
+
 /*type AddCardACType = ReturnType<typeof addCardAC>
 type DeleteCardACType = ReturnType<typeof deleteCardAC>*/
