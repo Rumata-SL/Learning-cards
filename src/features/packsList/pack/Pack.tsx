@@ -21,6 +21,7 @@ import { useAppDispatch, useAppSelector } from '../../../bll/store'
 import { PaginationBlock } from '../../../common/components/paginationBlock/PaginationBlock'
 import SuperButton from '../../../common/components/superButton/SuperButton'
 import { SuperInput } from '../../../common/components/superInput/SuperInput'
+import { AddCardModal } from '../../modal/modalCards/AddCardModal'
 
 import s from './Pack.module.css'
 import {
@@ -40,6 +41,7 @@ export const Pack: React.FC<PackPropsType> = props => {
 
   const userId = useAppSelector(state => state.profile.profile._id)
   const cardsState = useAppSelector(state => state.pack)
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false)
 
   const navigate = useNavigate()
   const openPackList = () => navigate(`/packs_list/`)
@@ -69,6 +71,10 @@ export const Pack: React.FC<PackPropsType> = props => {
   }
 
   // handle action functions
+
+  const addCardModalOpenHandler = () => {
+    setIsAddModalOpen(true)
+  }
   const handleAddNewCard = () => {
     const data = {
       cardsPack_id: packId ? packId : '',
@@ -166,7 +172,8 @@ export const Pack: React.FC<PackPropsType> = props => {
         </div>
 
         {cardsState.packUserId === userId ? (
-          <SuperButton onClick={handleAddNewCard} className={s.button}>
+          // <SuperButton onClick={handleAddNewCard} className={s.button}>
+          <SuperButton onClick={addCardModalOpenHandler} className={s.button}>
             Add new card
           </SuperButton>
         ) : (
@@ -201,6 +208,7 @@ export const Pack: React.FC<PackPropsType> = props => {
         defaultSelectValue={cardsState.searchData.pageCount}
         onChangeSelect={handlePageCountChange}
       />
+      <AddCardModal isOpenModal={isAddModalOpen} setIsModalOpen={setIsAddModalOpen} />
     </div>
   )
 }

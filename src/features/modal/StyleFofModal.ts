@@ -19,6 +19,9 @@ export const styleBtn = {
   borderRadius: '30px',
 }
 
+export const styleSelect = {
+  marginTop: '25px',
+}
 /*export const styleBtnVariant = {
   width: '127px',
   height: '30px',
