@@ -36,6 +36,12 @@ export const PacksListTable: FC<PropsType> = () => {
     }
   }
 
+  useEffect(() => {
+    if (!sortPacks) {
+      setSortLastUpdated('desc')
+    }
+  }, [sortPacks])
+
   return (
     <>
       {cardPacks.length !== 0 ? (
