@@ -5,6 +5,10 @@
     color: white !important;
 }
 
+.backLink:hover{
+    cursor: pointer;
+}
+
 .backLink svg {
     padding-top: 2px;
     margin-right: 6px;

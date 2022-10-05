@@ -1,6 +1,6 @@
 export const style = {
   position: 'absolute' as 'absolute',
-  top: '50%',
+  top: '40%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
   width: 400,
@@ -8,9 +8,6 @@ export const style = {
   border: '2px solid #000',
   boxShadow: 24,
   p: 4,
-  /*display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'space-between',*/
 }
 
 export const styleBtn = {
@@ -22,8 +19,3 @@ export const styleBtn = {
 export const styleSelect = {
   marginTop: '25px',
 }
-/*export const styleBtnVariant = {
-  width: '127px',
-  height: '30px',
-  borderRadius: '30px',
-}*/
