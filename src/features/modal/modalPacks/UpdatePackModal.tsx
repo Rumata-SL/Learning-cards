@@ -9,9 +9,9 @@ import { ModalComponent } from '../ModalComponent'
 
 type UpdatePackModalPropsType = {
   isModalOpen: boolean
-  pack: CardPacksType
+  pack?: CardPacksType
   packName: string
-  id: string
+  id: string | undefined
   setIsModalOpen: (value: boolean) => void
 }
 
@@ -19,15 +19,16 @@ export const UpdatePackModal: FC<UpdatePackModalPropsType> = props => {
   const { isModalOpen, pack, packName, id, setIsModalOpen } = props
 
   const dispatch = useAppDispatch()
-  const [newName, setNewName] = useState(packName ? packName : '')
+  const [newName, setNewName] = useState(packName)
   const [isPrivate, setIsPrivate] = useState(false)
 
   useEffect(() => {
-    pack && setNewName(pack.name)
-  }, [pack])
+    setNewName(packName)
+  }, [packName])
 
   const updatePackHandler = () => {
-    pack && dispatch(updatePackTC(id, newName))
+    // pack && dispatch(updatePackTC(id, newName))
+    id && dispatch(updatePackTC(id, newName))
     setNewName(newName)
     setIsModalOpen(false)
   }

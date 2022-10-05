@@ -5,6 +5,8 @@ import { setAppStatusAC } from '../../app/appReducer'
 import { ThunkType } from '../../bll/store'
 import { utilsError } from '../../utils/utils_error'
 
+import { setPackNameAC } from './pack/packReducer'
+
 //initial state
 type InitialStateType = typeof initialState
 
@@ -114,7 +116,7 @@ export const changeFiltersAC = (filtersModel: PacksRequestType) =>
 
 export const resetFiltersAC = () => ({ type: 'packsList/RESET_FILTERS' } as const)
 
-const setIsDeletedAC = (isDeleted: boolean) =>
+export const setIsDeletedAC = (isDeleted: boolean) =>
   ({ type: 'packsList/SET-IS-DELETED', isDeleted } as const)
 
 //TC
@@ -170,6 +172,7 @@ export const updatePackTC =
 
       if (res) {
         dispatch(fetchPacksTC())
+        dispatch(setPackNameAC(name))
       }
     } catch (e) {
       const err = e as Error | AxiosError<{ error: string }>
