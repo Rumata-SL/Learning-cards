@@ -94,7 +94,7 @@ export const PackTable = (props: packTablePropsType) => {
         <UpdateCardModal
           isOpenModal={isOpenCardUpdateModal}
           setIsOpenModal={setIsOpenCardUpdateModal}
-          _id={updateCard._id}
+          id={updateCard._id}
           cardsPack_id={updateCard.cardsPack_id}
           question={updateCard.question}
           answer={updateCard.answer}

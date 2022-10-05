@@ -26,11 +26,12 @@ export const AddCardModal: FC<AddCardModalPropsType> = props => {
   const [questionImg, setQuestionImg] = useState(fakeImg)
   const [newGrade, setNewGrade] = useState(0)
   const { packId } = useParams()
+  let id = packId ?? ''
 
   const addNewCard = () => {
     if (packId && formatQuestion === 'text') {
       const data = {
-        cardsPack_id: packId ? packId : '',
+        cardsPack_id: id,
         question: newQuestion,
         answer: newAnswer,
         grade: newGrade,
@@ -40,7 +41,7 @@ export const AddCardModal: FC<AddCardModalPropsType> = props => {
     }
     if (packId && formatQuestion === 'image') {
       const data = {
-        cardsPack_id: packId ? packId : '',
+        cardsPack_id: id,
         questionImg: questionImg,
         answer: newAnswer,
         grade: newGrade,

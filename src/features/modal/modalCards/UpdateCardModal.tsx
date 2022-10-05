@@ -11,7 +11,7 @@ import s from '../ModalComponent.module.css'
 type UpdateCardModalPropsType = {
   isOpenModal: boolean
   cardsPack_id: string
-  _id: string
+  id: string
   question: string
   answer: string
 
@@ -19,7 +19,7 @@ type UpdateCardModalPropsType = {
 }
 
 export const UpdateCardModal: FC<UpdateCardModalPropsType> = props => {
-  const { isOpenModal, cardsPack_id, _id, question, answer, setIsOpenModal } = props
+  const { isOpenModal, cardsPack_id, id, question, answer, setIsOpenModal } = props
 
   const dispatch = useAppDispatch()
 
@@ -34,7 +34,7 @@ export const UpdateCardModal: FC<UpdateCardModalPropsType> = props => {
       const data = {
         question: newQuestion,
         answer: newAnswer,
-        _id: _id,
+        _id: id,
       }
 
       dispatch(updateCardTC(cardsPack_id, data))
@@ -43,7 +43,7 @@ export const UpdateCardModal: FC<UpdateCardModalPropsType> = props => {
       const data = {
         questionImg: questionImg,
         answer: newAnswer,
-        _id: _id,
+        _id: id,
       }
 
       dispatch(updateCardTC(cardsPack_id, data))
@@ -66,8 +66,8 @@ export const UpdateCardModal: FC<UpdateCardModalPropsType> = props => {
       setIsModalOpen={setIsOpenModal}
       operationClick={updateCard}
     >
-      {formatQuestion === 'text' && (
-        <div>
+      <div className={s.inputContainer}>
+        {formatQuestion === 'text' && (
           <TextField
             id="standard-basic"
             fullWidth
@@ -76,16 +76,16 @@ export const UpdateCardModal: FC<UpdateCardModalPropsType> = props => {
             value={newQuestion}
             onChange={e => setNewQuestion(e.currentTarget.value)}
           />
-        </div>
-      )}
-      {formatQuestion === 'image' && (
-        <>
-          <div className={s.questionTitle}>Question image preview</div>
-          <div className={s.imgContainer}>
-            <img src={isImage ? fakeImg : questionImg} className={s.img} alt="fakeImg" />
-          </div>
-        </>
-      )}
+        )}
+        {formatQuestion === 'image' && (
+          <>
+            <div className={s.questionTitle}>Question image preview</div>
+            <div className={s.imgContainer}>
+              <img src={isImage ? fakeImg : questionImg} className={s.img} alt="fakeImg" />
+            </div>
+          </>
+        )}
+      </div>
       <div className={s.answer}>
         <TextField
           id="standard-basic"
