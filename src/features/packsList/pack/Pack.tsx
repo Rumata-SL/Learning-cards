@@ -42,7 +42,7 @@ type PackPropsType = {}
 
 export const Pack: React.FC<PackPropsType> = props => {
   const dispatch = useAppDispatch()
-  const isDeleted = useAppSelector(state => state.pack.isDeleted)
+  const isDeleted = useAppSelector(state => state.packsList.isDeleted)
   const userId = useAppSelector(state => state.profile.profile._id)
   const cardsState = useAppSelector(state => state.pack)
   const [isAddModalOpen, setIsAddModalOpen] = useState(false)
@@ -54,12 +54,6 @@ export const Pack: React.FC<PackPropsType> = props => {
   const navigate = useNavigate()
   const openPackList = () => navigate(`/packs_list/`)
   const { packId } = useParams<{ packId: string }>()
-
-  useEffect(() => {
-    if (isDeleted) {
-      openPackList()
-    }
-  }, [isDeleted])
 
   // popper functions
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
@@ -120,6 +114,10 @@ export const Pack: React.FC<PackPropsType> = props => {
     }
 
     dispatch(updateCardTC(packId ? packId : '', data))
+  }
+
+  if (isDeleted) {
+    openPackList()
   }
 
   return (

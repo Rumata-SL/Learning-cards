@@ -20,6 +20,7 @@ const initialState = {
     user_id: '',
     block: false,
   } as PacksRequestType,
+  isDeleted: false,
   cardPacksTotalCount: 0,
   minCardsCount: 0,
   maxCardsCount: 100,
@@ -71,6 +72,8 @@ export const packsListReducer = (
           block: false,
         },
       }
+    case 'packsList/SET-IS-DELETED':
+      return { ...state, isDeleted: action.isDeleted }
     default:
       return state
   }
@@ -110,6 +113,9 @@ export const changeFiltersAC = (filtersModel: PacksRequestType) =>
   ({ type: 'packsList/CHANGE_FILTERS', payload: { filtersModel } } as const)
 
 export const resetFiltersAC = () => ({ type: 'packsList/RESET_FILTERS' } as const)
+
+const setIsDeletedAC = (isDeleted: boolean) =>
+  ({ type: 'packsList/SET-IS-DELETED', isDeleted } as const)
 
 //TC
 export const fetchPacksTC = (): ThunkType => async (dispatch, getState) => {
@@ -183,6 +189,7 @@ export const deletePackTC =
 
       if (res) {
         dispatch(fetchPacksTC())
+        dispatch(setIsDeletedAC(true))
       }
     } catch (e) {
       const err = e as Error | AxiosError<{ error: string }>
@@ -218,3 +225,4 @@ export type PacksListActionType =
   | ReturnType<typeof setMinMaxCardsCountAC>
   | ReturnType<typeof changeFiltersAC>
   | ReturnType<typeof resetFiltersAC>
+  | ReturnType<typeof setIsDeletedAC>
