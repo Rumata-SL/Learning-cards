@@ -75,7 +75,7 @@ export const setPageCountAC = (pageCount: number) =>
 const setMinGradeAC = (min: number) => ({ type: 'pack/SET-MIN-GRADE', min } as const)
 
 const setMaxGradeAC = (max: number) => ({ type: 'pack/SET-MAX-GRADE', max } as const)
-const setPackNameAC = (name: string) => ({ type: 'pack/SET-PACK-NAME', name } as const)
+export const setPackNameAC = (name: string) => ({ type: 'pack/SET-PACK-NAME', name } as const)
 
 //TC
 export const getPackTC =
