@@ -35,8 +35,12 @@ export const DeleteCardModal: FC<DeleteCardModalPropsType> = props => {
       buttonColor={'error'}
     >
       <div>
-        <p>
+        {/*<p>
           Do you really want to remove card <span className={s.packName}>{cardName}</span> ?
+        </p>*/}
+        <p>
+          Are you sure you want to remove a card from the pack{' '}
+          <span className={s.packName}>{cardName}</span> ?
         </p>
         Question : <span className={s.packName}> {question}</span>
       </div>

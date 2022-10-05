@@ -214,7 +214,7 @@ export const Pack: React.FC<PackPropsType> = props => {
         <PackTable
           cardsState={cardsState}
           userId={userId}
-          updateCardCallback={handleUpdateCard}
+          // updateCardCallback={handleUpdateCard}
           // deleteCardCallback={handleDeleteCard}
         />
 
