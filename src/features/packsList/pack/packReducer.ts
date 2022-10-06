@@ -1,6 +1,11 @@
 import { AxiosError } from 'axios'
 
-import { CreateCardType, packAPI, UpdateCardType } from '../../../api/cards/packAPI'
+import {
+  CreateCardType,
+  packAPI,
+  RequestCardsType,
+  UpdateCardType,
+} from '../../../api/cards/packAPI'
 import { setAppStatusAC } from '../../../app/appReducer'
 import { ThunkType } from '../../../bll/store'
 import { utilsError } from '../../../utils/utils_error'
@@ -50,8 +55,23 @@ export const packReducer = (state: PackType = initialState, action: PackActionTy
       return { ...state, packName: action.name }
     case 'pack/SET-IS-DELETED':
       return { ...state, isDeleted: action.isDeleted }
+    case 'pack/CHANGE-CARDS-FILTERS':
+      return { ...state, searchData: { ...state.searchData, ...action.payload.filtersModel } }
+    case 'pack/RESET-CARDS-FILTERS':
+      return {
+        ...state,
+        searchData: {
+          cardAnswer: '',
+          cardQuestion: '',
+          min: 0,
+          max: 100,
+          sortCards: '',
+          page: 1,
+          pageCount: 5,
+        },
+      }
     /*case 'pack/DELETE-CARD':
-              return {...state, cards: state.cards.filter(el => el._id !== action.cardID)}*/
+                return {...state, cards: state.cards.filter(el => el._id !== action.cardID)}*/
     default:
       return state
   }
@@ -80,6 +100,11 @@ export const setPackNameAC = (name: string) => ({ type: 'pack/SET-PACK-NAME', na
 
 export const setIsDeletedAC = (isDeleted: boolean) =>
   ({ type: 'pack/SET-IS-DELETED', isDeleted } as const)
+
+export const changeCardsFiltersAC = (filtersModel: RequestCardsType) =>
+  ({ type: 'pack/CHANGE-CARDS-FILTERS', payload: { filtersModel } } as const)
+
+export const resetCardsFiltersAC = () => ({ type: 'pack/RESET-CARDS-FILTERS' } as const)
 
 //TC
 export const getPackTC =
@@ -188,6 +213,8 @@ export type PackActionType =
   | SetPageCountACType
   | SetPackNameACType
   | SetIsDeletedACType
+  | ChangeFiltersACType
+  | ResetCardsFiltersACType
 /*| AddCardACType | DeleteCardACType*/
 
 type GetPackACType = ReturnType<typeof setPackAC>
@@ -199,6 +226,8 @@ type SetPageACType = ReturnType<typeof setPageAC>
 type SetPageCountACType = ReturnType<typeof setPageCountAC>
 type SetPackNameACType = ReturnType<typeof setPackNameAC>
 type SetIsDeletedACType = ReturnType<typeof setIsDeletedAC>
+type ChangeFiltersACType = ReturnType<typeof changeCardsFiltersAC>
+type ResetCardsFiltersACType = ReturnType<typeof resetCardsFiltersAC>
 
 /*type AddCardACType = ReturnType<typeof addCardAC>
 type DeleteCardACType = ReturnType<typeof deleteCardAC>*/

@@ -5,7 +5,6 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import EditIcon from '@mui/icons-material/Edit'
 import MoreVertOutlinedIcon from '@mui/icons-material/MoreVertOutlined'
 import SchoolIcon from '@mui/icons-material/School'
-import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'
 import {
   IconButton,
   Link,
@@ -21,14 +20,21 @@ import { CardPacksType } from '../../../api/cards/packsListAPI'
 import { useAppDispatch, useAppSelector } from '../../../bll/store'
 import { PaginationBlock } from '../../../common/components/paginationBlock/PaginationBlock'
 import SuperButton from '../../../common/components/superButton/SuperButton'
-import { SuperInput } from '../../../common/components/superInput/SuperInput'
 import { AddCardModal } from '../../modal/modalCards/AddCardModal'
 import { DeletePacksModal } from '../../modal/modalPacks/DeletePacksModal'
 import { UpdatePackModal } from '../../modal/modalPacks/UpdatePackModal'
 
 import s from './Pack.module.css'
-import { getPackTC, PackType, setIsDeletedAC, setPageAC, setPageCountAC } from './packReducer'
+import {
+  getPackTC,
+  PackType,
+  resetCardsFiltersAC,
+  setIsDeletedAC,
+  setPageAC,
+  setPageCountAC,
+} from './packReducer'
 import { PackTable } from './packTable/PackTable'
+import { SearchCard } from './searchCard/SearchCard'
 
 type PackPropsType = {}
 
@@ -63,7 +69,17 @@ const Pack: React.FC<PackPropsType> = props => {
 
   useEffect(() => {
     dispatch(getPackTC(packId ? packId : ''))
-  }, [cardsState.searchData.pageCount, cardsState.searchData.page])
+  }, [
+    cardsState.searchData.pageCount,
+    cardsState.searchData.page,
+    cardsState.searchData.cardQuestion,
+  ])
+
+  useEffect(() => {
+    return () => {
+      dispatch(resetCardsFiltersAC())
+    }
+  }, [])
 
   // pagination functions
   const arrCardPerPage = [5, 10, 20, 50, 100]
@@ -186,14 +202,7 @@ const Pack: React.FC<PackPropsType> = props => {
           )}
         </div>
 
-        <div className={s.searchBlock}>
-          <div className={s.searchBlockText}>Search</div>
-
-          <div className={s.inputBlock}>
-            <SuperInput placeholder={'Provide your text'} />
-            <SearchOutlinedIcon className={s.searchIcon} sx={{ color: '#ffffff' }} />
-          </div>
-        </div>
+        <SearchCard />
 
         <PackTable cardsState={cardsState} userId={userId} />
 
