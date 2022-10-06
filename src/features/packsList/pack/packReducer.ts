@@ -1,11 +1,9 @@
-/* eslint-disable */
+import { AxiosError } from 'axios'
 
-import {AxiosError} from 'axios'
-
-import {CreateCardType, packAPI, UpdateCardType,} from '../../../api/cards/packAPI'
-import {setAppStatusAC} from '../../../app/appReducer'
-import {ThunkType} from '../../../bll/store'
-import {utilsError} from '../../../utils/utils_error'
+import { CreateCardType, packAPI, UpdateCardType } from '../../../api/cards/packAPI'
+import { setAppStatusAC } from '../../../app/appReducer'
+import { ThunkType } from '../../../bll/store'
+import { utilsError } from '../../../utils/utils_error'
 
 //initial state
 const initialState = {
@@ -50,6 +48,8 @@ export const packReducer = (state: PackType = initialState, action: PackActionTy
       return { ...state, cardsTotalCount: action.cardsTotalCount }
     case 'pack/SET-PACK-NAME':
       return { ...state, packName: action.name }
+    case 'pack/SET-IS-DELETED':
+      return { ...state, isDeleted: action.isDeleted }
     /*case 'pack/DELETE-CARD':
               return {...state, cards: state.cards.filter(el => el._id !== action.cardID)}*/
     default:
@@ -75,7 +75,11 @@ export const setPageCountAC = (pageCount: number) =>
 const setMinGradeAC = (min: number) => ({ type: 'pack/SET-MIN-GRADE', min } as const)
 
 const setMaxGradeAC = (max: number) => ({ type: 'pack/SET-MAX-GRADE', max } as const)
+
 export const setPackNameAC = (name: string) => ({ type: 'pack/SET-PACK-NAME', name } as const)
+
+export const setIsDeletedAC = (isDeleted: boolean) =>
+  ({ type: 'pack/SET-IS-DELETED', isDeleted } as const)
 
 //TC
 export const getPackTC =
@@ -183,6 +187,7 @@ export type PackActionType =
   | SetPageACType
   | SetPageCountACType
   | SetPackNameACType
+  | SetIsDeletedACType
 /*| AddCardACType | DeleteCardACType*/
 
 type GetPackACType = ReturnType<typeof setPackAC>
@@ -193,6 +198,7 @@ type SetCardsTotalCountACType = ReturnType<typeof setCardsTotalCountAC>
 type SetPageACType = ReturnType<typeof setPageAC>
 type SetPageCountACType = ReturnType<typeof setPageCountAC>
 type SetPackNameACType = ReturnType<typeof setPackNameAC>
+type SetIsDeletedACType = ReturnType<typeof setIsDeletedAC>
 
 /*type AddCardACType = ReturnType<typeof addCardAC>
 type DeleteCardACType = ReturnType<typeof deleteCardAC>*/

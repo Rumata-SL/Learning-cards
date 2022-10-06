@@ -5,7 +5,7 @@ import { setAppStatusAC } from '../../app/appReducer'
 import { ThunkType } from '../../bll/store'
 import { utilsError } from '../../utils/utils_error'
 
-import { setPackNameAC } from './pack/packReducer'
+import { setIsDeletedAC, setPackNameAC } from './pack/packReducer'
 
 //initial state
 type InitialStateType = typeof initialState
@@ -74,8 +74,7 @@ export const packsListReducer = (
           block: false,
         },
       }
-    case 'packsList/SET-IS-DELETED':
-      return { ...state, isDeleted: action.isDeleted }
+
     default:
       return state
   }
@@ -115,9 +114,6 @@ export const changeFiltersAC = (filtersModel: PacksRequestType) =>
   ({ type: 'packsList/CHANGE_FILTERS', payload: { filtersModel } } as const)
 
 export const resetFiltersAC = () => ({ type: 'packsList/RESET_FILTERS' } as const)
-
-export const setIsDeletedAC = (isDeleted: boolean) =>
-  ({ type: 'packsList/SET-IS-DELETED', isDeleted } as const)
 
 //TC
 export const fetchPacksTC = (): ThunkType => async (dispatch, getState) => {
@@ -228,4 +224,3 @@ export type PacksListActionType =
   | ReturnType<typeof setMinMaxCardsCountAC>
   | ReturnType<typeof changeFiltersAC>
   | ReturnType<typeof resetFiltersAC>
-  | ReturnType<typeof setIsDeletedAC>

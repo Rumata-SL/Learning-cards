@@ -26,7 +26,6 @@ import { PATH } from '../../../common/enum/path'
 import { AddCardModal } from '../../modal/modalCards/AddCardModal'
 import { DeletePacksModal } from '../../modal/modalPacks/DeletePacksModal'
 import { UpdatePackModal } from '../../modal/modalPacks/UpdatePackModal'
-import { setIsDeletedAC } from '../packsListReducer'
 
 import s from './Pack.module.css'
 import {
@@ -34,6 +33,7 @@ import {
   deleteCardTC,
   getPackTC,
   PackType,
+  setIsDeletedAC,
   setPageAC,
   setPageCountAC,
   updateCardTC,
@@ -44,7 +44,7 @@ type PackPropsType = {}
 
 export const Pack: React.FC<PackPropsType> = props => {
   const dispatch = useAppDispatch()
-  const isDeleted = useAppSelector(state => state.packsList.isDeleted)
+  const isDeleted = useAppSelector(state => state.pack.isDeleted)
   const userId = useAppSelector(state => state.profile.profile._id)
   const cardsState = useAppSelector(state => state.pack)
 
@@ -102,27 +102,6 @@ export const Pack: React.FC<PackPropsType> = props => {
     // setUpdatePacks(currentPack)
     handlePopperMenuClose()
   }
-
-  // const handleAddNewCard = () => {
-  //   const data = {
-  //     cardsPack_id: packId ? packId : '',
-  //     question: 'example question',
-  //     answer: 'example answer',
-  //     grade: 4,
-  //   }
-  //
-  //   dispatch(createCardTC(data))
-  // }
-  //
-  // const handleUpdateCard = (_id: string) => {
-  //   const data = {
-  //     _id: _id,
-  //     question: 'updated question',
-  //     answer: 'updated answer',
-  //   }
-  //
-  //   dispatch(updateCardTC(packId ? packId : '', data))
-  // }
 
   if (isDeleted) {
     openPackList()
