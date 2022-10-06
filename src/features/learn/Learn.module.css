@@ -58,3 +58,17 @@
 .answer span {
   font-weight: 600;
 }
+
+.radioGroup {
+  margin-bottom: 40px;
+}
+
+.radioGroup span {
+  font-family: 'Montserrat', serif;
+  font-size: 16px;
+}
+
+.radioGroupLabel {
+  font-family: 'Montserrat', serif;
+  font-size: 16px;
+}

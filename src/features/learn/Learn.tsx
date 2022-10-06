@@ -1,64 +1,111 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
+import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from '@mui/material'
 import { useParams } from 'react-router-dom'
 
+import { CardGradeType } from '../../api/cards/packAPI'
 import { useAppDispatch, useAppSelector } from '../../bll/store'
 import { BackToPackList } from '../../common/components/backToPackList/BackToPackList'
 import SuperButton from '../../common/components/superButton/SuperButton'
 import { getRandomCard } from '../../utils/getRandomCard'
-import { CardType, getPackTC } from '../packsList/pack/packReducer'
+import { CardType, getPackTC, updateCardGradeTC } from '../packsList/pack/packReducer'
 
 import s from './Learn.module.css'
 
-type PropsType = {}
+const grades = [
+  {
+    title: 'Did not know',
+    value: 1 as CardGradeType,
+  },
+  {
+    title: 'Forgot',
+    value: 2 as CardGradeType,
+  },
+  {
+    title: 'A lot of thought',
+    value: 3 as CardGradeType,
+  },
+  {
+    title: 'Сonfused',
+    value: 4 as CardGradeType,
+  },
+  {
+    title: 'Knew the answer',
+    value: 5 as CardGradeType,
+  },
+]
 
-const Learn: FC<PropsType> = () => {
-  const dispatch = useAppDispatch()
-  const { packId } = useParams<{ packId: string }>()
-  const packName = useAppSelector(state => state.pack.packName)
-  const cards = useAppSelector(state => state.pack.cards)
-  const [card, setCard] = useState<CardType>()
+const Learn = () => {
   const [showAnswer, setShowAnswer] = useState(false)
+  const [first, setFirst] = useState<boolean>(true)
+  const { cards, packName } = useAppSelector(state => state.pack)
+  const { packId } = useParams()
+
+  const [card, setCard] = useState<CardType>({} as CardType)
+  const [gradeRadioValue, setGradeRadioValue] = useState<CardGradeType>(1)
+
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
-    dispatch(getPackTC(packId ? packId : ''))
-    if (cards && cards.length > 0) setCard(getRandomCard(cards))
-  }, [])
+    if (first) {
+      dispatch(getPackTC(packId as string))
+      setFirst(false)
+    }
 
-  const showAnswerHandler = () => {
-    setShowAnswer(true)
+    if (cards.length > 0) setCard(getRandomCard(cards))
+  }, [dispatch, packId, cards, first])
+
+  const handleChangeRadioValue = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setGradeRadioValue(+(event.target as HTMLInputElement).value as CardGradeType)
   }
 
-  const nextCardHandler = () => {
+  const onNext = () => {
     setShowAnswer(false)
-    setCard(getRandomCard(cards))
+
+    if (cards.length > 0) {
+      dispatch(updateCardGradeTC(gradeRadioValue, card._id))
+      setCard(getRandomCard(cards))
+    }
   }
 
   return (
     <div>
       <BackToPackList />
-
       <h3 className={s.title}>Learn “{packName}”</h3>
-
       <div className={s.container}>
         <div className={s.question}>
-          <span>Question: </span> {card && card.question}
+          <span>Question: </span> {card.question}
         </div>
         <div className={s.countAnswers}>
           Количество попыток ответов на вопрос: <span>10</span>
         </div>
         {showAnswer && (
-          <div className={s.answer}>
-            <span>Answer: </span> {card && card.answer}
-          </div>
+          <>
+            <div className={s.answer}>
+              <span>Answer: </span> {card.answer}
+            </div>
+            <FormControl className={s.radioGroup}>
+              <FormLabel className={s.radioGroupLabel}>Rate yourself:</FormLabel>
+              <RadioGroup value={gradeRadioValue} onChange={handleChangeRadioValue}>
+                {grades.map((g, i) => (
+                  <FormControlLabel
+                    key={'grade-' + i}
+                    value={g.value}
+                    control={<Radio />}
+                    label={g.title}
+                  />
+                ))}
+              </RadioGroup>
+            </FormControl>
+          </>
         )}
 
         {showAnswer ? (
-          <SuperButton className={s.button} onClick={nextCardHandler}>
+          <SuperButton className={s.button} onClick={onNext}>
             Next
           </SuperButton>
         ) : (
-          <SuperButton className={s.button} onClick={showAnswerHandler}>
+          <SuperButton className={s.button} onClick={() => setShowAnswer(true)}>
             Show answer
           </SuperButton>
         )}
