@@ -17,7 +17,6 @@ import {
 } from '@mui/material'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
 
-import { CardPacksType } from '../../../api/cards/packsListAPI'
 import { useAppDispatch, useAppSelector } from '../../../bll/store'
 import { PaginationBlock } from '../../../common/components/paginationBlock/PaginationBlock'
 import SuperButton from '../../../common/components/superButton/SuperButton'
@@ -47,9 +46,6 @@ export const Pack: React.FC<PackPropsType> = props => {
   const isDeleted = useAppSelector(state => state.pack.isDeleted)
   const userId = useAppSelector(state => state.profile.profile._id)
   const cardsState = useAppSelector(state => state.pack)
-
-  const packList = useAppSelector(state => state.packsList.cardPacks)
-
   const [isAddModalOpen, setIsAddModalOpen] = useState(false)
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
   const [deletePacks, setDeletePacks] = useState<PackType | null>(null)
@@ -59,8 +55,6 @@ export const Pack: React.FC<PackPropsType> = props => {
   const navigate = useNavigate()
   const openPackList = () => navigate(`/packs_list/`)
   const { packId } = useParams<{ packId: string }>()
-
-  const updatePacks: CardPacksType | undefined = packList.find(pack => pack._id === packId)
 
   // popper functions
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
@@ -99,7 +93,7 @@ export const Pack: React.FC<PackPropsType> = props => {
 
   const openUpdatePackModal = () => {
     setIsUpdateModalOpen(true)
-    // setUpdatePacks(currentPack)
+    // setUpdatePacks(cardsState)
     handlePopperMenuClose()
   }
 
@@ -234,17 +228,15 @@ export const Pack: React.FC<PackPropsType> = props => {
           // id={deletePacks && deletePacks.packUserId}
         />
       )}
-
-      {cardsState && (
+      {/*{updatePacks && (
         <UpdatePackModal
           isModalOpen={isUpdateModalOpen}
           setIsModalOpen={setIsUpdateModalOpen}
-          // pack={updatePacks}
-          packName={cardsState && cardsState.packName}
-          // id={cardsState && cardsState.packUserId}
-          id={packId && packId}
+          pack={updatePacks}
+          packName={updatePacks && updatePacks.packName}
+          id={updatePacks && updatePacks.packUserId}
         />
-      )}
+      )}*/}
     </>
   )
 }
