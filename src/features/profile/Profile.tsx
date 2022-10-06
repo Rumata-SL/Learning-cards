@@ -1,14 +1,13 @@
 import React from 'react'
 
-import { Navigate, NavLink } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 
 import { EditMeArgsType } from '../../api/profileAPI'
 import avatar from '../../assets/image/avatar.png'
-import arrowIcon from '../../assets/image/icons/arrow.svg'
 import logoutIcon from '../../assets/image/icons/logout.svg'
 import changePhoto from '../../assets/image/icons/photo.svg'
 import { useAppDispatch, useAppSelector } from '../../bll/store'
-import { PATH } from '../../common/enum/path'
+import { BackToPackList } from '../../common/components/backToPackList/BackToPackList'
 import { logoutTC } from '../auth/login/loginReducer'
 
 import { EditableProfileName } from './editableProfileName/EditableProfileName'
@@ -34,12 +33,7 @@ const Profile = () => {
 
   return (
     <div className={s.wrapper}>
-      <NavLink to={PATH.PACKS_LIST}>
-        <div className={s.back}>
-          <img src={arrowIcon} alt="back" />
-          <span>Back to Packs List</span>
-        </div>
-      </NavLink>
+      <BackToPackList />
       <div className={s.container}>
         <h3 className={s.title}>Personal Information</h3>
         <div className={s.avatarBlock}>

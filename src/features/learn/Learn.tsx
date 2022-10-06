@@ -1,11 +1,10 @@
 import React, { FC, useEffect, useState } from 'react'
 
-import { NavLink, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
-import arrowIcon from '../../assets/image/icons/arrow.svg'
 import { useAppDispatch, useAppSelector } from '../../bll/store'
+import { BackToPackList } from '../../common/components/backToPackList/BackToPackList'
 import SuperButton from '../../common/components/superButton/SuperButton'
-import { PATH } from '../../common/enum/path'
 import { getRandomCard } from '../../utils/getRandomCard'
 import { CardType, getPackTC } from '../packsList/pack/packReducer'
 
@@ -37,12 +36,7 @@ const Learn: FC<PropsType> = () => {
 
   return (
     <div>
-      <NavLink to={PATH.PACKS_LIST}>
-        <div className={s.back}>
-          <img src={arrowIcon} alt="back" />
-          <span>Back to Packs List</span>
-        </div>
-      </NavLink>
+      <BackToPackList />
 
       <h3 className={s.title}>Learn “{packName}”</h3>
 
