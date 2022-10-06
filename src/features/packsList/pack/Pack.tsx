@@ -73,6 +73,7 @@ const Pack: React.FC<PackPropsType> = props => {
     cardsState.searchData.pageCount,
     cardsState.searchData.page,
     cardsState.searchData.cardQuestion,
+    cardsState.searchData.sortCards,
   ])
 
   useEffect(() => {

@@ -11,13 +11,16 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  TableSortLabel,
 } from '@mui/material'
 
+import { useAppDispatch } from '../../../../bll/store'
 import { FormatDate } from '../../../../utils/formatDate'
 import { DeleteCardModal } from '../../../modal/modalCards/DeleteCardModal'
 import { UpdateCardModal } from '../../../modal/modalCards/UpdateCardModal'
+import { changeFiltersAC } from '../../packsListReducer'
 import { Grade } from '../Grade'
-import { CardType, PackType } from '../packReducer'
+import { CardType, changeCardsFiltersAC, PackType } from '../packReducer'
 
 import s from './packTable.module.css'
 
@@ -28,10 +31,38 @@ type packTablePropsType = {
   // deleteCardCallback: (_id: string) => void
 }
 export const PackTable = (props: packTablePropsType) => {
+  const dispatch = useAppDispatch()
+
   const [updateCard, setUpdateCard] = useState<CardType | null>(null)
   const [isOpenCardUpdateModal, setIsOpenCardUpdateModal] = useState(false)
   const [deleteCard, setDeleteCard] = useState<CardType | null>(null)
   const [isOpenCardDeleteModal, setIsOpenCardDeleteModal] = useState(false)
+
+  // sort functions
+  const [sortCardsLastUpdated, setSortCardsLastUpdated] = useState<'asc' | 'desc'>('desc')
+  const [sortCardsGrade, setSortCardsGrade] = useState<'asc' | 'desc'>('desc')
+
+  const onClickSortLastUpdated = () => {
+    if (sortCardsLastUpdated === 'asc') {
+      dispatch(changeCardsFiltersAC({ sortCards: '0updated' }))
+      setSortCardsLastUpdated('desc')
+    }
+    if (sortCardsLastUpdated === 'desc') {
+      dispatch(changeCardsFiltersAC({ sortCards: '1updated' }))
+      setSortCardsLastUpdated('asc')
+    }
+  }
+
+  const onClickSortGrade = () => {
+    if (sortCardsLastUpdated === 'asc') {
+      dispatch(changeCardsFiltersAC({ sortCards: '0grade' }))
+      setSortCardsGrade('desc')
+    }
+    if (sortCardsLastUpdated === 'desc') {
+      dispatch(changeCardsFiltersAC({ sortCards: '1grade' }))
+      setSortCardsGrade('asc')
+    }
+  }
 
   const openDeleteCardModal = (card: CardType) => {
     setIsOpenCardDeleteModal(true)
@@ -51,8 +82,22 @@ export const PackTable = (props: packTablePropsType) => {
             <TableRow style={{ height: '48px' }}>
               <TableCell>Question</TableCell>
               <TableCell align="left">Answer</TableCell>
-              <TableCell align="left">Last Updated</TableCell>
-              <TableCell align="left">Grade</TableCell>
+              <TableCell align="left">
+                Last Updated
+                <TableSortLabel
+                  active={true}
+                  direction={sortCardsLastUpdated}
+                  onClick={onClickSortLastUpdated}
+                />
+              </TableCell>
+              <TableCell align="left">
+                Grade
+                <TableSortLabel
+                  active={false}
+                  direction={sortCardsGrade}
+                  onClick={onClickSortGrade}
+                />
+              </TableCell>
               {props.cardsState.packUserId === props.userId ? (
                 <TableCell width={80} align="left"></TableCell>
               ) : null}
