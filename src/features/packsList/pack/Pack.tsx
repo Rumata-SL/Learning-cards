@@ -18,6 +18,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 import { CardPacksType } from '../../../api/cards/packsListAPI'
 import { useAppDispatch, useAppSelector } from '../../../bll/store'
+import { BackToPackList } from '../../../common/components/backToPackList/BackToPackList'
 import { PaginationBlock } from '../../../common/components/paginationBlock/PaginationBlock'
 import SuperButton from '../../../common/components/superButton/SuperButton'
 import { AddCardModal } from '../../modal/modalCards/AddCardModal'
@@ -116,10 +117,12 @@ const Pack: React.FC<PackPropsType> = props => {
   return (
     <>
       <div>
-        <Link onClick={openPackList} className={s.backLink}>
+        {/* <Link onClick={openPackList} className={s.backLink}>
           <ArrowBackIcon sx={{ color: '#ffffff' }} />
           Back to Packs List
-        </Link>
+        </Link> */}
+
+        <BackToPackList />
 
         <div className={s.nameButtonBlock}>
           <div className={s.packNameMenuBlock}>
