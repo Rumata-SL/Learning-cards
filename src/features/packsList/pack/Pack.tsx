@@ -52,6 +52,7 @@ const Pack: React.FC<PackPropsType> = props => {
 
   const navigate = useNavigate()
   const openPackList = () => navigate(`/packs_list/`)
+  const learnPack = (packId: string) => navigate(`/learn/${packId}/`)
   const { packId = '' } = useParams<{ packId: string }>()
 
   // find current pack state
@@ -118,11 +119,6 @@ const Pack: React.FC<PackPropsType> = props => {
   return (
     <>
       <div>
-        {/* <Link onClick={openPackList} className={s.backLink}>
-          <ArrowBackIcon sx={{ color: '#ffffff' }} />
-          Back to Packs List
-        </Link> */}
-
         <BackToPackList />
 
         <div className={s.nameButtonBlock}>
@@ -185,7 +181,7 @@ const Pack: React.FC<PackPropsType> = props => {
                 </ListItemIcon>
                 <ListItemText>Delete</ListItemText>
               </MenuItem>
-              <MenuItem onClick={handlePopperMenuClose}>
+              <MenuItem onClick={() => learnPack(packId)}>
                 <ListItemIcon>
                   <SchoolIcon />
                 </ListItemIcon>
@@ -200,7 +196,7 @@ const Pack: React.FC<PackPropsType> = props => {
               Add new card
             </SuperButton>
           ) : (
-            <SuperButton onClick={() => alert('Пока не работает')} className={s.button}>
+            <SuperButton onClick={() => learnPack(packId)} className={s.button}>
               Learn to Pack
             </SuperButton>
           )}
