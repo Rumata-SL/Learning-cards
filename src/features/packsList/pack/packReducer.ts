@@ -14,7 +14,7 @@ import { utilsError } from '../../../utils/utils_error'
 
 //initial state
 const initialState = {
-  cards: [] as Array<CardType>,
+  cards: [] as Array<CardDomainType>,
   searchData: {
     cardAnswer: '',
     cardQuestion: '',
@@ -40,7 +40,7 @@ const initialState = {
 export const packReducer = (state: PackType = initialState, action: PackActionType): PackType => {
   switch (action.type) {
     case 'pack/SET-PACK':
-      return { ...state, cards: action.cards }
+      return { ...state, cards: action.cards.map(c => ({ ...c, attempts: 0 })) }
     case 'pack/SET-MIN-GRADE':
       return { ...state, searchData: { ...state.searchData, min: action.min } }
     case 'pack/SET-MAX-GRADE':
@@ -77,6 +77,14 @@ export const packReducer = (state: PackType = initialState, action: PackActionTy
         ...state,
         cards: state.cards.map(el =>
           el._id === action.data.card_id ? { ...el, grade: action.data.grade } : el
+        ),
+      }
+    }
+    case 'pack/UPDATE-ATTEMPTS-CARD': {
+      return {
+        ...state,
+        cards: state.cards.map(c =>
+          c._id === action.cardId ? { ...c, attempts: c.attempts + 1 } : c
         ),
       }
     }
@@ -118,6 +126,9 @@ export const resetCardsFiltersAC = () => ({ type: 'pack/RESET-CARDS-FILTERS' } a
 
 export const updateCardGradeAC = (data: CardGradeResponseType) =>
   ({ type: 'pack/UPDATE-CARD-GRADE', data } as const)
+
+export const updateAttemptsCardAC = (cardId: string) =>
+  ({ type: 'pack/UPDATE-ATTEMPTS-CARD', cardId } as const)
 
 //TC
 export const getPackTC =
@@ -211,6 +222,7 @@ export const updateCardGradeTC =
 
       if (res) {
         dispatch(updateCardGradeAC(res.data))
+        dispatch(updateAttemptsCardAC(card_id))
       }
     } catch (e) {
       const err = e as Error | AxiosError<{ error: string }>
@@ -236,6 +248,10 @@ export type CardType = {
   _id: string
 }
 
+export type CardDomainType = CardType & {
+  attempts: number
+}
+
 export type PackActionType =
   | GetPackACType
   | SetMinGradeACType
@@ -249,6 +265,7 @@ export type PackActionType =
   | ChangeFiltersACType
   | ResetCardsFiltersACType
   | UpdateCardGradeACType
+  | UpdateAttemptsCardACType
 /*| AddCardACType | DeleteCardACType*/
 
 type GetPackACType = ReturnType<typeof setPackAC>
@@ -263,6 +280,7 @@ type SetIsDeletedACType = ReturnType<typeof setIsDeletedAC>
 type ChangeFiltersACType = ReturnType<typeof changeCardsFiltersAC>
 type ResetCardsFiltersACType = ReturnType<typeof resetCardsFiltersAC>
 type UpdateCardGradeACType = ReturnType<typeof updateCardGradeAC>
+type UpdateAttemptsCardACType = ReturnType<typeof updateAttemptsCardAC>
 
 /*type AddCardACType = ReturnType<typeof addCardAC>
 type DeleteCardACType = ReturnType<typeof deleteCardAC>*/
