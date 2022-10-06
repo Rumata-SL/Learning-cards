@@ -1,4 +1,4 @@
-.backLink {
+/* .backLink {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -12,63 +12,64 @@
 .backLink svg {
     padding-top: 2px;
     margin-right: 6px;
-}
+} */
 
 .nameButtonBlock {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    color: white;
-    margin-top: 30px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-top: 30px;
+
+  color: white;
 }
 
-.nameButtonBlock div{
-    color: white;
-    font-family: Montserrat, serif;
-    font-weight: 600;
-    font-size: 22px;
+.nameButtonBlock div {
+  font-family: Montserrat, serif;
+  font-size: 22px;
+  font-weight: 600;
+  color: white;
 }
 
 .packNameMenuBlock {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
-
-.packName{
-    font-family: 'Montserrat', serif;
-    font-weight: 600;
-    line-height: 27px;
+.packName {
+  font-family: 'Montserrat', serif;
+  font-weight: 600;
+  line-height: 27px;
 }
 
-.packName::first-letter{
-    text-transform: uppercase;
+.packName::first-letter {
+  text-transform: uppercase;
 }
-
 
 .moreButton {
-    display: flex;
-    height: 30px;
-    width: 30px;
-    align-items: center;
-    justify-content: center;
-    margin-left: 5px;
-    cursor: pointer;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 30px;
+  height: 30px;
+  margin-left: 5px;
 }
 
 .button {
-    width: 184px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: Montserrat, serif;
-    font-size: 16px;
-    font-weight: 500;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 184px;
+
+  font-family: Montserrat, serif;
+  font-size: 16px;
+  font-weight: 500;
 }
-
-
-
-
