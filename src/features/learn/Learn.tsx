@@ -13,7 +13,7 @@ import s from './Learn.module.css'
 
 type PropsType = {}
 
-export const Learn: FC<PropsType> = () => {
+const Learn: FC<PropsType> = () => {
   const dispatch = useAppDispatch()
   const { packId } = useParams<{ packId: string }>()
   const packName = useAppSelector(state => state.pack.packName)
@@ -72,3 +72,5 @@ export const Learn: FC<PropsType> = () => {
     </div>
   )
 }
+
+export default Learn

@@ -40,7 +40,7 @@ import { PackTable } from './packTable/PackTable'
 
 type PackPropsType = {}
 
-export const Pack: React.FC<PackPropsType> = props => {
+const Pack: React.FC<PackPropsType> = props => {
   const dispatch = useAppDispatch()
   const isDeleted = useAppSelector(state => state.packsList.isDeleted)
   const userId = useAppSelector(state => state.profile.profile._id)
@@ -56,7 +56,7 @@ export const Pack: React.FC<PackPropsType> = props => {
   const { packId } = useParams<{ packId: string }>()
 
   // popper functions
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const open = Boolean(anchorEl)
   const handlePopperMenuOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget)
@@ -258,3 +258,5 @@ export const Pack: React.FC<PackPropsType> = props => {
     </>
   )
 }
+
+export default Pack
