@@ -15,28 +15,19 @@ import {
   MenuItem,
   SelectChangeEvent,
 } from '@mui/material'
-import { Navigate, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
+import { CardPacksType } from '../../../api/cards/packsListAPI'
 import { useAppDispatch, useAppSelector } from '../../../bll/store'
 import { PaginationBlock } from '../../../common/components/paginationBlock/PaginationBlock'
 import SuperButton from '../../../common/components/superButton/SuperButton'
 import { SuperInput } from '../../../common/components/superInput/SuperInput'
-import { PATH } from '../../../common/enum/path'
 import { AddCardModal } from '../../modal/modalCards/AddCardModal'
 import { DeletePacksModal } from '../../modal/modalPacks/DeletePacksModal'
 import { UpdatePackModal } from '../../modal/modalPacks/UpdatePackModal'
 
 import s from './Pack.module.css'
-import {
-  createCardTC,
-  deleteCardTC,
-  getPackTC,
-  PackType,
-  setIsDeletedAC,
-  setPageAC,
-  setPageCountAC,
-  updateCardTC,
-} from './packReducer'
+import { getPackTC, PackType, setIsDeletedAC, setPageAC, setPageCountAC } from './packReducer'
 import { PackTable } from './packTable/PackTable'
 
 type PackPropsType = {}
@@ -50,11 +41,15 @@ export const Pack: React.FC<PackPropsType> = props => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
   const [deletePacks, setDeletePacks] = useState<PackType | null>(null)
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false)
-  // const [updatePacks, setUpdatePacks] = useState<PackType | null>(null)
+  const [updatePacks, setUpdatePacks] = useState<CardPacksType | null | undefined>(null)
 
   const navigate = useNavigate()
   const openPackList = () => navigate(`/packs_list/`)
   const { packId } = useParams<{ packId: string }>()
+
+  // find current pack state
+  const allPacks = useAppSelector(state => state.packsList.cardPacks)
+  const currentPack = allPacks.find(pack => pack._id === packId)
 
   // popper functions
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
@@ -93,7 +88,7 @@ export const Pack: React.FC<PackPropsType> = props => {
 
   const openUpdatePackModal = () => {
     setIsUpdateModalOpen(true)
-    // setUpdatePacks(cardsState)
+    setUpdatePacks(currentPack)
     handlePopperMenuClose()
   }
 
@@ -200,12 +195,7 @@ export const Pack: React.FC<PackPropsType> = props => {
           </div>
         </div>
 
-        <PackTable
-          cardsState={cardsState}
-          userId={userId}
-          // updateCardCallback={handleUpdateCard}
-          // deleteCardCallback={handleDeleteCard}
-        />
+        <PackTable cardsState={cardsState} userId={userId} />
 
         <PaginationBlock
           page={cardsState.searchData.page}
@@ -228,15 +218,15 @@ export const Pack: React.FC<PackPropsType> = props => {
           // id={deletePacks && deletePacks.packUserId}
         />
       )}
-      {/*{updatePacks && (
+      {updatePacks && (
         <UpdatePackModal
           isModalOpen={isUpdateModalOpen}
           setIsModalOpen={setIsUpdateModalOpen}
           pack={updatePacks}
-          packName={updatePacks && updatePacks.packName}
-          id={updatePacks && updatePacks.packUserId}
+          packName={updatePacks && updatePacks.name}
+          id={updatePacks && updatePacks._id}
         />
-      )}*/}
+      )}
     </>
   )
 }
