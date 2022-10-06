@@ -52,7 +52,7 @@ const Pack: React.FC<PackPropsType> = props => {
 
   const navigate = useNavigate()
   const openPackList = () => navigate(`/packs_list/`)
-  const { packId } = useParams<{ packId: string }>()
+  const { packId = '' } = useParams<{ packId: string }>()
 
   // find current pack state
   const allPacks = useAppSelector(state => state.packsList.cardPacks)
@@ -69,7 +69,7 @@ const Pack: React.FC<PackPropsType> = props => {
   }
 
   useEffect(() => {
-    dispatch(getPackTC(packId ? packId : ''))
+    dispatch(getPackTC(packId))
   }, [
     cardsState.searchData.pageCount,
     cardsState.searchData.page,
@@ -231,13 +231,13 @@ const Pack: React.FC<PackPropsType> = props => {
           // id={deletePacks && deletePacks.packUserId}
         />
       )}
-      {updatePacks && (
+      {cardsState && (
         <UpdatePackModal
           isModalOpen={isUpdateModalOpen}
           setIsModalOpen={setIsUpdateModalOpen}
-          pack={updatePacks}
-          packName={updatePacks && updatePacks.name}
-          id={updatePacks && updatePacks._id}
+          cardPack={cardsState}
+          packName={cardsState && cardsState.packName}
+          id={packId && packId}
         />
       )}
     </>
