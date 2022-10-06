@@ -16,7 +16,7 @@ import { PacksListTable } from './packsListTable/PacksListTable'
 
 type PacksListPropsType = {}
 
-export const PacksList: React.FC<PacksListPropsType> = () => {
+const PacksList: React.FC<PacksListPropsType> = () => {
   const dispatch = useAppDispatch()
   const { packName, page, pageCount, min, max, sortPacks, user_id, block } = useAppSelector(
     state => state.packsList.filtersModel
@@ -76,3 +76,5 @@ export const PacksList: React.FC<PacksListPropsType> = () => {
     </div>
   )
 }
+
+export default PacksList

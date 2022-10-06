@@ -7,15 +7,16 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 import { useAppDispatch, useAppSelector } from '../bll/store'
 import { Preloader } from '../common/components/preloader/Preloader'
 import { PATH } from '../common/enum/path'
-import { Login } from '../features/auth/login/Login'
-import { Learn } from '../features/learn/Learn'
-import { Pack } from '../features/packsList/pack/Pack'
-import { PacksList } from '../features/packsList/PacksList'
-import { Profile } from '../features/profile/Profile'
 import { MainLayout } from '../layouts/MainLayout'
 
 import { authMeTC } from './appReducer'
 
+const Profile = lazy(
+  () => import(/*webpackChunkName: "Registration"*/ '../features/profile/Profile')
+)
+const Login = lazy(
+  () => import(/*webpackChunkName: "Registration"*/ '../features/auth/login/Login')
+)
 const Registration = lazy(
   () => import(/*webpackChunkName: "Registration"*/ '../features/auth/registration/Registration')
 )
@@ -29,6 +30,11 @@ const ErrorComponent = lazy(
   () =>
     import(/*webpackChunkName: "ErrorComponent"*/ '../common/components/errorFolder/ErrorComponent')
 )
+const PacksList = lazy(
+  () => import(/*webpackChunkName: "PacksList"*/ '../features/packsList/PacksList')
+)
+const Pack = lazy(() => import(/*webpackChunkName: "Pack"*/ '../features/packsList/pack/Pack'))
+const Learn = lazy(() => import(/*webpackChunkName: "Pack"*/ '../features/learn/Learn'))
 
 function App() {
   const dispatch = useAppDispatch()
@@ -48,7 +54,20 @@ function App() {
     <Routes>
       <Route path="/" element={<MainLayout />}>
         <Route path="/" element={<Navigate to={PATH.PACKS_LIST} />} />
-        <Route path={PATH.PROFILE} element={<Profile />}></Route>
+        <Route
+          path={PATH.PROFILE}
+          element={
+            <Suspense
+              fallback={
+                <div className="linearProgress">
+                  <LinearProgress />
+                </div>
+              }
+            >
+              <Profile />
+            </Suspense>
+          }
+        ></Route>
         <Route
           path={PATH.REGISTRATION}
           element={
@@ -63,7 +82,20 @@ function App() {
             </Suspense>
           }
         ></Route>
-        <Route path={PATH.LOGIN} element={<Login />}></Route>
+        <Route
+          path={PATH.LOGIN}
+          element={
+            <Suspense
+              fallback={
+                <div className="linearProgress">
+                  <LinearProgress />
+                </div>
+              }
+            >
+              <Login />
+            </Suspense>
+          }
+        ></Route>
         <Route
           path={PATH.RECOVERY}
           element={
@@ -92,9 +124,48 @@ function App() {
             </Suspense>
           }
         ></Route>
-        <Route path={PATH.PACKS_LIST} element={<PacksList />}></Route>
-        <Route path={PATH.PACK} element={<Pack />}></Route>
-        <Route path={PATH.LEARN} element={<Learn />}></Route>
+        <Route
+          path={PATH.PACKS_LIST}
+          element={
+            <Suspense
+              fallback={
+                <div className="linearProgress">
+                  <LinearProgress />
+                </div>
+              }
+            >
+              <PacksList />
+            </Suspense>
+          }
+        ></Route>
+        <Route
+          path={PATH.PACK}
+          element={
+            <Suspense
+              fallback={
+                <div className="linearProgress">
+                  <LinearProgress />
+                </div>
+              }
+            >
+              <Pack />
+            </Suspense>
+          }
+        ></Route>
+        <Route
+          path={PATH.LEARN}
+          element={
+            <Suspense
+              fallback={
+                <div className="linearProgress">
+                  <LinearProgress />
+                </div>
+              }
+            >
+              <Learn />
+            </Suspense>
+          }
+        ></Route>
         <Route
           path={'/*'}
           element={

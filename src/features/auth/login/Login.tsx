@@ -26,7 +26,7 @@ type FormikErrorType = {
   rememberMe?: boolean
 }
 
-export const Login = () => {
+const Login = () => {
   const [visibleMode, setVisibleMode] = useState<boolean>(false)
 
   const dispatch = useAppDispatch()
@@ -138,3 +138,5 @@ export const Login = () => {
     </div>
   )
 }
+
+export default Login

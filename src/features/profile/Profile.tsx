@@ -15,7 +15,7 @@ import { EditableProfileName } from './editableProfileName/EditableProfileName'
 import s from './Profile.module.css'
 import { updateProfileTC } from './profileReducer'
 
-export const Profile = () => {
+const Profile = () => {
   const dispatch = useAppDispatch()
   const profile = useAppSelector(state => state.profile.profile)
   const isLoggedIn = useAppSelector(state => state.login.isLoggedIn)
@@ -65,3 +65,5 @@ export const Profile = () => {
     </div>
   )
 }
+
+export default Profile
