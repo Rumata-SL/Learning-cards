@@ -181,7 +181,10 @@ const Pack: React.FC<PackPropsType> = props => {
                 </ListItemIcon>
                 <ListItemText>Delete</ListItemText>
               </MenuItem>
-              <MenuItem onClick={() => learnPack(packId)}>
+              <MenuItem
+                disabled={cardsState.cardsTotalCount === 0}
+                onClick={() => learnPack(packId)}
+              >
                 <ListItemIcon>
                   <SchoolIcon />
                 </ListItemIcon>
@@ -196,7 +199,11 @@ const Pack: React.FC<PackPropsType> = props => {
               Add new card
             </SuperButton>
           ) : (
-            <SuperButton onClick={() => learnPack(packId)} className={s.button}>
+            <SuperButton
+              disabled={cardsState.cardsTotalCount === 0}
+              onClick={() => learnPack(packId)}
+              className={s.button}
+            >
               Learn to Pack
             </SuperButton>
           )}
