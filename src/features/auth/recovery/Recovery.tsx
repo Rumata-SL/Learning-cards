@@ -11,6 +11,8 @@ import { BackToLogin } from './BackToLogin'
 import style from './Recovery.module.css'
 import { requestRecoveryTC, setRecoveryErrorAC } from './recoveryReducer'
 
+const Zoom = require('react-reveal/Zoom')
+
 type FormikErrorType = {
   email?: string
 }
@@ -56,54 +58,56 @@ const Recovery = () => {
 
   return (
     <div className={style.wrapper}>
-      <form className={style.formContainer} onSubmit={formik.handleSubmit}>
-        <div className={style.title}>Forgot your password?</div>
+      <Zoom duration={'2000'}>
+        <form className={style.formContainer} onSubmit={formik.handleSubmit}>
+          <div className={style.title}>Forgot your password?</div>
 
-        <div className={style.instructionsText}>
-          Enter your email address and we will send you further instructions
-        </div>
+          <div className={style.instructionsText}>
+            Enter your email address and we will send you further instructions
+          </div>
 
-        <FormControl className={style.inputBlock} variant="standard">
-          <InputLabel color="secondary">Email</InputLabel>
-          <Input
-            id="email"
-            type="email"
-            placeholder={'Email'}
-            className={style.input}
-            color={'secondary'}
-            onFocus={onFocusHandle}
-            {...formik.getFieldProps('email')}
-          />
-          {formik.errors.email && formik.touched.email && (
-            <div className={style.error}>{formik.errors.email}</div>
-          )}
-        </FormControl>
+          <FormControl className={style.inputBlock} variant="standard">
+            <InputLabel color="secondary">Email</InputLabel>
+            <Input
+              id="email"
+              type="email"
+              placeholder={'Email'}
+              className={style.input}
+              color={'secondary'}
+              onFocus={onFocusHandle}
+              {...formik.getFieldProps('email')}
+            />
+            {formik.errors.email && formik.touched.email && (
+              <div className={style.error}>{formik.errors.email}</div>
+            )}
+          </FormControl>
 
-        {/*{error ? <div className={style.error}>{error}</div> : null}*/}
+          {/*{error ? <div className={style.error}>{error}</div> : null}*/}
 
-        {/*<Button color={'primary'} variant={'contained'} type="submit">Send Instructions</Button>*/}
+          {/*<Button color={'primary'} variant={'contained'} type="submit">Send Instructions</Button>*/}
 
-        <SuperButton
-          style={{
-            fontFamily: 'Montserrat',
-            fontStyle: 'normal',
-            fontWeight: 500,
-            fontSize: '16px',
-            lineHeight: '20px',
-            letterSpacing: '0.01em',
-          }}
-          type="submit"
-        >
-          Send Instructions
-        </SuperButton>
+          <SuperButton
+            style={{
+              fontFamily: 'Montserrat',
+              fontStyle: 'normal',
+              fontWeight: 500,
+              fontSize: '16px',
+              lineHeight: '20px',
+              letterSpacing: '0.01em',
+            }}
+            type="submit"
+          >
+            Send Instructions
+          </SuperButton>
 
-        <div>
-          <div className={style.loginMessage}>Already have an account?</div>
-          <Link className={style.link} to={'/login'}>
-            Try logging in
-          </Link>
-        </div>
-      </form>
+          <div>
+            <div className={style.loginMessage}>Already have an account?</div>
+            <Link className={style.link} to={'/login'}>
+              Try logging in
+            </Link>
+          </div>
+        </form>
+      </Zoom>
     </div>
   )
 }

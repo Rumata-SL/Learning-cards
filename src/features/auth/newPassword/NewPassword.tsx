@@ -11,6 +11,8 @@ import SuperButton from '../../../common/components/superButton/SuperButton'
 import style from './NewPassword.module.css'
 import { createNewPasswordTC } from './newPasswordReducer'
 
+const Zoom = require('react-reveal/Zoom')
+
 type FormikErrorType = {
   email?: string
   password?: string
@@ -80,79 +82,81 @@ const NewPassword = () => {
 
   return (
     <div className={style.wrapper}>
-      <form className={style.formContainer} onSubmit={formik.handleSubmit}>
-        <div className={style.title}>Create new password</div>
+      <Zoom duration={'2000'}>
+        <form className={style.formContainer} onSubmit={formik.handleSubmit}>
+          <div className={style.title}>Create new password</div>
 
-        <div className={style.instructionsText}>
-          Create new password and we will send you further instructions to email
-        </div>
+          <div className={style.instructionsText}>
+            Create new password and we will send you further instructions to email
+          </div>
 
-        <FormControl className={style.inputBlock} variant="standard">
-          <InputLabel color={'secondary'}>Password</InputLabel>
-          <Input
-            id="password"
-            type={showValuePass ? 'text' : 'password'}
-            placeholder={'Password'}
-            className={style.input}
-            color={'secondary'}
-            {...formik.getFieldProps('password')}
-            autoComplete="on"
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton onClick={clickShowPass} onMouseDown={MouseDownPass} color={'primary'}>
-                  {showValuePass ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-              </InputAdornment>
-            }
-          />
+          <FormControl className={style.inputBlock} variant="standard">
+            <InputLabel color={'secondary'}>Password</InputLabel>
+            <Input
+              id="password"
+              type={showValuePass ? 'text' : 'password'}
+              placeholder={'Password'}
+              className={style.input}
+              color={'secondary'}
+              {...formik.getFieldProps('password')}
+              autoComplete="on"
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton onClick={clickShowPass} onMouseDown={MouseDownPass} color={'primary'}>
+                    {showValuePass ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              }
+            />
 
-          {formik.errors.password && formik.touched.password && (
-            <div className={style.error}>{formik.errors.password}</div>
-          )}
-        </FormControl>
+            {formik.errors.password && formik.touched.password && (
+              <div className={style.error}>{formik.errors.password}</div>
+            )}
+          </FormControl>
 
-        <FormControl className={style.inputBlock} variant="standard">
-          <InputLabel color={'secondary'}>Confirm password</InputLabel>
-          <Input
-            id="confirmPassword"
-            type={showValuePassConfirm ? 'text' : 'password'}
-            placeholder={'Confirm password'}
-            className={style.input}
-            color={'secondary'}
-            {...formik.getFieldProps('confirmPassword')}
-            autoComplete="on"
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton
-                  onClick={clickShowConfirmPass}
-                  onMouseDown={MouseDownPass}
-                  color={'primary'}
-                >
-                  {showValuePassConfirm ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-              </InputAdornment>
-            }
-          />
+          <FormControl className={style.inputBlock} variant="standard">
+            <InputLabel color={'secondary'}>Confirm password</InputLabel>
+            <Input
+              id="confirmPassword"
+              type={showValuePassConfirm ? 'text' : 'password'}
+              placeholder={'Confirm password'}
+              className={style.input}
+              color={'secondary'}
+              {...formik.getFieldProps('confirmPassword')}
+              autoComplete="on"
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    onClick={clickShowConfirmPass}
+                    onMouseDown={MouseDownPass}
+                    color={'primary'}
+                  >
+                    {showValuePassConfirm ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              }
+            />
 
-          {formik.errors.confirmPassword && formik.touched.confirmPassword && (
-            <div className={style.error}>{formik.errors.confirmPassword}</div>
-          )}
-        </FormControl>
+            {formik.errors.confirmPassword && formik.touched.confirmPassword && (
+              <div className={style.error}>{formik.errors.confirmPassword}</div>
+            )}
+          </FormControl>
 
-        <SuperButton
-          style={{
-            fontFamily: 'Montserrat',
-            fontStyle: 'normal',
-            fontWeight: 500,
-            fontSize: '16px',
-            lineHeight: '20px',
-            letterSpacing: '0.01em',
-          }}
-          type="submit"
-        >
-          Create new password
-        </SuperButton>
-      </form>
+          <SuperButton
+            style={{
+              fontFamily: 'Montserrat',
+              fontStyle: 'normal',
+              fontWeight: 500,
+              fontSize: '16px',
+              lineHeight: '20px',
+              letterSpacing: '0.01em',
+            }}
+            type="submit"
+          >
+            Create new password
+          </SuperButton>
+        </form>
+      </Zoom>
     </div>
   )
 }
