@@ -1,6 +1,8 @@
 import { AxiosError } from 'axios'
 
 import {
+  CardGradeResponseType,
+  CardGradeType,
   CreateCardType,
   packAPI,
   RequestCardsType,
@@ -70,6 +72,14 @@ export const packReducer = (state: PackType = initialState, action: PackActionTy
           pageCount: 5,
         },
       }
+    case 'pack/UPDATE-CARD-GRADE': {
+      return {
+        ...state,
+        cards: state.cards.map(el =>
+          el._id === action.data.card_id ? { ...el, grade: action.data.grade } : el
+        ),
+      }
+    }
     /*case 'pack/DELETE-CARD':
                 return {...state, cards: state.cards.filter(el => el._id !== action.cardID)}*/
     default:
@@ -105,6 +115,9 @@ export const changeCardsFiltersAC = (filtersModel: RequestCardsType) =>
   ({ type: 'pack/CHANGE-CARDS-FILTERS', payload: { filtersModel } } as const)
 
 export const resetCardsFiltersAC = () => ({ type: 'pack/RESET-CARDS-FILTERS' } as const)
+
+export const updateCardGradeAC = (data: CardGradeResponseType) =>
+  ({ type: 'pack/UPDATE-CARD-GRADE', data } as const)
 
 //TC
 export const getPackTC =
@@ -188,6 +201,26 @@ export const deleteCardTC =
     }
   }
 
+export const updateCardGradeTC =
+  (grade: CardGradeType, card_id: string): ThunkType =>
+  async dispatch => {
+    dispatch(setAppStatusAC('loading'))
+    try {
+      const data = { grade, card_id }
+      const res = await packAPI.setGrade(data)
+
+      if (res) {
+        dispatch(updateCardGradeAC(res.data))
+      }
+    } catch (e) {
+      const err = e as Error | AxiosError<{ error: string }>
+
+      utilsError(err, dispatch)
+    } finally {
+      dispatch(setAppStatusAC('idle'))
+    }
+  }
+
 //types
 export type PackType = typeof initialState
 
@@ -215,6 +248,7 @@ export type PackActionType =
   | SetIsDeletedACType
   | ChangeFiltersACType
   | ResetCardsFiltersACType
+  | UpdateCardGradeACType
 /*| AddCardACType | DeleteCardACType*/
 
 type GetPackACType = ReturnType<typeof setPackAC>
@@ -228,6 +262,7 @@ type SetPackNameACType = ReturnType<typeof setPackNameAC>
 type SetIsDeletedACType = ReturnType<typeof setIsDeletedAC>
 type ChangeFiltersACType = ReturnType<typeof changeCardsFiltersAC>
 type ResetCardsFiltersACType = ReturnType<typeof resetCardsFiltersAC>
+type UpdateCardGradeACType = ReturnType<typeof updateCardGradeAC>
 
 /*type AddCardACType = ReturnType<typeof addCardAC>
 type DeleteCardACType = ReturnType<typeof deleteCardAC>*/

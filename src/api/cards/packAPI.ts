@@ -28,6 +28,12 @@ export const packAPI = {
       params: { id: _id },
     })
   },
+  setGrade(data: CardGradeRequestType) {
+    return instance.put<CardGradeRequestType, AxiosResponse<CardGradeResponseType>>(
+      `/cards/grade`,
+      data
+    )
+  },
 }
 
 //types
@@ -97,4 +103,20 @@ export type UpdateCardType = {
   questionImg?: string
   answerImg?: string
   comments?: string
+}
+
+export type CardGradeRequestType = {
+  grade: CardGradeType
+  card_id: string
+}
+
+export type CardGradeType = 1 | 2 | 3 | 4 | 5
+
+export type CardGradeResponseType = {
+  _id: string
+  cardsPack_id: string
+  card_id: string
+  user_id: string
+  grade: number
+  shots: number
 }
