@@ -1,10 +1,12 @@
-import React, { FC, ReactNode } from 'react'
+import React, { FC, ReactNode, useState } from 'react'
 
 import CloseIcon from '@mui/icons-material/Close'
 import { Box, Button, IconButton, Modal } from '@mui/material'
 
 import s from './ModalComponent.module.css'
 import { style, styleBtn } from './StyleFofModal'
+
+const Fade = require('react-reveal/Fade')
 
 type ModalPropsType = {
   title: string
@@ -33,31 +35,33 @@ export const ModalComponent: FC<ModalPropsType> = props => {
 
   return (
     <Modal open={isOpenModal} onClose={closeModalHandler}>
-      <Box sx={style}>
-        <div className={s.headerModal}>
-          <h2>{title}</h2>
-          <IconButton aria-label="close" onClick={closeModalHandler}>
-            <CloseIcon />
-          </IconButton>
-        </div>
-        <hr />
-        <div>{children}</div>
-        <div className={s.buttons}>
-          <Button variant="outlined" style={styleBtn} onClick={closeModalHandler}>
-            Cancel
-          </Button>
-          <Button
-            autoFocus={true}
-            variant="contained"
-            style={styleBtn}
-            color={buttonColor}
-            onClick={operationClick}
-            onKeyPress={onKeyPressHandler}
-          >
-            {buttonTitle}
-          </Button>
-        </div>
-      </Box>
+      <Fade left duration={1000}>
+        <Box sx={style}>
+          <div className={s.headerModal}>
+            <h2>{title}</h2>
+            <IconButton aria-label="close" onClick={closeModalHandler}>
+              <CloseIcon />
+            </IconButton>
+          </div>
+          <hr />
+          <div>{children}</div>
+          <div className={s.buttons}>
+            <Button variant="outlined" style={styleBtn} onClick={closeModalHandler}>
+              Cancel
+            </Button>
+            <Button
+              autoFocus={true}
+              variant="contained"
+              style={styleBtn}
+              color={buttonColor}
+              onClick={operationClick}
+              onKeyPress={onKeyPressHandler}
+            >
+              {buttonTitle}
+            </Button>
+          </div>
+        </Box>
+      </Fade>
     </Modal>
   )
 }
