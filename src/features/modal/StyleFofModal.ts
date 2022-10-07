@@ -1,5 +1,6 @@
 export const style = {
   position: 'absolute' as 'absolute',
+  marginTop: '300px',
   top: '40%',
   left: '50%',
   transform: 'translate(-50%, -50%)',
