@@ -45,9 +45,11 @@ export const Header = () => {
   return (
     <div className={s.header}>
       <div className={s.container}>
-        <div className={s.logo}>
-          <img src={logo} alt="logo" />
-        </div>
+        <NavLink to={PATH.PACKS_LIST}>
+          <div className={s.logo}>
+            <img src={logo} alt="logo" />
+          </div>
+        </NavLink>
         {isLoggedIn ? (
           <div ref={popupRef} className={s.user} onClick={onTogglePopupHandler}>
             <span className={s.name}>{profileName}</span>

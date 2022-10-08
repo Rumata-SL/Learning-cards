@@ -20,7 +20,7 @@ export const MainLayout = () => {
           <Outlet />
         </div>
         <ErrorBar />
-        <Navbar />
+        {/*<Navbar />*/}
       </div>
     </div>
   )
