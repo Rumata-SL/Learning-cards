@@ -1,17 +1,44 @@
 .wrapper {
   display: flex;
-  flex-direction: column;
+  column-gap: 60px;
   align-items: center;
   justify-content: center;
 
-  height: 80%;
+  height: 70vh;
 }
-.title {
-  font-size: 8em;
-  font-weight: bold;
-  color: red;
-}
+
 .text {
-  font-size: 7em;
-  color: #0685a5;
+  max-width: 220px;
+
+  text-align: left;
+}
+
+.title {
+  margin-top: 0;
+  margin-bottom: 11px;
+
+  font-family: 'Montserrat', serif;
+  font-size: 50px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.subTitle {
+  font-family: 'Montserrat', serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 35px;
+  padding: 8px 28px;
+
+  font-family: 'Montserrat', serif;
+  font-size: 16px;
+  font-weight: 500;
 }
