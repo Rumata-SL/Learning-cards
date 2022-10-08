@@ -3,6 +3,7 @@ import React, { FC, useState } from 'react'
 import { Checkbox, FormControlLabel, TextField } from '@mui/material'
 
 import Img from '../../../../assets/image/icons/fakeImg.svg'
+import defaultCover from '../../../../assets/image/noImage.png'
 import { useAppDispatch } from '../../../../bll/store'
 import { addPackTC } from '../../../../features/packsList/packsListReducer'
 import { ModalComponent } from '../ModalComponent'
@@ -38,6 +39,15 @@ export const AddPacksModal: FC<AddModalPacksPropsType> = props => {
       buttonColor={'primary'}
     >
       <div style={{ margin: '30px 0 0 0 ' }}>
+        <div>
+          <div>
+            <h4>Cover</h4>
+            <label>Change cover</label>
+          </div>
+          <div>
+            <img src={defaultCover} alt="cover" />
+          </div>
+        </div>
         <TextField
           id="standard-basic"
           fullWidth
