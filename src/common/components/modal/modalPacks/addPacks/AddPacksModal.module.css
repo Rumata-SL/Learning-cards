@@ -1,0 +1,45 @@
+.changeCoverBlock {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.coverTitle {
+  margin: 0;
+
+  font-family: 'Montserrat', serif;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.coverLabel {
+  cursor: pointer;
+
+  font-family: 'Montserrat', serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #366eff;
+  text-decoration-line: underline;
+}
+
+.coverBlock {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 120px;
+}
+
+.coverBlock img {
+  height: 100%;
+
+  object-fit: container;
+}
+
+.error {
+  margin-top: 5px;
+
+  font-size: 12px;
+  font-style: italic;
+  color: red;
+}
