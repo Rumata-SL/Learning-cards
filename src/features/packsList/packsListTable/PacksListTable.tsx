@@ -49,6 +49,7 @@ export const PacksListTable: FC<PropsType> = () => {
           <Table size={'small'}>
             <TableHead className={s.tableHeader}>
               <TableRow>
+                <TableCell>Cover</TableCell>
                 <TableCell>Name</TableCell>
                 <TableCell>Cards</TableCell>
                 <TableCell className={s.tableCell}>

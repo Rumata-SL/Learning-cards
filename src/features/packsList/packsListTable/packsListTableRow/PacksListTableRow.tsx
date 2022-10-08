@@ -1,12 +1,13 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 
 import DeleteIcon from '@mui/icons-material/Delete'
 import EditIcon from '@mui/icons-material/Edit'
 import SchoolIcon from '@mui/icons-material/School'
-import { TableRow, Tooltip, TableCell, IconButton } from '@mui/material'
+import { TableRow, Tooltip, TableCell, IconButton, Paper } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
 
 import { CardPacksType } from '../../../../api/cards/packsListAPI'
+import defaultCover from '../../../../assets/image/noImage.png'
 import { useAppSelector } from '../../../../bll/store'
 import { DeletePacksModal } from '../../../../common/components/modal/modalPacks/DeletePacksModal'
 import { UpdatePackModal } from '../../../../common/components/modal/modalPacks/UpdatePackModal'
@@ -25,9 +26,15 @@ export const PacksListTableRow: FC<PropsType> = ({ pack }) => {
   const [deletePacks, setDeletePacks] = useState<CardPacksType | null>(null)
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false)
   const [updatePacks, setUpdatePacks] = useState<CardPacksType | null>(null)
+  const [deckCover, setDeckCover] = useState(pack.deckCover || defaultCover)
+  const [isDeckBroken, setIsDeckBroken] = useState(false)
 
   const openPack = (packId: string) => navigate(`/pack/${packId}/`)
   const learnPack = (packId: string) => navigate(`/learn/${packId}/`)
+
+  useEffect(() => {
+    setDeckCover(pack.deckCover || defaultCover)
+  }, [pack])
 
   const openDeletePackModal = () => {
     setIsDeleteModalOpen(true)
@@ -39,12 +46,19 @@ export const PacksListTableRow: FC<PropsType> = ({ pack }) => {
     setUpdatePacks(pack)
   }
 
+  const errorHandler = () => {
+    setIsDeckBroken(true)
+  }
+
   return (
     <>
       <TableRow>
+        <TableCell className={s.deckCover} style={{ width: 50 }}>
+          <img src={isDeckBroken ? defaultCover : deckCover} alt="cover" onError={errorHandler} />
+        </TableCell>
         <Tooltip title="Open pack">
           <TableCell onClick={() => openPack(pack._id)} className={s.tableLink}>
-            {pack.name}
+            <div>{pack.name}</div>
           </TableCell>
         </Tooltip>
         <TableCell>{pack.cardsCount}</TableCell>
