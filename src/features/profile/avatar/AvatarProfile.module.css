@@ -1,0 +1,55 @@
+.avatarBlock {
+  display: flex;
+  justify-content: center;
+
+  margin-top: 30px;
+  margin-bottom: 36px;
+}
+
+.avatar {
+  position: relative;
+
+  width: 100px;
+  height: 100px;
+}
+
+.holder {
+  position: relative;
+
+  overflow: hidden;
+
+  width: 100%;
+  height: 100%;
+
+  border-radius: 100%;
+}
+
+.holder img {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.changeAvatarButton {
+  cursor: pointer;
+
+  position: absolute;
+  right: 0;
+  bottom: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 32px;
+  height: 32px;
+
+  background: #808080;
+  border: 1px solid #ffffff;
+  border-radius: 100%;
+}

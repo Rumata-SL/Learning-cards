@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 
 import { NavLink } from 'react-router-dom'
 
-import avatar from '../../../assets/image/avatar.png'
+import defaultAva from '../../../assets/image/avatar.png'
 import logoutIcon from '../../../assets/image/icons/logout.svg'
 import userIcon from '../../../assets/image/icons/user.svg'
 import logo from '../../../assets/image/logo.svg'
@@ -15,6 +15,7 @@ import s from './Header.module.css'
 
 export const Header = () => {
   const dispatch = useAppDispatch()
+  const avatar = useAppSelector(state => state.profile.profile.avatar)
   const isLoggedIn = useAppSelector(state => state.login.isLoggedIn)
   const profileName = useAppSelector(state => state.profile.profile.name)
   const [togglePopup, setTogglePopup] = useState(false)
@@ -54,7 +55,7 @@ export const Header = () => {
           <div ref={popupRef} className={s.user} onClick={onTogglePopupHandler}>
             <span className={s.name}>{profileName}</span>
             <div className={s.photo}>
-              <img src={avatar} alt="avatar" />
+              <img src={avatar || defaultAva} alt="avatar" />
             </div>
             {togglePopup && (
               <div className={s.popup}>
