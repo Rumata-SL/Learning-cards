@@ -8,9 +8,9 @@ import { useNavigate } from 'react-router-dom'
 
 import { CardPacksType } from '../../../../api/cards/packsListAPI'
 import { useAppSelector } from '../../../../bll/store'
+import { DeletePacksModal } from '../../../../common/components/modal/modalPacks/DeletePacksModal'
+import { UpdatePackModal } from '../../../../common/components/modal/modalPacks/UpdatePackModal'
 import { FormatDate } from '../../../../utils/formatDate'
-import { DeletePacksModal } from '../../../modal/modalPacks/DeletePacksModal'
-import { UpdatePackModal } from '../../../modal/modalPacks/UpdatePackModal'
 
 import s from './PacksListTableRow.module.css'
 

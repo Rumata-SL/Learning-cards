@@ -4,10 +4,10 @@ import { SelectChangeEvent } from '@mui/material'
 import { Navigate } from 'react-router-dom'
 
 import { useAppDispatch, useAppSelector } from '../../bll/store'
+import { AddPacksModal } from '../../common/components/modal/modalPacks/AddPacksModal'
 import { PaginationBlock } from '../../common/components/paginationBlock/PaginationBlock'
 import SuperButton from '../../common/components/superButton/SuperButton'
 import t from '../../common/styles/Title.module.css'
-import { AddPacksModal } from '../modal/modalPacks/AddPacksModal'
 
 import s from './PacksList.module.css'
 import { PacksListFilters } from './packsListFilters/PacksListFilters'

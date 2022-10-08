@@ -2,9 +2,9 @@ import React, { FC, useState } from 'react'
 
 import { Checkbox, FormControlLabel, TextField } from '@mui/material'
 
-import Img from '../../../assets/image/icons/fakeImg.svg'
-import { useAppDispatch } from '../../../bll/store'
-import { addPackTC } from '../../packsList/packsListReducer'
+import Img from '../../../../assets/image/icons/fakeImg.svg'
+import { useAppDispatch } from '../../../../bll/store'
+import { addPackTC } from '../../../../features/packsList/packsListReducer'
 import { ModalComponent } from '../ModalComponent'
 
 type AddModalPacksPropsType = {

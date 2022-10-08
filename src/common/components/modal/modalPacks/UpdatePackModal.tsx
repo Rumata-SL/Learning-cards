@@ -2,10 +2,10 @@ import React, { FC, useEffect, useState } from 'react'
 
 import { Checkbox, FormControlLabel, TextField } from '@mui/material'
 
-import { CardPacksType } from '../../../api/cards/packsListAPI'
-import { useAppDispatch } from '../../../bll/store'
-import { PackType } from '../../packsList/pack/packReducer'
-import { updatePackTC } from '../../packsList/packsListReducer'
+import { CardPacksType } from '../../../../api/cards/packsListAPI'
+import { useAppDispatch } from '../../../../bll/store'
+import { PackType } from '../../../../features/packsList/pack/packReducer'
+import { updatePackTC } from '../../../../features/packsList/packsListReducer'
 import { ModalComponent } from '../ModalComponent'
 
 type UpdatePackModalPropsType = {

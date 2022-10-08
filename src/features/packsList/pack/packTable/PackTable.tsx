@@ -15,9 +15,9 @@ import {
 } from '@mui/material'
 
 import { useAppDispatch } from '../../../../bll/store'
+import { DeleteCardModal } from '../../../../common/components/modal/modalCards/DeleteCardModal'
+import { UpdateCardModal } from '../../../../common/components/modal/modalCards/UpdateCardModal'
 import { FormatDate } from '../../../../utils/formatDate'
-import { DeleteCardModal } from '../../../modal/modalCards/DeleteCardModal'
-import { UpdateCardModal } from '../../../modal/modalCards/UpdateCardModal'
 import { changeFiltersAC } from '../../packsListReducer'
 import { Grade } from '../Grade'
 import { CardType, changeCardsFiltersAC, PackType } from '../packReducer'

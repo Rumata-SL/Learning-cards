@@ -2,9 +2,9 @@ import React, { FC, useEffect, useState } from 'react'
 
 import { TextField } from '@mui/material'
 
-import fakeImg from '../../../assets/image/icons/fakeImg.svg'
-import { useAppDispatch } from '../../../bll/store'
-import { updateCardTC } from '../../packsList/pack/packReducer'
+import fakeImg from '../../../../assets/image/icons/fakeImg.svg'
+import { useAppDispatch } from '../../../../bll/store'
+import { updateCardTC } from '../../../../features/packsList/pack/packReducer'
 import { ModalComponent } from '../ModalComponent'
 import s from '../ModalComponent.module.css'
 

@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 
-import { useAppDispatch } from '../../../bll/store'
-import { deletePackTC } from '../../packsList/packsListReducer'
+import { useAppDispatch } from '../../../../bll/store'
+import { deletePackTC } from '../../../../features/packsList/packsListReducer'
 import { ModalComponent } from '../ModalComponent'
 
 import s from './DeletePacksModal.module.css'
