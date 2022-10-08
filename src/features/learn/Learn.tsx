@@ -8,12 +8,7 @@ import { useAppDispatch, useAppSelector } from '../../bll/store'
 import { BackToPackList } from '../../common/components/backToPackList/BackToPackList'
 import SuperButton from '../../common/components/superButton/SuperButton'
 import { getRandomCard } from '../../utils/getRandomCard'
-import {
-  CardDomainType,
-  CardType,
-  getPackTC,
-  updateCardGradeTC,
-} from '../packsList/pack/packReducer'
+import { CardType, getPackTC, updateCardGradeTC } from '../packsList/pack/packReducer'
 
 import s from './Learn.module.css'
 
@@ -46,7 +41,7 @@ const Learn = () => {
   const { cards, packName } = useAppSelector(state => state.pack)
   const { packId } = useParams()
 
-  const [card, setCard] = useState<CardDomainType>({} as CardDomainType)
+  const [card, setCard] = useState<CardType>({} as CardType)
   const [gradeRadioValue, setGradeRadioValue] = useState<CardGradeType>(1)
 
   const dispatch = useAppDispatch()
@@ -82,7 +77,7 @@ const Learn = () => {
           <span>Question: </span> {card.question}
         </div>
         <div className={s.countAnswers}>
-          Количество попыток ответов на вопрос: <span>{card.attempts}</span>
+          Количество попыток ответов на вопрос: <span>{card.shots}</span>
         </div>
         {showAnswer && (
           <>

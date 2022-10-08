@@ -113,10 +113,14 @@ export type CardGradeRequestType = {
 export type CardGradeType = 1 | 2 | 3 | 4 | 5
 
 export type CardGradeResponseType = {
-  _id: string
-  cardsPack_id: string
-  card_id: string
-  user_id: string
-  grade: number
-  shots: number
+  updatedGrade: {
+    _id: string
+    cardsPack_id: string
+    card_id: string
+    user_id: string
+    grade: number
+    shots: number
+  }
+  token: string
+  tokenDeathTime: number
 }

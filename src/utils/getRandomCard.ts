@@ -1,8 +1,8 @@
-import { CardDomainType, CardType } from '../features/packsList/pack/packReducer'
+import { CardType } from '../features/packsList/pack/packReducer'
 
 // функция принимает массив карточек и выдает рандомно карточку, с наибольшей вероятностью должен выпасть вопрос с наименьей оценкой
 
-export const getRandomCard = (cards: CardDomainType[]) => {
+export const getRandomCard = (cards: CardType[]) => {
   const sum = cards.reduce((acc, card) => acc + (6 - card.grade) * (6 - card.grade), 0)
   const rand = Math.random() * sum
   const res = cards.reduce(
