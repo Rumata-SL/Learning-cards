@@ -209,21 +209,38 @@ const Pack: React.FC<PackPropsType> = props => {
           )}
         </div>
 
-        <SearchCard />
+        {(!!cardsState.cards.length || !!cardsState.searchData.cardQuestion) && <SearchCard />}
 
-        <PackTable cardsState={cardsState} userId={userId} />
+        {!!cardsState.cards.length && (
+          <div>
+            <PackTable cardsState={cardsState} userId={userId} />
 
-        <PaginationBlock
-          page={cardsState.searchData.page}
-          totalItemsCount={cardsState.cardsTotalCount}
-          pageItemsCount={cardsState.searchData.pageCount}
-          onChangePage={handlePageChange}
-          selectItems={arrCardPerPage}
-          defaultSelectValue={cardsState.searchData.pageCount}
-          onChangeSelect={handlePageCountChange}
-        />
-        <AddCardModal isOpenModal={isAddModalOpen} setIsModalOpen={setIsAddModalOpen} />
+            <PaginationBlock
+              page={cardsState.searchData.page}
+              totalItemsCount={cardsState.cardsTotalCount}
+              pageItemsCount={cardsState.searchData.pageCount}
+              onChangePage={handlePageChange}
+              selectItems={arrCardPerPage}
+              defaultSelectValue={cardsState.searchData.pageCount}
+              onChangeSelect={handlePageCountChange}
+            />
+          </div>
+        )}
+
+        {!cardsState.cards.length && !!cardsState.searchData.cardQuestion && (
+          <div className={s.infoMessage}>
+            No cards were found in the pack according to your request
+          </div>
+        )}
+
+        {!cardsState.cards.length && !cardsState.searchData.cardQuestion && (
+          <div className={s.infoMessage}>
+            This pack is empty. Click add new card to fill this pack
+          </div>
+        )}
       </div>
+
+      <AddCardModal isOpenModal={isAddModalOpen} setIsModalOpen={setIsAddModalOpen} />
 
       {deletePacks && (
         <DeletePacksModal
