@@ -31,3 +31,7 @@
 .inputContainer, .answer{
     margin-top: 20px;
 }
+.upload{
+    display: flex;
+    justify-content: flex-end;
+}

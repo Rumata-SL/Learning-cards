@@ -1,11 +1,13 @@
 import React, { FC, useState } from 'react'
 
-import { FormControl, InputLabel, NativeSelect, TextField } from '@mui/material'
+import CloudUploadIcon from '@mui/icons-material/CloudUpload'
+import { FormControl, IconButton, InputLabel, NativeSelect, TextField } from '@mui/material'
 import { useParams } from 'react-router-dom'
 
 import fakeImg from '../../../../assets/image/icons/fakeImg.svg'
 import { useAppDispatch } from '../../../../bll/store'
 import { createCardTC } from '../../../../features/packsList/pack/packReducer'
+import { InputFile } from '../../inputFile/InputFile'
 import { ModalComponent } from '../ModalComponent'
 import s from '../ModalComponent.module.css'
 import { styleSelect } from '../StyleFofModal'
@@ -100,6 +102,14 @@ export const AddCardModal: FC<AddCardModalPropsType> = props => {
             <div className={s.imgContainer}>
               <img src={isImage ? fakeImg : questionImg} className={s.img} alt="fakeImg" />
             </div>
+
+            <InputFile uploadFile={(image: string) => setQuestionImg(image)}>
+              <div className={s.upload}>
+                <IconButton component="span">
+                  <CloudUploadIcon color={'primary'} />
+                </IconButton>
+              </div>
+            </InputFile>
           </>
         )}
       </div>
