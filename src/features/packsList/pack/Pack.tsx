@@ -233,11 +233,19 @@ const Pack: React.FC<PackPropsType> = props => {
           </div>
         )}
 
-        {!cardsState.cards.length && !cardsState.searchData.cardQuestion && (
-          <div className={s.infoMessage}>
-            This pack is empty. Click add new card to fill this pack
-          </div>
-        )}
+        {!cardsState.cards.length &&
+          !cardsState.searchData.cardQuestion &&
+          cardsState.packUserId === userId && (
+            <div className={s.infoMessage}>
+              This pack is empty. Click add new card to fill this pack
+            </div>
+          )}
+
+        {!cardsState.cards.length &&
+          !cardsState.searchData.cardQuestion &&
+          cardsState.packUserId !== userId && (
+            <div className={s.infoMessage}>This pack is empty</div>
+          )}
       </div>
 
       <AddCardModal isOpenModal={isAddModalOpen} setIsModalOpen={setIsAddModalOpen} />
