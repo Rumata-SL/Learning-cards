@@ -82,3 +82,14 @@
   font-weight: 400;
   color: white;
 }
+
+.deckCover {
+  display: flex;
+
+  margin-top: 20px;
+}
+.deckCover img{
+  width: 120px;
+
+  border-radius: 2px;
+}

@@ -17,6 +17,7 @@ import {
 import { useNavigate, useParams } from 'react-router-dom'
 
 import { CardPacksType } from '../../../api/cards/packsListAPI'
+import defaultCover from '../../../assets/image/noImage.png'
 import { useAppDispatch, useAppSelector } from '../../../bll/store'
 import { BackToPackList } from '../../../common/components/backToPackList/BackToPackList'
 import { AddCardModal } from '../../../common/components/modal/modalCards/AddCardModal'
@@ -49,6 +50,7 @@ const Pack: React.FC<PackPropsType> = props => {
   const [deletePacks, setDeletePacks] = useState<PackType | null>(null)
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false)
   const [updatePacks, setUpdatePacks] = useState<CardPacksType | null | undefined>(null)
+  const [isDeckBroken, setIsDeckBroken] = useState(false)
 
   const navigate = useNavigate()
   const openPackList = () => navigate(`/packs_list/`)
@@ -109,6 +111,10 @@ const Pack: React.FC<PackPropsType> = props => {
     setIsUpdateModalOpen(true)
     setUpdatePacks(currentPack)
     handlePopperMenuClose()
+  }
+
+  const errorHandler = () => {
+    setIsDeckBroken(true)
   }
 
   if (isDeleted) {
@@ -207,6 +213,14 @@ const Pack: React.FC<PackPropsType> = props => {
               Learn to Pack
             </SuperButton>
           )}
+        </div>
+
+        <div className={s.deckCover}>
+          <img
+            src={isDeckBroken ? defaultCover : cardsState.packDeckCover}
+            alt="cover"
+            onError={errorHandler}
+          />
         </div>
 
         {(!!cardsState.cards.length || !!cardsState.searchData.cardQuestion) && <SearchCard />}

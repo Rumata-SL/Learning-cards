@@ -86,8 +86,11 @@ export const packReducer = (state: PackType = initialState, action: PackActionTy
         ),
       }
     }
+
+    case 'pack/SET-PACK-DECK-COVER':
+      return { ...state, packDeckCover: action.packDeckCover }
     /*case 'pack/DELETE-CARD':
-                return {...state, cards: state.cards.filter(el => el._id !== action.cardID)}*/
+                  return {...state, cards: state.cards.filter(el => el._id !== action.cardID)}*/
     default:
       return state
   }
@@ -125,6 +128,9 @@ export const resetCardsFiltersAC = () => ({ type: 'pack/RESET-CARDS-FILTERS' } a
 export const updateCardGradeAC = (data: CardGradeResponseType) =>
   ({ type: 'pack/UPDATE-CARD-GRADE', data } as const)
 
+export const setPackDeckCoverAC = (packDeckCover: string) =>
+  ({ type: 'pack/SET-PACK-DECK-COVER', packDeckCover } as const)
+
 //TC
 export const getPackTC =
   (cardsPack_id: string): ThunkType =>
@@ -141,6 +147,7 @@ export const getPackTC =
       dispatch(setPageAC(res.data.page))
       dispatch(setPageCountAC(res.data.pageCount))
       dispatch(setPackNameAC(res.data.packName))
+      dispatch(setPackDeckCoverAC(res.data.packDeckCover))
     } catch (e) {
       const err = e as Error | AxiosError<{ error: string }>
 
@@ -255,6 +262,7 @@ export type PackActionType =
   | ChangeFiltersACType
   | ResetCardsFiltersACType
   | UpdateCardGradeACType
+  | SetPackDeckCoverACType
 /*| AddCardACType | DeleteCardACType*/
 
 type GetPackACType = ReturnType<typeof setPackAC>
@@ -269,6 +277,7 @@ type SetIsDeletedACType = ReturnType<typeof setIsDeletedAC>
 type ChangeFiltersACType = ReturnType<typeof changeCardsFiltersAC>
 type ResetCardsFiltersACType = ReturnType<typeof resetCardsFiltersAC>
 type UpdateCardGradeACType = ReturnType<typeof updateCardGradeAC>
+type SetPackDeckCoverACType = ReturnType<typeof setPackDeckCoverAC>
 
 /*type AddCardACType = ReturnType<typeof addCardAC>
 type DeleteCardACType = ReturnType<typeof deleteCardAC>*/
