@@ -11,12 +11,8 @@ import { MainLayout } from '../layouts/MainLayout'
 
 import { authMeTC } from './appReducer'
 
-const Profile = lazy(
-  () => import(/*webpackChunkName: "Registration"*/ '../features/profile/Profile')
-)
-const Login = lazy(
-  () => import(/*webpackChunkName: "Registration"*/ '../features/auth/login/Login')
-)
+const Profile = lazy(() => import(/*webpackChunkName: "Profile"*/ '../features/profile/Profile'))
+const Login = lazy(() => import(/*webpackChunkName: "Login"*/ '../features/auth/login/Login'))
 const Registration = lazy(
   () => import(/*webpackChunkName: "Registration"*/ '../features/auth/registration/Registration')
 )
@@ -34,7 +30,7 @@ const PacksList = lazy(
   () => import(/*webpackChunkName: "PacksList"*/ '../features/packsList/PacksList')
 )
 const Pack = lazy(() => import(/*webpackChunkName: "Pack"*/ '../features/packsList/pack/Pack'))
-const Learn = lazy(() => import(/*webpackChunkName: "Pack"*/ '../features/learn/Learn'))
+const Learn = lazy(() => import(/*webpackChunkName: "Learn"*/ '../features/learn/Learn'))
 
 function App() {
   const dispatch = useAppDispatch()
