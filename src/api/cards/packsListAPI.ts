@@ -16,11 +16,13 @@ export const packsListAPI = {
       },
     })
   },
-  updatePack(_id: string, name: string) {
+  updatePack(_id: string, deckCover: string, name: string, isPrivate?: boolean) {
     return instance.put<UpdatePackType, AxiosResponse<CardPacksType>>('cards/pack', {
       cardsPack: {
         _id,
+        deckCover,
         name,
+        isPrivate,
       },
     })
   },
