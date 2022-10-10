@@ -20,3 +20,7 @@ export const styleBtn = {
 export const styleSelect = {
   marginTop: '25px',
 }
+
+export const styleInputFile = {
+  display: 'none',
+}

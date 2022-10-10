@@ -1,10 +1,12 @@
 import React, { FC, useEffect, useState } from 'react'
 
-import { TextField } from '@mui/material'
+import CloudUploadIcon from '@mui/icons-material/CloudUpload'
+import { IconButton, TextField } from '@mui/material'
 
 import fakeImg from '../../../../assets/image/icons/fakeImg.svg'
 import { useAppDispatch } from '../../../../bll/store'
 import { updateCardTC } from '../../../../features/packsList/pack/packReducer'
+import { InputFile } from '../../inputFile/InputFile'
 import { ModalComponent } from '../ModalComponent'
 import s from '../ModalComponent.module.css'
 
@@ -23,9 +25,19 @@ export const UpdateCardModal: FC<UpdateCardModalPropsType> = props => {
 
   const dispatch = useAppDispatch()
 
+  let formatQuestion: string
+
+  if (question.slice(0, 10) === 'data:image') {
+    formatQuestion = 'image'
+  } else {
+    formatQuestion = 'text'
+  }
+
   const [newQuestion, setNewQuestion] = useState('')
   const [newAnswer, setNewAnswer] = useState('')
-  const [formatQuestion, setFormatQuestion] = useState<'text' | 'image'>('text')
+  const [imgQuestion, setImgQuestion] = useState(
+    question.slice(0, 10) === 'data:image' ? question : fakeImg
+  )
   const [isImage, setIsImage] = useState(false)
   const [questionImg, setQuestionImg] = useState(fakeImg)
 
@@ -83,6 +95,14 @@ export const UpdateCardModal: FC<UpdateCardModalPropsType> = props => {
             <div className={s.imgContainer}>
               <img src={isImage ? fakeImg : questionImg} className={s.img} alt="fakeImg" />
             </div>
+
+            <InputFile uploadFile={(image: string) => setQuestionImg(image)}>
+              <div className={s.upload}>
+                <IconButton component="span">
+                  <CloudUploadIcon color={'primary'} />
+                </IconButton>
+              </div>
+            </InputFile>
           </>
         )}
       </div>
