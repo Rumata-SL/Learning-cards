@@ -160,11 +160,11 @@ export const addPackTC =
   }
 
 export const updatePackTC =
-  (_id: string, name: string): ThunkType =>
+  (_id: string, deckCover: string, name: string, isPrivate?: boolean): ThunkType =>
   async dispatch => {
     dispatch(setAppStatusAC('loading'))
     try {
-      const res = await packsListAPI.updatePack(_id, name)
+      const res = await packsListAPI.updatePack(_id, deckCover, name, isPrivate)
 
       if (res) {
         dispatch(fetchPacksTC())

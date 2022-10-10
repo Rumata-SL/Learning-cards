@@ -1,12 +1,18 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { ChangeEvent, FC, useEffect, useState } from 'react'
 
-import { Checkbox, FormControlLabel, TextField } from '@mui/material'
+import CloudUploadIcon from '@mui/icons-material/CloudUpload'
+import { Checkbox, FormControlLabel, IconButton, TextField } from '@mui/material'
 
 import { CardPacksType } from '../../../../api/cards/packsListAPI'
+import { setAppErrorAC } from '../../../../app/appReducer'
+import defaultCover from '../../../../assets/image/noImage.png'
 import { useAppDispatch } from '../../../../bll/store'
 import { PackType } from '../../../../features/packsList/pack/packReducer'
 import { updatePackTC } from '../../../../features/packsList/packsListReducer'
+import { InputFile } from '../../inputFile/InputFile'
 import { ModalComponent } from '../ModalComponent'
+import s from '../ModalComponent.module.css'
+import st from '../modalPacks/addPacks/AddPacksModal.module.css'
 
 type UpdatePackModalPropsType = {
   isModalOpen: boolean
@@ -23,6 +29,8 @@ export const UpdatePackModal: FC<UpdatePackModalPropsType> = props => {
   const dispatch = useAppDispatch()
   const [newName, setNewName] = useState(packName ? packName : '')
   const [isPrivate, setIsPrivate] = useState(false)
+  const [deckCover, setDeckCover] = useState(pack ? pack.deckCover : defaultCover)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     pack && setNewName(pack.name)
@@ -30,9 +38,22 @@ export const UpdatePackModal: FC<UpdatePackModalPropsType> = props => {
   }, [pack, cardPack])
 
   const updatePackHandler = () => {
-    dispatch(updatePackTC(id, newName))
-    setNewName(newName)
-    setIsModalOpen(false)
+    if (newName.trim() !== '') {
+      dispatch(updatePackTC(id, deckCover, newName, isPrivate))
+      setNewName(newName)
+      setIsModalOpen(false)
+    } else {
+      setError('Name is required')
+    }
+  }
+
+  const changeNameHandler = (e: ChangeEvent<HTMLInputElement>) => {
+    setError(null)
+    setNewName(e.currentTarget.value)
+  }
+
+  const errorHandler = () => {
+    dispatch(setAppErrorAC('Не правильный файл'))
   }
 
   return (
@@ -51,8 +72,9 @@ export const UpdatePackModal: FC<UpdatePackModalPropsType> = props => {
           label="Enter New Pack Name"
           variant="standard"
           value={newName}
-          onChange={e => setNewName(e.currentTarget.value)}
+          onChange={changeNameHandler}
         />
+        {error && <div className={st.error}>{error}</div>}
       </div>
       <div>
         <FormControlLabel
@@ -62,6 +84,21 @@ export const UpdatePackModal: FC<UpdatePackModalPropsType> = props => {
           label="Private pack"
         />
       </div>
+      Pack cover preview
+      <div className={s.imgContainer}>
+        {pack?.deckCover ? (
+          <img src={deckCover} className={s.img} onError={errorHandler} alt="img" />
+        ) : (
+          <img src={deckCover ?? defaultCover} className={s.img} onError={errorHandler} alt="img" />
+        )}
+      </div>
+      <InputFile uploadFile={(image: string) => setDeckCover(image)}>
+        <div className={s.upload}>
+          <IconButton component="span">
+            <CloudUploadIcon color={'primary'} />
+          </IconButton>
+        </div>
+      </InputFile>
     </ModalComponent>
   )
 }

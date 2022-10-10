@@ -30,7 +30,7 @@ const initialState = {
   packUserId: '6328b5b0da5de300045fa02a',
   packName: 'initial',
   packPrivate: false,
-  packDeckCover: null,
+  packDeckCover: '',
   cardsTotalCount: 0,
   token: 'b9e18f40-4097-11ed-a346-336d45d0120e',
   tokenDeathTime: 1664536392116,

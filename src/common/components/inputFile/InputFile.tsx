@@ -32,7 +32,7 @@ export const InputFile: FC<InputFilePropsType> = props => {
   return (
     <div>
       <label>
-        <input type="file" onChange={uploadHandler} style={styleInputFile} />
+        <input type="file" onChange={uploadHandler} style={styleInputFile} accept="image/*" />
         {children}
       </label>
     </div>
