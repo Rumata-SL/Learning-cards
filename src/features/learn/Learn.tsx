@@ -3,12 +3,12 @@ import React, { useEffect, useState } from 'react'
 import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from '@mui/material'
 import { useParams } from 'react-router-dom'
 
-import { CardGradeType } from '../../api/cards/packAPI'
+import { CardGradeType, CardType } from '../../api/cards/packAPI'
 import { useAppDispatch, useAppSelector } from '../../bll/store'
 import { BackToPackList } from '../../common/components/backToPackList/BackToPackList'
 import SuperButton from '../../common/components/superButton/SuperButton'
 import { getRandomCard } from '../../utils/getRandomCard'
-import { CardType, getPackTC, updateCardGradeTC } from '../packsList/pack/packReducer'
+import { getPackTC, updateCardGradeTC } from '../packsList/pack/packReducer'
 
 import s from './Learn.module.css'
 
