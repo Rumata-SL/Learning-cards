@@ -3,6 +3,7 @@ import { AxiosError } from 'axios'
 import {
   CardGradeResponseType,
   CardGradeType,
+  CardType,
   CreateCardType,
   packAPI,
   RequestCardsType,
@@ -230,7 +231,7 @@ export const updateCardGradeTC =
 //types
 export type PackType = typeof initialState
 
-export type CardType = {
+/*export type CardType = {
   answer: string
   question: string
   cardsPack_id: string
@@ -240,7 +241,7 @@ export type CardType = {
   created: string
   updated: string
   _id: string
-}
+}*/
 
 export type PackActionType =
   | GetPackACType
