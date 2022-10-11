@@ -14,13 +14,15 @@ import {
   TableSortLabel,
 } from '@mui/material'
 
+import { CardType } from '../../../../api/cards/packAPI'
+import defaultCover from '../../../../assets/image/noImage.png'
 import { useAppDispatch } from '../../../../bll/store'
 import { DeleteCardModal } from '../../../../common/components/modal/modalCards/DeleteCardModal'
 import { UpdateCardModal } from '../../../../common/components/modal/modalCards/UpdateCardModal'
 import { FormatDate } from '../../../../utils/formatDate'
 import { changeFiltersAC } from '../../packsListReducer'
 import { Grade } from '../Grade'
-import { CardType, changeCardsFiltersAC, PackType } from '../packReducer'
+import { changeCardsFiltersAC, PackType } from '../packReducer'
 
 import s from './packTable.module.css'
 
@@ -74,6 +76,14 @@ export const PackTable = (props: packTablePropsType) => {
     setUpdateCard(card)
   }
 
+  const cardQuestion = (question: string) => {
+    if (question.includes('data:image')) {
+      return <img src={question} alt={'img question'} style={{ width: '100px' }} />
+    }
+
+    return <>{question}</>
+  }
+
   return (
     <>
       <TableContainer className={s.tableBlock} component={Paper}>
@@ -109,7 +119,8 @@ export const PackTable = (props: packTablePropsType) => {
               return (
                 <TableRow key={row._id}>
                   <TableCell component="th" scope="row">
-                    {row.question}
+                    {/*{row.question}*/}
+                    {cardQuestion(row.question)}
                   </TableCell>
                   <TableCell align="left">{row.answer}</TableCell>
                   <TableCell align="left">{FormatDate(row.updated)}</TableCell>
