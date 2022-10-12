@@ -68,13 +68,23 @@ const Learn = () => {
     }
   }
 
+  console.log(card)
+
   return (
     <div>
       <BackToPackList />
       <h3 className={s.title}>Learn “{packName}”</h3>
       <div className={s.container}>
         <div className={s.question}>
-          <span>Question: </span> {card.question}
+          {card.questionImg ? (
+            <div className={s.questionImg}>
+              <img src={card.questionImg} alt="question" />
+            </div>
+          ) : (
+            <>
+              <span>Question: </span> {card.question}
+            </>
+          )}
         </div>
         <div className={s.countAnswers}>
           Количество попыток ответов на вопрос: <span>{card.shots}</span>
@@ -82,7 +92,15 @@ const Learn = () => {
         {showAnswer && (
           <>
             <div className={s.answer}>
-              <span>Answer: </span> {card.answer}
+              {card.answerImg ? (
+                <div className={s.answerImg}>
+                  <img src={card.answerImg} alt="answer" />
+                </div>
+              ) : (
+                <>
+                  <span>Answer: </span> {card.answer}
+                </>
+              )}
             </div>
             <FormControl className={s.radioGroup}>
               <FormLabel className={s.radioGroupLabel}>Rate yourself:</FormLabel>

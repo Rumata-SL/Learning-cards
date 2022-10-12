@@ -41,7 +41,7 @@ const initialState = {
 export const packReducer = (state: PackType = initialState, action: PackActionType): PackType => {
   switch (action.type) {
     case 'pack/SET-PACK':
-      return { ...state, cards: action.cards.map(c => ({ ...c, attempts: 0 })) }
+      return { ...state, cards: action.cards }
     case 'pack/SET-MIN-GRADE':
       return { ...state, searchData: { ...state.searchData, min: action.min } }
     case 'pack/SET-MAX-GRADE':
