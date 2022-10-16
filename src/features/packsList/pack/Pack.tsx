@@ -50,7 +50,6 @@ const Pack: React.FC<PackPropsType> = props => {
   const [deletePacks, setDeletePacks] = useState<PackType | null>(null)
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false)
   const [updatePacks, setUpdatePacks] = useState<CardPacksType | null | undefined>(null)
-  const [isDeckBroken, setIsDeckBroken] = useState(false)
 
   const navigate = useNavigate()
   const openPackList = () => navigate(`/packs_list/`)
@@ -78,6 +77,7 @@ const Pack: React.FC<PackPropsType> = props => {
     cardsState.searchData.page,
     cardsState.searchData.cardQuestion,
     cardsState.searchData.sortCards,
+    cardsState.packDeckCover,
   ])
 
   useEffect(() => {
@@ -111,10 +111,6 @@ const Pack: React.FC<PackPropsType> = props => {
     setIsUpdateModalOpen(true)
     setUpdatePacks(currentPack)
     handlePopperMenuClose()
-  }
-
-  const errorHandler = () => {
-    setIsDeckBroken(true)
   }
 
   if (isDeleted) {
@@ -217,9 +213,8 @@ const Pack: React.FC<PackPropsType> = props => {
 
         <div className={s.deckCover}>
           <img
-            src={isDeckBroken ? defaultCover : cardsState.packDeckCover}
+            src={cardsState.packDeckCover ? cardsState.packDeckCover : defaultCover}
             alt="cover"
-            onError={errorHandler}
           />
         </div>
 

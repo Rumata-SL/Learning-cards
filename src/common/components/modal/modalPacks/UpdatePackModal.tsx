@@ -29,12 +29,17 @@ export const UpdatePackModal: FC<UpdatePackModalPropsType> = props => {
   const dispatch = useAppDispatch()
   const [newName, setNewName] = useState(packName ? packName : '')
   const [isPrivate, setIsPrivate] = useState(false)
-  const [deckCover, setDeckCover] = useState(pack ? pack.deckCover : defaultCover)
+  const [deckCover, setDeckCover] = useState('')
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
     pack && setNewName(pack.name)
     cardPack && setNewName(cardPack.packName)
+  }, [pack, cardPack])
+
+  useEffect(() => {
+    pack && setDeckCover(pack.deckCover)
+    cardPack && setDeckCover(cardPack.packDeckCover)
   }, [pack, cardPack])
 
   const updatePackHandler = () => {

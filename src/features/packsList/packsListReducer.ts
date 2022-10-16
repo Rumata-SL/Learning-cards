@@ -5,7 +5,7 @@ import { setAppStatusAC } from '../../app/appReducer'
 import { ThunkType } from '../../bll/store'
 import { utilsError } from '../../utils/utils_error'
 
-import { setIsDeletedAC, setPackNameAC } from './pack/packReducer'
+import { setIsDeletedAC, setPackDeckCoverAC, setPackNameAC } from './pack/packReducer'
 
 //initial state
 type InitialStateType = typeof initialState
@@ -169,6 +169,7 @@ export const updatePackTC =
       if (res) {
         dispatch(fetchPacksTC())
         dispatch(setPackNameAC(name))
+        dispatch(setPackDeckCoverAC(deckCover))
       }
     } catch (e) {
       const err = e as Error | AxiosError<{ error: string }>
