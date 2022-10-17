@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Learning-cards/static/css/main.34c77acb.css",
-    "main.js": "/Learning-cards/static/js/main.7f6fb194.js",
+    "main.js": "/Learning-cards/static/js/main.0b51cbc8.js",
     "Profile.css": "/Learning-cards/static/css/Profile.a613cca2.chunk.css",
     "Profile.js": "/Learning-cards/static/js/Profile.9a72fdc5.chunk.js",
     "Login.css": "/Learning-cards/static/css/Login.3679121b.chunk.css",
@@ -15,11 +15,11 @@
     "ErrorComponent.css": "/Learning-cards/static/css/ErrorComponent.3ba07e60.chunk.css",
     "ErrorComponent.js": "/Learning-cards/static/js/ErrorComponent.ed6c9c65.chunk.js",
     "PacksList.css": "/Learning-cards/static/css/PacksList.f80217a5.chunk.css",
-    "PacksList.js": "/Learning-cards/static/js/PacksList.1a7715c1.chunk.js",
+    "PacksList.js": "/Learning-cards/static/js/PacksList.967b96e6.chunk.js",
     "Pack.css": "/Learning-cards/static/css/Pack.9d74b1e4.chunk.css",
-    "Pack.js": "/Learning-cards/static/js/Pack.fbed020f.chunk.js",
-    "Learn.css": "/Learning-cards/static/css/Learn.bc2d2201.chunk.css",
-    "Learn.js": "/Learning-cards/static/js/Learn.d85ba948.chunk.js",
+    "Pack.js": "/Learning-cards/static/js/Pack.e1fdda7c.chunk.js",
+    "Learn.css": "/Learning-cards/static/css/Learn.9728616a.chunk.css",
+    "Learn.js": "/Learning-cards/static/js/Learn.992313fc.chunk.js",
     "static/js/496.d02cd838.chunk.js": "/Learning-cards/static/js/496.d02cd838.chunk.js",
     "static/js/284.02c90171.chunk.js": "/Learning-cards/static/js/284.02c90171.chunk.js",
     "static/js/454.6e3d7fae.chunk.js": "/Learning-cards/static/js/454.6e3d7fae.chunk.js",
@@ -40,7 +40,7 @@
     "static/media/user.svg": "/Learning-cards/static/media/user.80fa9754947dabe414f5181c7b26bc2c.svg",
     "static/media/arrow.svg": "/Learning-cards/static/media/arrow.9eb5f0989be33713d2dd94c6d875dba5.svg",
     "main.34c77acb.css.map": "/Learning-cards/static/css/main.34c77acb.css.map",
-    "main.7f6fb194.js.map": "/Learning-cards/static/js/main.7f6fb194.js.map",
+    "main.0b51cbc8.js.map": "/Learning-cards/static/js/main.0b51cbc8.js.map",
     "Profile.a613cca2.chunk.css.map": "/Learning-cards/static/css/Profile.a613cca2.chunk.css.map",
     "Profile.9a72fdc5.chunk.js.map": "/Learning-cards/static/js/Profile.9a72fdc5.chunk.js.map",
     "Login.3679121b.chunk.css.map": "/Learning-cards/static/css/Login.3679121b.chunk.css.map",
@@ -54,11 +54,11 @@
     "ErrorComponent.3ba07e60.chunk.css.map": "/Learning-cards/static/css/ErrorComponent.3ba07e60.chunk.css.map",
     "ErrorComponent.ed6c9c65.chunk.js.map": "/Learning-cards/static/js/ErrorComponent.ed6c9c65.chunk.js.map",
     "PacksList.f80217a5.chunk.css.map": "/Learning-cards/static/css/PacksList.f80217a5.chunk.css.map",
-    "PacksList.1a7715c1.chunk.js.map": "/Learning-cards/static/js/PacksList.1a7715c1.chunk.js.map",
+    "PacksList.967b96e6.chunk.js.map": "/Learning-cards/static/js/PacksList.967b96e6.chunk.js.map",
     "Pack.9d74b1e4.chunk.css.map": "/Learning-cards/static/css/Pack.9d74b1e4.chunk.css.map",
-    "Pack.fbed020f.chunk.js.map": "/Learning-cards/static/js/Pack.fbed020f.chunk.js.map",
-    "Learn.bc2d2201.chunk.css.map": "/Learning-cards/static/css/Learn.bc2d2201.chunk.css.map",
-    "Learn.d85ba948.chunk.js.map": "/Learning-cards/static/js/Learn.d85ba948.chunk.js.map",
+    "Pack.e1fdda7c.chunk.js.map": "/Learning-cards/static/js/Pack.e1fdda7c.chunk.js.map",
+    "Learn.9728616a.chunk.css.map": "/Learning-cards/static/css/Learn.9728616a.chunk.css.map",
+    "Learn.992313fc.chunk.js.map": "/Learning-cards/static/js/Learn.992313fc.chunk.js.map",
     "496.d02cd838.chunk.js.map": "/Learning-cards/static/js/496.d02cd838.chunk.js.map",
     "284.02c90171.chunk.js.map": "/Learning-cards/static/js/284.02c90171.chunk.js.map",
     "454.6e3d7fae.chunk.js.map": "/Learning-cards/static/js/454.6e3d7fae.chunk.js.map",
@@ -69,6 +69,6 @@
   },
   "entrypoints": [
     "static/css/main.34c77acb.css",
-    "static/js/main.7f6fb194.js"
+    "static/js/main.0b51cbc8.js"
   ]
 }
