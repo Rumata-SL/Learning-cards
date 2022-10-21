@@ -5,6 +5,7 @@ import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'
 import { useAppDispatch, useAppSelector } from '../../../../bll/store'
 import { SuperInput } from '../../../../common/components/superInput/SuperInput'
 import useDebounce from '../../../../common/hooks/useDebounce'
+import { selectPackCardQuestion } from '../../../../utils/selectors/selectors'
 import { changeCardsFiltersAC } from '../packReducer'
 
 import s from './SearchCard.module.css'
@@ -13,7 +14,7 @@ type PropsType = {}
 
 export const SearchCard: FC<PropsType> = () => {
   const dispatch = useAppDispatch()
-  const cardQuestion = useAppSelector(state => state.pack.searchData.cardQuestion)
+  const cardQuestion = useAppSelector(selectPackCardQuestion)
   const [value, setValue] = useState(cardQuestion)
   const debouncedValue = useDebounce(value, 500)
 

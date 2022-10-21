@@ -15,6 +15,7 @@ import { Link, Navigate } from 'react-router-dom'
 
 import { useAppDispatch, useAppSelector } from '../../../bll/store'
 import SuperButton from '../../../common/components/superButton/SuperButton'
+import { selectLoginIsLoggedIn } from '../../../utils/selectors/selectors'
 import style from '../recovery/Recovery.module.css'
 
 import styles from './Login.module.css'
@@ -33,7 +34,7 @@ const Login = () => {
 
   const dispatch = useAppDispatch()
 
-  const isLoggedIn = useAppSelector<boolean>(state => state.login.isLoggedIn)
+  const isLoggedIn = useAppSelector<boolean>(selectLoginIsLoggedIn)
 
   const formik = useFormik({
     initialValues: {

@@ -3,6 +3,7 @@ import React, { FC } from 'react'
 import { Button, ButtonGroup } from '@mui/material'
 
 import { useAppDispatch, useAppSelector } from '../../../../bll/store'
+import { selectPacksListIsMyPack, selectProfileUserId } from '../../../../utils/selectors/selectors'
 import { changeFiltersAC, setIsMyPacksAC } from '../../packsListReducer'
 import t from '../PacksListFilters.module.css'
 
@@ -12,8 +13,8 @@ type PropsType = {}
 
 export const FilterMyAllPacks: FC<PropsType> = props => {
   const dispatch = useAppDispatch()
-  const isMyPack = useAppSelector(state => state.packsList.isMyPack)
-  const profileId = useAppSelector(state => state.profile.profile._id)
+  const isMyPack = useAppSelector(selectPacksListIsMyPack)
+  const profileId = useAppSelector(selectProfileUserId)
 
   const setAllHandler = () => {
     if (isMyPack === true) {

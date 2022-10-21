@@ -5,6 +5,7 @@ import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined'
 import { useAppDispatch, useAppSelector } from '../../../../bll/store'
 import { SuperInput } from '../../../../common/components/superInput/SuperInput'
 import useDebounce from '../../../../common/hooks/useDebounce'
+import { selectPackListPackName } from '../../../../utils/selectors/selectors'
 import { changeFiltersAC } from '../../packsListReducer'
 import t from '../PacksListFilters.module.css'
 
@@ -14,7 +15,7 @@ type PropsType = {}
 
 export const SearchPacks: FC<PropsType> = () => {
   const dispatch = useAppDispatch()
-  const packName = useAppSelector(state => state.packsList.filtersModel.packName)
+  const packName = useAppSelector(selectPackListPackName)
   const [value, setValue] = useState(packName)
   const debouncedValue = useDebounce(value, 500)
 

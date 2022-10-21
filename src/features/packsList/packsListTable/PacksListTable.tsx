@@ -12,6 +12,10 @@ import {
 } from '@mui/material'
 
 import { useAppDispatch, useAppSelector } from '../../../bll/store'
+import {
+  selectPackListSortPacks,
+  selectPacksListCardPacks,
+} from '../../../utils/selectors/selectors'
 import { changeFiltersAC } from '../packsListReducer'
 
 import s from './PacksListTable.module.css'
@@ -21,8 +25,8 @@ type PropsType = {}
 
 export const PacksListTable: FC<PropsType> = () => {
   const dispatch = useAppDispatch()
-  const sortPacks = useAppSelector(state => state.packsList.filtersModel.sortPacks)
-  const cardPacks = useAppSelector(state => state.packsList.cardPacks)
+  const sortPacks = useAppSelector(selectPackListSortPacks)
+  const cardPacks = useAppSelector(selectPacksListCardPacks)
   const [sortLastUpdated, setSortLastUpdated] = useState<'asc' | 'desc'>('desc')
 
   const onClickSortLastUpdated = () => {

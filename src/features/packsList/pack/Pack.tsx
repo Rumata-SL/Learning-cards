@@ -25,6 +25,12 @@ import { DeletePacksModal } from '../../../common/components/modal/modalPacks/De
 import { UpdatePackModal } from '../../../common/components/modal/modalPacks/UpdatePackModal'
 import { PaginationBlock } from '../../../common/components/paginationBlock/PaginationBlock'
 import SuperButton from '../../../common/components/superButton/SuperButton'
+import {
+  selectPack,
+  selectPackIsDeleted,
+  selectPacksListCardPacks,
+  selectProfileUserId,
+} from '../../../utils/selectors/selectors'
 
 import s from './Pack.module.css'
 import {
@@ -42,9 +48,9 @@ type PackPropsType = {}
 
 const Pack: React.FC<PackPropsType> = props => {
   const dispatch = useAppDispatch()
-  const isDeleted = useAppSelector(state => state.pack.isDeleted)
-  const userId = useAppSelector(state => state.profile.profile._id)
-  const cardsState = useAppSelector(state => state.pack)
+  const isDeleted = useAppSelector(selectPackIsDeleted)
+  const userId = useAppSelector(selectProfileUserId)
+  const cardsState = useAppSelector(selectPack)
   const [isAddModalOpen, setIsAddModalOpen] = useState(false)
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
   const [deletePacks, setDeletePacks] = useState<PackType | null>(null)
@@ -57,7 +63,7 @@ const Pack: React.FC<PackPropsType> = props => {
   const { packId = '' } = useParams<{ packId: string }>()
 
   // find current pack state
-  const allPacks = useAppSelector(state => state.packsList.cardPacks)
+  const allPacks = useAppSelector(selectPacksListCardPacks)
   const currentPack = allPacks.find(pack => pack._id === packId)
 
   // popper functions

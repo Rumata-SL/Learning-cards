@@ -7,12 +7,13 @@ import defaultAva from '../../../assets/image/avatar.png'
 import changePhoto from '../../../assets/image/icons/photo.svg'
 import { useAppDispatch, useAppSelector } from '../../../bll/store'
 import { convertFileToBase64 } from '../../../utils/convertFileToBase64'
+import { selectProfileAvatar } from '../../../utils/selectors/selectors'
 import { updateProfileTC } from '../profileReducer'
 
 import s from './AvatarProfile.module.css'
 export const AvatarProfile = () => {
   const dispatch = useAppDispatch()
-  const avatar = useAppSelector(state => state.profile.profile.avatar)
+  const avatar = useAppSelector(selectProfileAvatar)
   const [ava, setAva] = useState(avatar || defaultAva)
   const [isAvaBroken, setIsAvaBroken] = useState(false)
 

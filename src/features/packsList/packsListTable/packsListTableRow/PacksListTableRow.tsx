@@ -12,6 +12,7 @@ import { useAppSelector } from '../../../../bll/store'
 import { DeletePacksModal } from '../../../../common/components/modal/modalPacks/DeletePacksModal'
 import { UpdatePackModal } from '../../../../common/components/modal/modalPacks/UpdatePackModal'
 import { FormatDate } from '../../../../utils/formatDate'
+import { selectProfileUserId } from '../../../../utils/selectors/selectors'
 
 import s from './PacksListTableRow.module.css'
 
@@ -20,7 +21,7 @@ type PropsType = {
 }
 
 export const PacksListTableRow: FC<PropsType> = ({ pack }) => {
-  const userId = useAppSelector(state => state.profile.profile._id)
+  const userId = useAppSelector(selectProfileUserId)
   const navigate = useNavigate()
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false)
   const [deletePacks, setDeletePacks] = useState<CardPacksType | null>(null)
