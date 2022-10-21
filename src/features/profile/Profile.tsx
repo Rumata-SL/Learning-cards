@@ -6,6 +6,7 @@ import { EditMeArgsType } from '../../api/profileAPI'
 import logoutIcon from '../../assets/image/icons/logout.svg'
 import { useAppDispatch, useAppSelector } from '../../bll/store'
 import { BackToPackList } from '../../common/components/backToPackList/BackToPackList'
+import { selectLoginIsLoggedIn, selectProfile } from '../../utils/selectors/selectors'
 import { logoutTC } from '../auth/login/loginReducer'
 
 import { AvatarProfile } from './avatar/AvatarProfile'
@@ -18,8 +19,8 @@ const Zoom = require('react-reveal/Zoom')
 
 const Profile = () => {
   const dispatch = useAppDispatch()
-  const profile = useAppSelector(state => state.profile.profile)
-  const isLoggedIn = useAppSelector(state => state.login.isLoggedIn)
+  const profile = useAppSelector(selectProfile)
+  const isLoggedIn = useAppSelector(selectLoginIsLoggedIn)
 
   const updateProfile = (args: EditMeArgsType) => {
     dispatch(updateProfileTC(args))

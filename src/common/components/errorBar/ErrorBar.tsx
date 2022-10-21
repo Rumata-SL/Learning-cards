@@ -5,13 +5,14 @@ import Snackbar from '@mui/material/Snackbar'
 
 import { setAppErrorAC } from '../../../app/appReducer'
 import { useAppDispatch, useAppSelector } from '../../../bll/store'
+import { selectAppError } from '../../../utils/selectors/selectors'
 
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />
 })
 
 export function ErrorBar() {
-  const error = useAppSelector(state => state.app.error)
+  const error = useAppSelector(selectAppError)
 
   const dispatch = useAppDispatch()
 

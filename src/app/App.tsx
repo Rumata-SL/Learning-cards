@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from '../bll/store'
 import { Preloader } from '../common/components/preloader/Preloader'
 import { PATH } from '../common/enum/path'
 import { MainLayout } from '../layouts/MainLayout'
+import { selectAppIsInitial, selectLoginIsLoggedIn } from '../utils/selectors/selectors'
 
 import { authMeTC } from './appReducer'
 
@@ -34,8 +35,8 @@ const Learn = lazy(() => import(/*webpackChunkName: "Learn"*/ '../features/learn
 
 function App() {
   const dispatch = useAppDispatch()
-  const isInitialized = useAppSelector(state => state.app.isInitial)
-  const isLoggedIn = useAppSelector(state => state.login.isLoggedIn)
+  const isInitialized = useAppSelector(selectAppIsInitial)
+  const isLoggedIn = useAppSelector(selectLoginIsLoggedIn)
 
   useEffect(() => {
     if (isLoggedIn) return

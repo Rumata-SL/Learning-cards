@@ -7,6 +7,10 @@ import { Navigate, useParams } from 'react-router-dom'
 
 import { useAppDispatch, useAppSelector } from '../../../bll/store'
 import SuperButton from '../../../common/components/superButton/SuperButton'
+import {
+  selectLoginIsLoggedIn,
+  selectNewPasswordIsCreated,
+} from '../../../utils/selectors/selectors'
 
 import style from './NewPassword.module.css'
 import { createNewPasswordTC } from './newPasswordReducer'
@@ -21,8 +25,8 @@ type FormikErrorType = {
 
 const NewPassword = () => {
   const dispatch = useAppDispatch()
-  const isCreated = useAppSelector<boolean>(state => state.newPassword.isCreated)
-  const isLoggedIn = useAppSelector<boolean>(state => state.login.isLoggedIn)
+  const isCreated = useAppSelector<boolean>(selectNewPasswordIsCreated)
+  const isLoggedIn = useAppSelector<boolean>(selectLoginIsLoggedIn)
 
   // const navigate = useNavigate(); ????
   const [showValuePass, setShowValuePass] = useState(false)

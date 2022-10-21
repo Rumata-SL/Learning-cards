@@ -8,6 +8,11 @@ import userIcon from '../../../assets/image/icons/user.svg'
 import logo from '../../../assets/image/logo.svg'
 import { useAppDispatch, useAppSelector } from '../../../bll/store'
 import { logoutTC } from '../../../features/auth/login/loginReducer'
+import {
+  selectLoginIsLoggedIn,
+  selectProfileAvatar,
+  selectProfileName,
+} from '../../../utils/selectors/selectors'
 import { PATH } from '../../enum/path'
 import SuperButton from '../superButton/SuperButton'
 
@@ -15,9 +20,9 @@ import s from './Header.module.css'
 
 export const Header = () => {
   const dispatch = useAppDispatch()
-  const avatar = useAppSelector(state => state.profile.profile.avatar)
-  const isLoggedIn = useAppSelector(state => state.login.isLoggedIn)
-  const profileName = useAppSelector(state => state.profile.profile.name)
+  const avatar = useAppSelector(selectProfileAvatar)
+  const isLoggedIn = useAppSelector(selectLoginIsLoggedIn)
+  const profileName = useAppSelector(selectProfileName)
   const [togglePopup, setTogglePopup] = useState(false)
   const popupRef = useRef(null)
 

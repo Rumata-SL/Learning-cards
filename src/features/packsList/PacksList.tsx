@@ -8,6 +8,14 @@ import { AddPacksModal } from '../../common/components/modal/modalPacks/addPacks
 import { PaginationBlock } from '../../common/components/paginationBlock/PaginationBlock'
 import SuperButton from '../../common/components/superButton/SuperButton'
 import t from '../../common/styles/Title.module.css'
+import {
+  selectLoginIsLoggedIn,
+  selectPackListFiltersModel,
+  selectPacksListCardPacksTotalCount,
+  selectPacksListIsMyPack,
+  selectPacksListPage,
+  selectPacksListPageCount,
+} from '../../utils/selectors/selectors'
 
 import s from './PacksList.module.css'
 import { PacksListFilters } from './packsListFilters/PacksListFilters'
@@ -19,14 +27,14 @@ type PacksListPropsType = {}
 const PacksList: React.FC<PacksListPropsType> = () => {
   const dispatch = useAppDispatch()
   const { packName, page, pageCount, min, max, sortPacks, user_id, block } = useAppSelector(
-    state => state.packsList.filtersModel
+    selectPackListFiltersModel
   )
 
-  const isLoggedIn = useAppSelector(state => state.login.isLoggedIn)
-  const isMyPack = useAppSelector(state => state.packsList.isMyPack)
-  const cardPacksTotalCount = useAppSelector(state => state.packsList.cardPacksTotalCount)
-  const pagePacksCount = useAppSelector(state => state.packsList.pageCount)
-  const pagePacks = useAppSelector(state => state.packsList.page)
+  const isLoggedIn = useAppSelector(selectLoginIsLoggedIn)
+  const isMyPack = useAppSelector(selectPacksListIsMyPack)
+  const cardPacksTotalCount = useAppSelector(selectPacksListCardPacksTotalCount)
+  const pagePacksCount = useAppSelector(selectPacksListPageCount)
+  const pagePacks = useAppSelector(selectPacksListPage)
   const arrCardPerPage = [5, 10, 20, 50, 100]
 
   const [isAddOpenModal, setIsAddOpenModal] = useState(false)

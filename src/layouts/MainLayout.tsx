@@ -7,9 +7,10 @@ import { useAppSelector } from '../bll/store'
 import { ErrorBar } from '../common/components/errorBar/ErrorBar'
 import { Header } from '../common/components/header/Header'
 import { Navbar } from '../common/components/nav/Navbar'
+import { selectAppStatus } from '../utils/selectors/selectors'
 
 export const MainLayout = () => {
-  const appStatus = useAppSelector(state => state.app.status)
+  const appStatus = useAppSelector(selectAppStatus)
 
   return (
     <div>

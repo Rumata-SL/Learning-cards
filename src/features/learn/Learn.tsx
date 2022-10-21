@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelector } from '../../bll/store'
 import { BackToPackList } from '../../common/components/backToPackList/BackToPackList'
 import SuperButton from '../../common/components/superButton/SuperButton'
 import { getRandomCard } from '../../utils/getRandomCard'
+import { selectPack } from '../../utils/selectors/selectors'
 import { getPackTC, updateCardGradeTC } from '../packsList/pack/packReducer'
 
 import s from './Learn.module.css'
@@ -38,7 +39,7 @@ const grades = [
 const Learn = () => {
   const [showAnswer, setShowAnswer] = useState(false)
   const [first, setFirst] = useState<boolean>(true)
-  const { cards, packName } = useAppSelector(state => state.pack)
+  const { cards, packName } = useAppSelector(selectPack)
   const { packId } = useParams()
 
   const [card, setCard] = useState<CardType>({} as CardType)

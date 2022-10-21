@@ -6,6 +6,10 @@ import { Link, Navigate } from 'react-router-dom'
 
 import { useAppDispatch, useAppSelector } from '../../../bll/store'
 import SuperButton from '../../../common/components/superButton/SuperButton'
+import {
+  selectLoginIsLoggedIn,
+  selectRecoveryIsRequested,
+} from '../../../utils/selectors/selectors'
 
 import { BackToLogin } from './BackToLogin'
 import style from './Recovery.module.css'
@@ -18,9 +22,9 @@ type FormikErrorType = {
 }
 
 const Recovery = () => {
-  const isRequested = useAppSelector<boolean>(state => state.recovery.isRequested)
+  const isRequested = useAppSelector<boolean>(selectRecoveryIsRequested)
   // const error = useAppSelector<string | null>(state => state.recovery.error)
-  const isLoggedIn = useAppSelector<boolean>(state => state.login.isLoggedIn)
+  const isLoggedIn = useAppSelector<boolean>(selectLoginIsLoggedIn)
 
   const dispatch = useAppDispatch()
 

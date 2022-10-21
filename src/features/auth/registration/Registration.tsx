@@ -7,6 +7,7 @@ import { Link, Navigate } from 'react-router-dom'
 
 import { useAppDispatch, useAppSelector } from '../../../bll/store'
 import SuperButton from '../../../common/components/superButton/SuperButton'
+import { selectLoginIsLoggedIn } from '../../../utils/selectors/selectors'
 
 import style from './Registration.module.css'
 import { registerTC } from './registrationReducer'
@@ -21,7 +22,7 @@ type FormikErrorType = {
 
 const Registration: FC = () => {
   const dispatch = useAppDispatch()
-  const isLoggedIn = useAppSelector<boolean>(state => state.login.isLoggedIn)
+  const isLoggedIn = useAppSelector<boolean>(selectLoginIsLoggedIn)
 
   const [valuePass, setValuePass] = useState({
     password: '',
